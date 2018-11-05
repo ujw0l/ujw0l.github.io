@@ -1,15 +1,192 @@
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+﻿
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0045)http://academic1.bellevue.edu/users/intern01/ -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="css/ctc_overlay_style.css" rel="stylesheet" type="text/css">
+<script type='text/javascript' src='js/jquery.js'></script>
+<script type='text/javascript' src='js/ctc_overlay.jquery.js'></script>
 
-<title>UjW0L's Github</title>
 
+<script type='text/javascript'>
+$(document).ready(function(){
+	$('.imageGallery1,.imageGallery2,.imageGallery3,.imageGallery4,.imageGallery5,#rightColumn').ctcOverlay();
+	
+	$(document).on('click',"#loadModalMessage",function(){
+		
+		$.ctcOverlayEl({modalMessage:"This is custom message loaded with CTC Overlay viewer"})
+	});
+	$(document).on('click',"#contentSelector",function(){
+		
+		$.ctcOverlayEl({elemHeight:'580px',elemWidth:'970px',elemSelector:'#innerWrapper1'});
+	});
+$(document).on('click',"#loadAjaxContent",function(){
+		
+		$.ctcOverlayEl({elemHeight:'400px',elemWidth:'970px',ajaxUrl:'ajax-content.html'});
+	});
+	
+$(document).on('click',"#loadIframe",function(){
+	var iFrame = 'https://www.bing.com/maps/embed?h=550&w=600&cp=27.7017~85.3206&lvl=10&typ=d&sty=r&src=SHELL&FORM=MBEDV8&pp=27.7017~85.3206"&scrolling="no"';
+	$.ctcOverlayEl({elemHeight: '550px',elemWidth:'600px',iframeUrl:iFrame});
+	$(document).find(".overlayElContainer").css('overflow','hidden');
+});	
+	
+});
 
+</script>
+<title>UjW0L's  Projects</title>
 
 </head>
 
-<body>
 
-This is my github demo site
 
+<body >
+
+<div id="wrapper">
+
+<div id="innerWrapper1">
+
+
+<div id="leftColumn" >
+<div id="aboutMe">
+		<h2>About Me</h2> 
+		<p>Hello I am Ujwol I am  a Web Programmer . I am  an experienced and passionate Web Programmer. 
+		In addition to my Web Development skills, I also possess a great eye for frontend design and specially love the fun things (animation) one can do with HTML5, CSS and jQuery these days.
+		</p>
+		<p>
+		I am highly skilled with WordPress, PHP, jQuery HTML, CSS, and Javascript and just love the AJAX( ninja emoji~wish there was one). I have over 9 years of experience with each of these technologies, and I love to learn even more technologies .
+		</p>
+		<p>
+		 In addition to web technologies, I do have a passion for mobile technologies as well. I have programmed some Android application for personal purpose in the past and I am learning Swift programming in my spare time, hopefully soon you will be using one of my iOS app. I program WordPress plugins, which I also have published on official WordPress plugin site. With almost 20000 downloads and 1000 active install. 
+		 </p>
+		<p>
+ Currently I am working on lightweight WordPress e-commerce plugin written from scratch. Beta version is out, don’t forget to play with it and report bug
+</p>
+</div>
+</div>
+
+
+
+<div id="rightColumn" >
+
+
+
+<img src="images/ujwol/hs.jpg" alt="uj" >
+
+<div >
+<h5>Bio</h5>
+<ul id="user-meta">
+		
+		
+
+					<li id="user-location">
+				Location: Bhaktapur, Nepal
+			</li>
+		
+			<li >
+				Links: 
+				<ul>
+				<li><a href="https://ujwolbastakoti.wordpress.com/" target='_blank'>Blog</a></li>
+				<li><a href="https://profiles.wordpress.org/ujw0l" target='_blank'>WordPress</a></li>
+				<li><a href="https://github.com/bktujwol/" target='_blank'>Github</a></li>
+				<li><a href="https://www.npmjs.com/~ujw0l" target='_blank'>npm</a></li>
+				</ul>
+			</li>
+		
+					<li id="user-job">
+				Job Title: <br/>&nbsp;&nbsp;WordPress/Javascript/jQuery/CSS 3/PHP <br/>&nbsp;&nbsp;Developer
+			</li>
+					<li id="user-company">
+				Employer: <br/>&nbsp;&nbsp;Self Employed/Freelance
+			</li>
+		
+		
+	</ul>
+</div>
+
+</div>
+
+
+
+</div> 
+
+<div id="innerWrapper2">
+
+<div class="gallery ">
+
+<h3>CTC Overlay Viewer : Image viewer demo  : </h3>
+
+<div class=" imageGallery imageGallery5">
+<h4>Wyoming Trip</h4>
+<div>
+<img src="images/pics/wy1.jpg" title="Wyoming road trip"/>
+
+
+</div>
+</div>
+
+<div class=" imageGallery imageGallery4">
+<h4>Random</h4>
+<div>
+<img src="images/pics/st1.jpg" title="Hubbard homstead park, Seattle"/>
+<img src="images/pics/st2.jpg" title="Chutney bistro, seattle"/>
+<img src="images/pics/bruno4.jpg" title="Bruno having fun"/>
+
+</div>
+</div>
+
+
+
+
+
+
+
+<div class=" imageGallery imageGallery2">
+<h4>Nepal</h4>
+<div class="galleryScroll">
+<div>
+<img src="images/lt/lt6.jpg" title="Gosaikunda 2"/>
+<img src="images/lt/lt5.jpg" title="Gosaikunda 1"/>
+<img src="images/lt/lt1.jpg" title="Lamtang 1"/>
+<img src="images/lt/lt2.jpg" title="Lamtang 2"/>
+<img src="images/lt/lt3.jpg" title="Lamtang 3"/>
+<img src="images/lt/lt4.jpg" title="Lamtang 4"/>
+<img src="images/pics/rv11.jpg" title="View from Roseville Farm & Resort "/>
+<img src="images/pics/rv12.jpg" title="View from Roseville Farm & Resort "/>
+<img src="images/pics/rv13.jpg" title="View from Roseville Farm & Resort "/>
+<img src="images/pics/pk4.jpg" title="Pokhara ,looking sarangkot and Fieshtail mountain "/>
+<img src="images/pics/pk5.jpg" title="Pokhara lakeside"/>
+<img src="images/pics/mk1.jpg" title="Manakamana cable car "/>
+</div>
+</div>
+</div>
+
+
+
+
+
+<div id="overlayElem">
+<h4>CTC Overlay Viewer : Image content loading demo : </h4>
+
+<ol>
+<li><a href="JavaScript:void(0);" id="loadModalMessage">Load modal message</a></li>
+<li><a href="JavaScript:void(0);" id="loadAjaxContent">Load content through AJAX</a></li>
+<li><a  href="JavaScript:void(0);" id="loadIframe">Load content with Iframe</a></li>
+<li><a href="JavaScript:void(0);" id="contentSelector">Load about me content</a></li>
+</ol>
+
+
+</div>	
+
+
+</div>
+
+
+
+
+
+
+
+</div>
 </body>
+</html>
