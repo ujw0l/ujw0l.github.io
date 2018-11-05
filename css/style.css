@@ -10,16 +10,15 @@ body  {
 	text-align: left; /* this overrides the text-align: center on the body element. */
 	position:relative;
 	margin-left:auto;
-	margin-right:uto;
+	margin-right:auto;
 	dsiplay:block;
-	
 	-webkit-transition: height 3s ; /* Safari */
        transition:  height 3s;
        transition: 0.8s ease;
       -webkit-transition: 0.8s ease;
       -moz-transition: 0.8s ease;
       -ms-transition: 0.8s ease;
-     overflow:hidden;
+   
      
      /* The image used */
     background-image: url("../images/ujwol/him.jpg");
@@ -32,15 +31,28 @@ body  {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+
+    overflow-y:auto !important;
+  
+   
 } 
 #innerWrapper1{
 	width:950px;
-	height:550px;
+	height:650px;
+	max-width:90%;
+	max-height:auto;
+	 display:block;
+	 overflow-y:auto !important;
+	 overflow-x:hidden;
 }
 #innerWrapper2{
 	
 	width:950px;
 	height:900px;
+	max-width:90%;
+	max-height:auto;
+
+	display:block;
 }
 
 
@@ -61,6 +73,7 @@ body  {
      transition: 0.2 ease;
      -webkit-transition: 0.2s ease;
      -moz-transition: 0.2s ease;
+      overflow-y:auto !important;
 }
 
 #innerWrapper1:hover{
@@ -81,7 +94,6 @@ body  {
 #header{
 	 height: 89px;
 	 width:100%;
-	
 	background: url("images/bu-logo.jpg") no-repeat;
 	}
 #topNavigation {
@@ -114,6 +126,7 @@ body  {
 	text-align:left;
 	padding-left:10px;
 	padding-right:10px;
+	max-width:90%;
 	
 }
 #leftColumn  h2{
@@ -130,6 +143,7 @@ body  {
 	box-shadow:2px 2px 4px rgba(0,0,0,0.5);
 	border: 1px solid rgb(192,192,192,1);
 	border-radius:10px;
+	max-width:90%;
 	
 
 }
