@@ -22,7 +22,7 @@ class ctcOverlayViewer{
 		  }
 
 		 //function to prrepare overlay
-		 prepareOverlay(elem){
+		  prepareOverlay(elem){
 
 			var overlayDiv =  document.getElementById("ctcOverlayV");
 
@@ -41,7 +41,7 @@ class ctcOverlayViewer{
 
 
 
-						    let ctcLoadedImgAltTitle = document.createElement('div');
+						 let ctcLoadedImgAltTitle = document.createElement('div');
 							ctcLoadedImgAltTitle.id = "ctcLoadedImgAltTitleV";
 							ctcLoadedImgAltTitle.className = "ctcLoadedImgAltTitleV";
 							imageContainer.appendChild(ctcLoadedImgAltTitle);
@@ -68,8 +68,146 @@ class ctcOverlayViewer{
 
 		 }
 
+		 //function to add or remove active and inactive gallery
+		  addRemoveActiveGallery(param){
 
-	      static checkForUnloadedImg(unloadedGalImg){
+
+		 	 var newImageCount =1;
+
+		 	 if(param[0].classList.contains( "ctcActiveGalleryV" ) === false){
+
+		 		 var sideGalleryContainer = document.getElementById("ctcOverlayThumbGalleryContainerV");
+
+		 		 if(sideGalleryContainer !== null){
+		 			 ctcOverlayViewer.removeElem([sideGalleryContainer]);
+
+		 		 }
+
+		 		 var activeGallery = document.getElementsByClassName("ctcActiveGalleryV");
+
+		 		 if(activeGallery.length >= 1){
+
+		 			 var attr = ['data-v-img-number','onclick'];
+		 			 var allOldImg  = ctcOverlayViewer.objectToArray(activeGallery[0].getElementsByTagName('img'));
+
+		 							 allOldImg.map(x =>ctcOverlayViewer.removeElemAttr(attr,x));
+		 							 ctcOverlayViewer.removeClass(["ctcActiveGalleryV"],activeGallery[0]);
+
+
+		 				}
+
+
+		 		 ctcOverlayViewer.addElemClass(["ctcActiveGalleryV"],param[0]);
+
+
+
+
+		 		 var newActiveImages = ctcOverlayViewer.objectToArray(param[0].getElementsByTagName('img'));
+		 			 newImageCount = newActiveImages.length;
+		 		 let gallerySpanHeight = Math.round(0.045*window.screen.width);
+
+		 		 if(newActiveImages.length >=2){
+
+		 			 var errorCount = 0;
+		 			 var sideGalleryContainer = ctcOverlayViewer.addElemClass(["ctcOverlayThumbGalleryContainerV"],document.createElement('div'));
+		 			 param[1].insertBefore(sideGalleryContainer,  param[1].firstChild);
+		 			 sideGalleryContainer.id="ctcOverlayThumbGalleryContainerV";
+
+
+		 			 newActiveImages.map( function(img,i=0){
+
+		 			 var thumbImage = new Image();
+
+
+		 			 thumbImage.src = img.src;
+
+		 			 ctcOverlayViewer.setElemAttr([['onclick','ctcOverlayViewer.loadOverlayImages('+i+');']],img);
+
+		 			 let imgNumb = i;
+
+		 			 thumbImage.onload = () => {
+
+		 						var styleRule = [['display','block'],['background','url('+img.src+')'],['height',gallerySpanHeight+'px']];
+		 						var ElemAttr = [['title',img.getAttribute("title")], ["alt",img.getAttribute("alt")],['onclick',img.getAttribute("onclick")]];
+		 						sideGalleryContainer.appendChild(ctcOverlayViewer.setElemAttr(ElemAttr,ctcOverlayViewer.applyStyle(styleRule,document.createElement('span'))));
+
+		 			 }
+		 			 thumbImage.onerror =  () => {
+		 						var ElemAttr = [["data-gal-unloaded-v",img.src],['title',img.getAttribute("title")], ["alt",img.getAttribute("alt")],['onclick',img.getAttribute("onclick")]];
+
+		 						sideGalleryContainer.appendChild(ctcOverlayViewer.setElemAttr(ElemAttr,document.createElement('span')));
+
+		 						errorCount++;
+		 						if( errorCount === 1){
+
+		 							 param[0].removeEventListener("mouseover", ctcOverlayViewer.checkForUnloadedImg, true);
+		 							 param[0].addEventListener("mouseover", ctcOverlayViewer.checkForUnloadedImg);
+		 							 param[1].removeEventListener("mouseover", ctcOverlayViewer.checkForUnloadedImg, true);
+		 							 param[1].addEventListener('mouseover', ctcOverlayViewer.checkForUnloadedImg);
+		 					 }
+
+
+		 			 };
+
+
+		 		 });
+
+		 	 }
+		 	 else{
+		 		 ctcOverlayViewer.setElemAttr([['onclick','ctcOverlayViewer.loadOverlayImages('+0+');']],newActiveImages[0]);
+
+		 	 }
+
+
+
+		  }
+
+		 	return param[0];
+		  }
+
+		 	//function on arrow keys press
+		 	 onRequiredEventListener(){
+
+		 		 var ctcOverlayContainer = document.getElementById("ctcOverlayV");
+
+		 		//when screen resizes
+		 		window.addEventListener('resize', () =>{
+
+		 			if(ctcOverlayContainer !== null && ctcOverlayContainer.offsetHeight !== 0){
+		 					var overlayImgContainer = document.getElementById("ctcOverlayImageContainerV");
+		 					ctcOverlayViewer.loadOverlayImages(overlayImgContainer.getAttribute("data-v-overlay-img"),"yes");
+		 			}
+
+		 		});
+
+
+		 		//on keypress do stuffs
+		 		window.addEventListener('keydown', (event) => {
+
+		 			if(ctcOverlayContainer.offsetHeight !== 0){
+		 				if (event.code === 'ArrowUp' ||event.code === 'ArrowLeft'){
+
+		 					let overlayImgContainer = document.getElementById("ctcOverlayImageContainerV");
+		 					ctcOverlayViewer.loadOverlayImages(parseInt(overlayImgContainer.getAttribute("data-v-overlay-img"))-1);
+		 					event.preventDefault();
+		 				}
+		 				else if (event.code === 'ArrowDown' || event.code == 'ArrowRight'){
+		 					let overlayImgContainer = document.getElementById("ctcOverlayImageContainerV");
+		 					ctcOverlayViewer.loadOverlayImages(parseInt(overlayImgContainer.getAttribute("data-v-overlay-img"))+1);
+		 					event.preventDefault();
+		 				}
+		 				else if (event.code == 'Escape'){
+		 					ctcOverlayViewer.closeOverlay();
+		 					event.preventDefault();
+		 				}
+		 			}
+
+		 		});
+
+		 	}
+
+			//function to check for images that has not been loaded on side gallery
+	    static checkForUnloadedImg(unloadedGalImg){
 	    	  var unloadedGalImg = document.querySelectorAll("#ctcOverlayThumbGalleryContainerV span[data-gal-unloaded-v]");
 
 
@@ -85,7 +223,6 @@ class ctcOverlayViewer{
 
 						var thumbImage = new Image();
 						let imgUrl = thumbImage.src = imgSpan.getAttribute("data-gal-unloaded-v");
-
 
 						thumbImage.onload = ()=>{
 
@@ -142,26 +279,33 @@ class ctcOverlayViewer{
 
 		//function to add class
 		  static addElemClass(newClass,elem){
+
 			  newClass.map(x=>elem.classList.add(x));
+
 			  return elem;
 		  }
 
 
 		  //function remove class
 		  static removeStyle(styleRule,elem){
+
 			  styleRule.map(x=>elem.style.x[0]="");
+
 			  return elem;
 		  }
 
 		  //function to remove class
 		  static removeClass(removeClass,elem){
+
 			  removeClass.map(x => elem.classList.remove(x));
+
 			  return elem;
 		  }
 
 
 		  //function remove element
 		  static removeElem(removeElem){
+
 			  removeElem.map(x=> x.parentNode.removeChild(x));
 		  }
 		  //function to object into array
@@ -305,107 +449,6 @@ class ctcOverlayViewer{
 
 
 
- //function to add or remove active and inactive gallery
-  addRemoveActiveGallery(param){
-
-
-	  var newImageCount =1;
-
-	  if(param[0].classList.contains( "ctcActiveGalleryV" ) === false){
-
-		  var sideGalleryContainer = document.getElementById("ctcOverlayThumbGalleryContainerV");
-
-			if(sideGalleryContainer !== null){
-				ctcOverlayViewer.removeElem([sideGalleryContainer]);
-
-			}
-
-		  var activeGallery = document.getElementsByClassName("ctcActiveGalleryV");
-
-			if(activeGallery.length >= 1){
-
-				var attr = ['data-v-img-number','onclick'];
-				var allOldImg  = ctcOverlayViewer.objectToArray(activeGallery[0].getElementsByTagName('img'));
-
-								allOldImg.map(x =>ctcOverlayViewer.removeElemAttr(attr,x));
-								ctcOverlayViewer.removeClass(["ctcActiveGalleryV"],activeGallery[0]);
-
-
-			   }
-
-
-		  ctcOverlayViewer.addElemClass(["ctcActiveGalleryV"],param[0]);
-
-
-
-
-			var newActiveImages = ctcOverlayViewer.objectToArray(param[0].getElementsByTagName('img'));
-				newImageCount = newActiveImages.length;
-			let gallerySpanHeight = Math.round(0.045*window.screen.width);
-
-			if(newActiveImages.length >=2){
-
-				var errorCount = 0;
-				var sideGalleryContainer = ctcOverlayViewer.addElemClass(["ctcOverlayThumbGalleryContainerV"],document.createElement('div'));
-				param[1].insertBefore(sideGalleryContainer,  param[1].firstChild);
-				sideGalleryContainer.id="ctcOverlayThumbGalleryContainerV";
-
-
-				newActiveImages.map( function(img,i=0){
-
-				var thumbImage = new Image();
-
-
-				thumbImage.src = img.src;
-
-				ctcOverlayViewer.setElemAttr([['onclick','ctcOverlayViewer.loadOverlayImages('+i+');']],img);
-
-				let imgNumb = i;
-
-
-
-
-
-				thumbImage.onload = () => {
-
-					   var styleRule = [['display','block'],['background','url('+img.src+')'],['height',gallerySpanHeight+'px']];
-					   var ElemAttr = [['title',img.getAttribute("title")], ["alt",img.getAttribute("alt")],['onclick',img.getAttribute("onclick")]];
-					   sideGalleryContainer.appendChild(ctcOverlayViewer.setElemAttr(ElemAttr,ctcOverlayViewer.applyStyle(styleRule,document.createElement('span'))));
-
-				}
-				thumbImage.onerror =  () => {
-					   var ElemAttr = [["data-gal-unloaded-v",img.src],['title',img.getAttribute("title")], ["alt",img.getAttribute("alt")],['onclick',img.getAttribute("onclick")]];
-
-					   sideGalleryContainer.appendChild(ctcOverlayViewer.setElemAttr(ElemAttr,document.createElement('span')));
-
-					   errorCount++;
-					   if( errorCount === 1){
-
-						    param[0].removeEventListener("mouseover", ctcOverlayViewer.checkForUnloadedImg, true);
-						    param[0].addEventListener("mouseover", ctcOverlayViewer.checkForUnloadedImg);
-
-						    param[1].removeEventListener("mouseover", ctcOverlayViewer.checkForUnloadedImg, true);
-						    param[1].addEventListener('mouseover', ctcOverlayViewer.checkForUnloadedImg);
-						}
-
-
-				};
-
-
-			});
-
-		}
-		else{
-			ctcOverlayViewer.setElemAttr([['onclick','ctcOverlayViewer.loadOverlayImages('+0+');']],newActiveImages[0]);
-
-		}
-
-
-
-	}
-
-	 return param[0];
-  }
 
 
 //function to run on close button lcik
@@ -623,14 +666,12 @@ static loadOverlayImages(currentImageNumber,resize){
 
 	 image.addEventListener('load', function() {
 
-
-
 		 							const sideImgGallery = document.getElementById("ctcOverlayThumbGalleryContainerV");
-							   		let containerMarginTop = Math.round(screenHeight-optimizedImageHeight)/2;
+							   	let containerMarginTop = Math.round(screenHeight-optimizedImageHeight)/2;
 									let navIconMargin = Math.round((optimizedImageHeight-(1.6*optimizedFontSize))/2);
-			  		                let closeMarginTop =   Math.round(containerMarginTop-(closeBtn.offsetHeight/1.2));
-			  		                let galleryRightNav = document.getElementById("ctcGalleryRightNavV");
-							   		let galleryLeftNav = document.getElementById("ctcGalleryLeftNavV");
+			  		      let closeMarginTop =   Math.round(containerMarginTop-(closeBtn.offsetHeight/1.2));
+			  		      let galleryRightNav = document.getElementById("ctcGalleryRightNavV");
+							   	let galleryLeftNav = document.getElementById("ctcGalleryLeftNavV");
 
 
 			  		              if(galleryRightNav !== null){
@@ -643,13 +684,9 @@ static loadOverlayImages(currentImageNumber,resize){
 
 			  		              }
 
-
-
 			  		          //script to load image and margin of close button
 
 								 ctcOverlayViewer.removeClass(['overlayContentloadingV'],closeBtn);
-
-
 			  		              if(prevGalImg[0] !== undefined){
 			  		            	ctcOverlayViewer.removeClass(['ctcOverlayThumbGalleryActiveV'],prevGalImg[0]);
 
@@ -733,6 +770,8 @@ static loadOverlayImages(currentImageNumber,resize){
 
 										}
 
+
+
 										//first add image counr and current images
 										if(imageNumberToLoad-1 >= 0  && imageNumberToLoad+1 < totalImageCount){
 
@@ -765,14 +804,12 @@ static loadOverlayImages(currentImageNumber,resize){
 											 		 overlayImgContainer.appendChild(ctcOverlayViewer.addElemClass(['ctcGalleryLeftNavV'],
 										 			 ctcOverlayViewer.setElemAttr([['title','Previous Image'],["onclick","ctcOverlayViewer.loadOverlayImages("+(imageNumberToLoad-1)+");"],['id','ctcGalleryLeftNavV']],
 										 			 ctcOverlayViewer.applyStyle([['margin-top',navIconMargin+"px"],['font-size',optimizedFontSize+'px']],document.createElement('span')))));
-
-
 											document.getElementById("ctcOverlayCountAndCurrentImageV").innerHTML = (imageNumberToLoad+1)+' of '+totalImageCount;
 
 										}
 
 
-	sideImgGallery.style.opacity="1";
+
 
 
 					}
@@ -797,24 +834,17 @@ static loadOverlayImages(currentImageNumber,resize){
 						ctcOverlayViewer.applyStyle([["margin-right",containerMarginLeft+"px"],["margin-top",closeMarginTop+"px"]],closeBtn);
 					}
 
-									//load image title
-									let imgTitle = overlayImg[0].getAttribute("title");
-									let ctcLoadedImgAltTitle = document.getElementById("ctcLoadedImgAltTitleV");
-
-									if(imgTitle !== null){
-											ctcLoadedImgAltTitle.innerHTML = imgTitle;
-											ctcLoadedImgAltTitle.style.opacity = "1";
-
-									}
-									else{
-
-										ctcLoadedImgAltTitle.style.opacity = "0";
-									}
 
 
+											let ctcLoadedImgDownload = document.getElementById('ctcLoadedImgAltTitleV');
 
+											ctcLoadedImgDownload.setAttribute('title','Download this image');
+											ctcLoadedImgDownload.setAttribute('onclick','ctcOverlayViewer.downloadImg ("'+imageToLoad+'")');
 
+									sideImgGallery.style.opacity="1";
 	 	});
+
+
 
 
 
@@ -826,48 +856,17 @@ static loadOverlayImages(currentImageNumber,resize){
 
 
 
-	//function on arrow keys press
-	 onRequiredEventListener(){
+//function to download image
 
-		 var ctcOverlayContainer = document.getElementById("ctcOverlayV");
+static downloadImg (imgBlob){
 
-		//when screen resizes
-		window.addEventListener('resize', () =>{
-
-			if(ctcOverlayContainer !== null && ctcOverlayContainer.offsetHeight !== 0){
-					var overlayImgContainer = document.getElementById("ctcOverlayImageContainerV");
-					ctcOverlayViewer.loadOverlayImages(overlayImgContainer.getAttribute("data-v-overlay-img"),"yes");
-			}
-
-		});
+var downloadLink = document.createElement('a');
+    downloadLink.setAttribute('href',imgBlob);
+		downloadLink.setAttribute('download','image.png');
+    downloadLink.click();
 
 
-		//on keypress do stuffs
-		window.addEventListener('keydown', (event) => {
-
-			if(ctcOverlayContainer.offsetHeight !== 0){
-				if (event.code === 'ArrowUp' ||event.code === 'ArrowLeft'){
-
-					let overlayImgContainer = document.getElementById("ctcOverlayImageContainerV");
-					ctcOverlayViewer.loadOverlayImages(parseInt(overlayImgContainer.getAttribute("data-v-overlay-img"))-1);
-					event.preventDefault();
-				}
-				else if (event.code === 'ArrowDown' || event.code == 'ArrowRight'){
-					let overlayImgContainer = document.getElementById("ctcOverlayImageContainerV");
-					ctcOverlayViewer.loadOverlayImages(parseInt(overlayImgContainer.getAttribute("data-v-overlay-img"))+1);
-					event.preventDefault();
-				}
-				else if (event.code == 'Escape'){
-					ctcOverlayViewer.closeOverlay();
-					event.preventDefault();
-				}
-			}
-
-		});
-
-
-
-	}
+}
 
 
 

@@ -3,38 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
+<!--  <link rel="shortcut icon" type="image/png" href="images/favicon.png"/> -->
 <link href="css/style.css" rel="stylesheet" type="text/css">
-<link href="css/ctc_overlay_style.css" rel="stylesheet" type="text/css">
-<script type='text/javascript' src='js/jquery.js'></script>
-<script type='text/javascript' src='js/ctc_overlay.jquery.js'></script>
 
-
-<script type='text/javascript'>
-$(document).ready(function(){
-	$('.imageGallery1,.imageGallery2,.imageGallery3,.imageGallery4,.imageGallery5,#rightColumn').ctcOverlay();
-	
-	$(document).on('click',"#loadModalMessage",function(){
-		
-		$.ctcOverlayEl({modalMessage:"This is custom message loaded with CTC Overlay viewer"})
-	});
-	$(document).on('click',"#contentSelector",function(){
-		
-		$.ctcOverlayEl({elemHeight:'580px',elemWidth:'970px',elemSelector:'#innerWrapper1'});
-	});
-$(document).on('click',"#loadAjaxContent",function(){
-		
-		$.ctcOverlayEl({elemHeight:'400px',elemWidth:'970px',ajaxUrl:'ajax-content.html'});
-	});
-	
-$(document).on('click',"#loadIframe",function(){
-	var iFrame = 'https://www.bing.com/maps/embed?h=550&w=600&cp=27.7017~85.3206&lvl=10&typ=d&sty=r&src=SHELL&FORM=MBEDV8&pp=27.7017~85.3206"&scrolling="no"';
-	$.ctcOverlayEl({elemHeight: '550px',elemWidth:'600px',iframeUrl:iFrame});
-	$(document).find(".overlayElContainer").css('overflow','hidden');
-});	
-	
-});
-</script>
 <title>UjW0L's  Projects</title>
 
 </head>
@@ -42,14 +13,19 @@ $(document).on('click',"#loadIframe",function(){
 
 
 <body >
+<div id="left-nav">
+<span id="home_nav"><a href="index.html">Home</a></span>
+<span id="overlay_jquery_nav"><a href="ctc-overlay-jquery.html">CTC Overlay</a></span>
+<span id="ctc_overlay_gallery"><a href="ctc-overlay-gallery.html">CTC  Gallery Viewer</a></span>
 
+</div>
 <div id="wrapper">
 
 <div id="innerWrapper1">
 
 
 <div id="leftColumn" >
-<div id="aboutMe">
+<div id="aboutMe" class="home_nav">
 		<h2>About Me</h2> 
 		<p>Hello I am Ujwol I am  a Web Programmer . I am  an experienced and passionate Web Programmer. 
 		In addition to my Web Development skills, I also possess a great eye for frontend design and specially love the fun things (animation) one can do with HTML5, CSS and jQuery these days.
@@ -179,12 +155,64 @@ $(document).on('click',"#loadIframe",function(){
 </div>	
 
 
+
+
+
+</div>
+
+
+
+</div>
+
+<div id="innerWrapper3">
+
+<div class="gallery ">
+
+<h3>CTC Gallery Viewer Demo  : </h3>
+
+<div class=" imageGalleryV ">
+<h4>Wyoming Trip</h4>
+<div onmouseenter="new ctcOverlayViewer(this);">
+<img src="images/pics/wy1.jpg" title="Wyoming road trip"/>
+
+
+</div>
+</div>
+
+<div class=" imageGalleryV ">
+<h4>Random</h4>
+<div onmouseenter="new ctcOverlayViewer(this);">
+<img src="images/pics/st1.jpg" title="Hubbard homstead park, Seattle"/>
+<img src="images/pics/st2.jpg" title="Chutney bistro, seattle"/>
+<img src="images/pics/bruno4.jpg" title="Bruno having fun"/>
+
+</div>
 </div>
 
 
 
 
 
+
+
+<div class=" imageGalleryV ">
+<h4>Nepal</h4>
+<div class="galleryScrollV">
+<div onmouseenter="new ctcOverlayViewer(this);">
+<img src="images/lt/lt6.jpg" title="Gosaikunda 2"/>
+<img src="images/lt/lt1.jpg" title="Lamtang 1"/>
+<img src="images/lt/lt2.jpg" title="Lamtang 2"/>
+<img src="images/lt/lt3.jpg" title="Lamtang 3"/>
+<img src="images/lt/lt4.jpg" title="Lamtang 4"/>
+<img src="images/pics/rv11.jpg" title="View from Roseville Farm & Resort "/>
+<img src="images/pics/rv12.jpg" title="View from Roseville Farm & Resort "/>
+<img src="images/pics/rv13.jpg" title="View from Roseville Farm & Resort "/>
+<img src="images/pics/pk4.jpg" title="Pokhara ,looking sarangkot and Fieshtail mountain "/>
+<img src="images/pics/pk5.jpg" title="Pokhara lakeside"/>
+<img src="images/pics/mk1.jpg" title="Manakamana cable car "/>
+</div>
+</div>
+</div>
 
 
 </div>

@@ -4,7 +4,7 @@ body  {
 }
 
 #wrapper { 
-	width: 100%;
+	width: 89.5%;
 	height:100% !important;;
 	margin: 0 auto; /* the auto margins (in conjunction with a width) center the page */
 	text-align: left; /* this overrides the text-align: center on the body element. */
@@ -14,26 +14,24 @@ body  {
 	dsiplay:block;
 	-webkit-transition: height 3s ; /* Safari */
        transition:  height 3s;
-       transition: 0.8s ease;
-      -webkit-transition: 0.8s ease;
-      -moz-transition: 0.8s ease;
-      -ms-transition: 0.8s ease;
+       transition: 0.3s ease;
+      -webkit-transition: 0.3s ease;
+      -moz-transition: 0.3s ease;
+      -ms-transition: 0.3s ease;
    
-     
+     padding-top:auto;
+     padding-bottom:uto;
      /* The image used */
     background-image: url("../images/ujwol/him.jpg");
 
-    /* Set a specific height */
-    height: 500px; 
+
 
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-
-    overflow-y:auto !important;
-  
+ 
    
 } 
 #innerWrapper1{
@@ -55,15 +53,15 @@ body  {
 	display:block;
 }
 
-
+#nnerWrapper3,
 #innerWrapper2,
 #innerWrapper1{
+	
 	background-color: #FFFFFF;
 	text-align:center;
 	border-radius:5px;
 	margin-left:auto;
 	margin-right:auto;
-	display:block;
 	max-width:95%;
 	box-shadow:2px 2px 4px rgba(0,0,0,0.8);
 	margin-top:15px;
@@ -74,6 +72,71 @@ body  {
      -webkit-transition: 0.2s ease;
      -moz-transition: 0.2s ease;
       overflow-y:auto !important;
+}
+
+
+/*style for overlay image gallery on left*/
+#left-nav{
+	width:4.5% !important;
+	height:99.99% !important;
+	margin-top:0.1%;
+	display:inline-block !important;
+	float:left;
+	backgound-color:rgba(0,0,0,1)!important;
+-webkit-transition: width 0.5s; /* Safari */
+    transition: width 0.5s;
+   transition: 0.2s ease;
+  -webkit-transition: 0.2s ease;
+  -moz-transition: 0.2s ease;
+	padding-top:auto;
+	padding-bottom:auto;
+
+	
+}
+
+#left-nav span{
+	border: 1.5px solid rgba(255,255,255,1);
+    margin-left: auto;
+    margin-right: auto;
+    width:90%;
+    display:block;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size:contain !important;
+    cursor:pointer !important;
+    background-color:rgba(0,0,0,0.3)!important; 
+    border-radius:10% 40%;
+    -webkit-transition: width 0.5s; /* Safari */
+    transition: width 0.5s;
+    transition: 0.2s ease;
+   -webkit-transition: 0.2s ease;
+   -moz-transition: 0.2s ease;
+   margin-bottom:4px;
+ 
+  
+  
+}
+
+#left-nav span:hover{
+	background-color:rgba(255,255,255,0.8) !important;
+		border-radius:5% 30%;
+      -webkit-transition: width 0.5s; /* Safari */
+    transition: width 0.5s;
+   transition: 0.5s ease;
+  -webkit-transition: 0.5s ease;
+  -moz-transition: 0.5s ease;
+  
+}
+
+span.ctcOverlayThumbGalleryActiveV{
+	border-radius:5% 5%;
+	background-color:rgba(255,255,255,1) !important;
+	
+	   -webkit-transition: width 0.5s; /* Safari */
+    transition: width 0.5s;
+   transition: 0.5s ease;
+  -webkit-transition: 0.5s ease;
+  -moz-transition: 0.5s ease;
 }
 
 #innerWrapper1:hover{
@@ -233,7 +296,8 @@ text-align:left;
 	display:block;
 	position:relative;
 	
-}			
+}
+.imageGalleryV,			
 .imageGallery{
 		  margin-left:auto;
 		  margin-right:auto;
@@ -241,7 +305,8 @@ text-align:left;
 		  width:98%;
 		  
 		
-		}	
+		}
+.imageGalleryV img,			
 .imageGallery img{
 		  width:145px !important;
 		  height:auto !important;
@@ -259,6 +324,7 @@ text-align:left;
 
 		
 		}
+.imageGallery div,		
 .imageGallery div{
 	background-color:rgba(0,0,0,0.7);
 	border-radius:10px;
@@ -266,12 +332,13 @@ text-align:left;
 	padding-bottom:5px;
 	 
 	}
+	.galleryScrollV,
 	.galleryScroll{
 	background-color:rgba(255,255,255,0)!important;
 	width:100%;
 	overflow-x:scroll;
 	}
-	
+	.galleryScrollV div,
 	.imageGallery2 .galleryScroll div{
 	width:1705px !important;
 	    margin-top: -7px;
@@ -298,6 +365,7 @@ text-align:left;
 	.imageGallery4 img{
 	vertical-align: middle !important;
 	}
+.imageGalleryV div img:hover,	
 .imageGallery div img:hover{
 	border:1px solid rgba(255,255,255,0.6);
 		 -webkit-transition: width 0.5s; /* Safari */
