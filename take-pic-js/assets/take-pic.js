@@ -24,8 +24,6 @@ class takePic{
 					this.accessCamera();
 					this.webCamOverlayHtml();
 
-
-
 			window.addEventListener("resize",this.resizeSnapShot);
 
 		}
@@ -134,14 +132,16 @@ class takePic{
 
 
 	//function to stream video
-	accessCamera(){
+	 accessCamera(){
 
+
+		
 		var video = document.getElementById("videoStream");
 		var imageCapture;
 
 		if(navigator.mediaDevices.getUserMedia){
 
-		    navigator.mediaDevices.getUserMedia({video: true})
+		    navigator.mediaDevices.getUserMedia({video : true})
 		  .then((mediaStream) => {
 
 			  document.getElementById('videoStream').srcObject = mediaStream;
@@ -153,6 +153,12 @@ class takePic{
 				  document.getElementById('filterHeader').style.display = 'block';
 					document.getElementById("captureButton").style.opacity ='1';
 
+					if(document.getElementById("changeCamButton") !== 'undefined'){
+						document.getElementById("changeCamButton").style.opacity='1';
+
+					}
+					
+
 			  }, 200);
 
 			  const track = mediaStream.getVideoTracks()[0];
@@ -163,7 +169,7 @@ class takePic{
 		  });
 
 
-		    /*
+		 
 		 //enumerate all cameras
 		    navigator.mediaDevices.enumerateDevices().then( (devices) => {
 		         let i=0;
@@ -174,7 +180,7 @@ class takePic{
 							  let changeCam = document.createElement('div');
 							  	  changeCam.id ="changeCamButton";
 							  	  changeCam.setAttribute('data-cam','1');
-							  	  changeCam.setAttribute('onclick','takePic.changeCam("1");');
+							  	  changeCam.setAttribute('onclick','takePic.changeCam("'+device.deviceId+'");');
 							  	  changeCam.setAttribute("title","User other Camera");
 							  	  document.getElementById("takePicOverlay").appendChild(changeCam);
 
@@ -186,45 +192,54 @@ class takePic{
 
 				  });
 			 });
-				*/
-
 
 		}
 	}
 
 	//function to change camera
-	static changeCam(camNum){
+	static changeCam(camId){
 
-		var i = 0;
 		navigator.mediaDevices.enumerateDevices().then( (devices) => {
 
-			  devices.map((device)=>{
-				  if(device.kind === 'videoinput'){
-					  i++;
+				navigator.mediaDevices.getUserMedia({video:{deviceId: camId}})
+							.then((mediaStream) => {
 
-					  if(i === parseInt(camNum)){
-						  console.log(device);
-					  }
-					  else{
+								document.getElementById('videoStream').srcObject = mediaStream;
+								ctcOverlayViewer.objectToArray(document.getElementsByClassName('filterVideoStream')).map((x)=>{
+										x.srcObject = mediaStream;
+								});
 
-						  console.log("camera to stop"+device)
-					  }
+								setTimeout(function(){
+									document.getElementById('filterHeader').style.display = 'block';
+									document.getElementById("captureButton").style.opacity ='1';
 
-				  }
+								}, 200);
 
-
-			  });
+								const track = mediaStream.getVideoTracks()[0];
+										imageCapture = new ImageCapture(track);
+							})
+							.catch((error) =>{
+								console.log(error);
+							});
+					
+					
+						devices.map((device)=>{
+							if(device.kind === 'videoinput'){
+								
+							if(device.deviceId != camId){
+									
+								document.getElementById("changeCamButton").setAttribute('onclick','takePic.changeCam("'+device.deviceId+'");');
+								}
+								
+							}	  
+						});
+					
 		 });
-
-
-
+		
 	}
 
 	//function to take image
 	 takeSnapshot(){
-
-
-
 
 		 let hidden_canvas = document.getElementById('imageCaptureCanvas');
 		 let sideGallery = document.getElementById('sideImageGallery');

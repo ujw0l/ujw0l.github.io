@@ -198,6 +198,7 @@ border:1px solid rgba(255,255,255,0.5);
 	margin-top:0px !important;
 	margin-left:0px;
  
+
 }
 #takePicClose:hover:before{
      background-color:rgba(255,255,255,0.6);
@@ -273,47 +274,43 @@ to {
      transition: 0.2 ease;
      -webkit-transition: 0.2s ease;
      -moz-transition: 0.2s ease;
+     opacity:0;
 
 }
 
 #changeCamButton:hover{
 	position:fixed;
-	-webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -o-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-     transform: scale(1.1);
-     -webkit-transition: width 0.2s; /* Safari */
+     -webkit-transition: width 0.2s; 
+     background-color: rgba(255, 255, 255, 1);
      transition: width 0.2;
-     transition: 0.2 ease;
-     -webkit-transition: 0.2s ease;
-     -moz-transition: 0.2s ease;
-
-      -webkit-transform: rotate(45deg);
-      -moz-transform: rotate(45deg);
-       -o-transform: rotate(45deg);
-    	-ms-transform: rotate(45deg);
-   		transform: rotate(45deg);
-
+     transition: 1 ease;
+     border-radius: 49.5%;
+     -webkit-transition: 1s ease;
+     -moz-transition: 1s ease;
+     -ms-transform: rotateY(180deg); /* IE 9 */
+     -webkit-transform: rotateY(180deg); /* Safari 3-8 */
+     transform: rotateY(180deg);
+     width: 50px;
 }
 
 #changeCamButton:before{
 
 	background-image: url(icons/changeCam.png);
-	background-repeat: no-repeat;
+  background-repeat: no-repeat;
+  background-color: rgba(255, 255, 255, 0.9);
     background-size: 50px 50px;
     display: inline-block;
     width: 50px;
     height: 50px;
+    border-radius: 50%;
     content:"";
     cursor:pointer;
-
 }
 
 
 
 #captureButton{
-    margin-top:28%;
+    margin-top:23%;
 	margin-left:0px;
 	display:inline-block;
 	-webkit-transition: width 0.2s; /* Safari */
@@ -324,59 +321,33 @@ to {
      opacity:0;
 }
 
-#captureButton:before{
-
-	background-image: url(icons/camera.png);
-	background-repeat: no-repeat;
-    background-size: 75px 75px;
-    display: inline-block;
-    width: 75px;
-    height: 75px;
-    content:"";
-
-
-}
 
 
 #captureButton:hover{
-	 margin-left:0px;
-	-webkit-transform: scale(1.1);
-    -moz-transform: scale(1.1);
-    -o-transform: scale(1.1);
-    -ms-transform: scale(1.1);
-     transform: scale(1.1);
-     -webkit-transition: width 0.2s; /* Safari */
-     transition: width 0.2;
-     transition: 0.2 ease;
-     -webkit-transition: 0.2s ease;
-     -moz-transition: 0.2s ease;
-     cursor:pointer;
-
+   margin-left:0px;
+   background-color: rgba(255, 255, 255, 1);
+   border-radius: 49.5%;
+   background-repeat: no-repeat;
+   background-size: 50px 50px;
+   cursor:pointer;
+   width: 52px;
+   height: 52px;
+   border-style: 3px solid rgba(255, 255, 255, 0.5);
+   box-shadow: 5px 10px rgba(rgba(255, 255, 255, 0.5));
 }
 
+
 #captureButton:before{
-
-	background-image: url(icons/camera.png);
-	  background-repeat: no-repeat;
+   	background-image: url(icons/camera.png);
+    background-repeat: no-repeat;
     background-size: 50px 50px;
-    display: inline-block;
-    width: 50px;
-    height: 50px;
-    content:"";
-    /*
-	content:url(icons/camera.png);
-	height:50px;
-	width:50px;
-	font-size:80px;
-	cursor:pointer;
-	color:rgba(255,255,255,1);
-	padding:5px;
-	padding-bottom:0px;
-	border-right: 3px solid rgba(255,255,255,1);
-    border-bottom: 3px solid rgba(255,255,255,1);
+    background-color: rgba(255, 255, 255, 0.9);
+    background-position: center; 
     border-radius: 50%;
-    */
-
+    display: inline-block;
+    width: 55px;
+    height: 55px;
+    content: "";
 }
 
 
@@ -411,3 +382,5 @@ to {
      -webkit-transition: 0.2s ease;
      -moz-transition: 0.2s ease;
 }
+
+
