@@ -29,7 +29,7 @@ class ctcOverlayViewer{
 			 if( overlayDiv === null){
 							
 				 
-				            var overlayDiv = document.createElement('div');
+				      var overlayDiv = document.createElement('div');
 							overlayDiv.id = "ctcOverlayV";
 							overlayDiv.className = "ctcOverlayV";
 				
@@ -38,10 +38,17 @@ class ctcOverlayViewer{
 							let imageContainer = document.createElement('div');
 							imageContainer.id = "ctcOverlayImageContainerV";
 							imageContainer.className = "ctcOverlayImageContainerV"; 
+
+							//add download button to overlay viewer
+						let downloadButton = document.createElement('a');  
+								downloadButton.id = "ctcOverlayDownloadButtonV";
+								downloadButton.setAttribute('target','_blank');
+								downloadButton.setAttribute('title','Download Image');
+								downloadButton.innerHTML ='⇓';
+								imageContainer.appendChild(downloadButton); 
 						   
-						   
-						     
-						    let ctcLoadedImgAltTitle = document.createElement('div');
+						
+						let ctcLoadedImgAltTitle = document.createElement('div');
 							ctcLoadedImgAltTitle.id = "ctcLoadedImgAltTitleV";
 							ctcLoadedImgAltTitle.className = "ctcLoadedImgAltTitleV";
 							imageContainer.appendChild(ctcLoadedImgAltTitle);
@@ -58,7 +65,6 @@ class ctcOverlayViewer{
 							//imageContainer.appendChild(ctcLoadedImgAltTitle);
 							overlayDiv.appendChild(ctcOverlayClosebtn);
 							overlayDiv.appendChild(imageContainer);
-				
 							document.body.insertBefore(overlayDiv,document.body.firstChild);
          
 						
@@ -789,7 +795,11 @@ static loadOverlayImages(currentImageNumber,resize){
 										ctcLoadedImgAltTitle.style.opacity = "0"; 
 									}        	   																		  		                	  
 		  		              
-	 	});
+		 });
+		 
+  
+			document.getElementById('ctcOverlayDownloadButtonV').setAttribute('href',imageToLoad);
+			
 	 
 	 
 	  
@@ -798,8 +808,7 @@ static loadOverlayImages(currentImageNumber,resize){
 	 
 }//end of function loadoverlay
 			
-			       	   						
-				     	  
+			     	  
 
 	//function on arrow keys press
 	 onRequiredEventListener(){
