@@ -152,6 +152,7 @@ font-size:35px;
             font-size:120px;
             z-index:125500;
             opacity:0;
+            margin-right:20px;
             
           
            
@@ -324,17 +325,16 @@ span.ctcOverlayThumbGalleryActiveV{
   
 
 #ctcOverlayDownloadButtonV{
-
   border: 1px solid rgba(255,255,255,1);
-  width:30px;
+  width:20px;
   height:30px;
-  font-size:25px;
+  font-size:22px;
   cursor:pointer;
   float:left;
   color:rgba(255,255,255,1);
   background-color: rgba(0,0,0,0.5);
   visibility: hidden;
-  text-decoration: none;
+  text-decoration:none;
 }
 
 #ctcOverlayDownloadButtonV{

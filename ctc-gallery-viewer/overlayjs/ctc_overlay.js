@@ -44,7 +44,7 @@ class ctcOverlayViewer{
 								downloadButton.id = "ctcOverlayDownloadButtonV";
 								downloadButton.setAttribute('target','_blank');
 								downloadButton.setAttribute('title','Download Image');
-								downloadButton.innerHTML ='⇓';
+								downloadButton.innerHTML ='↓';
 								imageContainer.appendChild(downloadButton); 
 						   
 						
@@ -605,11 +605,11 @@ static loadOverlayImages(currentImageNumber,resize){
 		
 			
 
-							   		let containerMarginTop = Math.round(screenHeight-optimizedImageHeight)/2;
-									let navIconMargin = Math.round((optimizedImageHeight-(1.6*optimizedFontSize))/2);	
+							   						let containerMarginTop = Math.round(screenHeight-optimizedImageHeight)/2;
+														let navIconMargin = Math.round((optimizedImageHeight-(1.6*optimizedFontSize))/2);	
 			  		                let closeMarginTop =   Math.round(containerMarginTop-(closeBtn.offsetHeight/1.2));
 			  		                let galleryRightNav = document.getElementById("ctcGalleryRightNavV");
-							   		let galleryLeftNav = document.getElementById("ctcGalleryLeftNavV");
+							   						let galleryLeftNav = document.getElementById("ctcGalleryLeftNavV");
 			  		            
 			  		            
 			  		              if(galleryRightNav !== null){
@@ -644,8 +644,7 @@ static loadOverlayImages(currentImageNumber,resize){
 								
 								
 										if(resize ==='yes'){
-											
-											console.log(ctcOverlayViewer.objectToArray(sideImgGallery.children));
+										
 											ctcOverlayViewer.objectToArray(sideImgGallery.children).map(x=>x.style.height=gallerySpanHeight+"px");
 											
 										}
@@ -729,10 +728,6 @@ static loadOverlayImages(currentImageNumber,resize){
 											 overlayImgContainer.appendChild(ctcOverlayViewer.addElemClass(['ctcGalleryLeftNavV'],
 													 			 ctcOverlayViewer.setElemAttr([['title','Previous Image'],["onclick","ctcOverlayViewer.loadOverlayImages("+(imageNumberToLoad-1)+");"],['id','ctcGalleryLeftNavV']],
 													 			 ctcOverlayViewer.applyStyle([['margin-top',navIconMargin+"px"],['font-size',optimizedFontSize+'px']],document.createElement('span')))));
-											
-						  		    
-											
-										
 											 countAndCurrent.innerHTML = (imageNumberToLoad+1)+' of '+totalImageCount;
 						  		            
 							  		        
@@ -798,12 +793,14 @@ static loadOverlayImages(currentImageNumber,resize){
 		 });
 		 
   
-			document.getElementById('ctcOverlayDownloadButtonV').setAttribute('href',imageToLoad);
+		
 			
 	 
 	 
 	  
 	 sideImgGallery.style.opacity="1";
+
+	 document.getElementById('ctcOverlayDownloadButtonV').setAttribute('href',imageToLoad);
 	 
 	 
 }//end of function loadoverlay
