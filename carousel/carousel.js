@@ -22,8 +22,15 @@ class ctcCarousel {
 
             selectedEl.forEach((el, i) => {
 
+                let currentOpacity = el.style.opacity;
+                el.style.opacity = '0';
                 this.createCarouselDiv(el, i, otherParam);
 
+                if (null === currentOpacity || '0' === currentOpacity) {
+                    el.style.opacity = '';
+                } else {
+                    el.style.opacity = currentOpacity;
+                }
             });
 
         }
@@ -56,6 +63,9 @@ class ctcCarousel {
 
         carouselImgs.forEach((img, i) => {
 
+            img.style.display = 'none';
+            img.setAttribute('data-carousel-' + carouselNum + '-img', i);
+
             if (i === 0) {
 
                 let carouseLImgDiv = document.createElement('div');
@@ -85,8 +95,7 @@ class ctcCarousel {
                 rightNavSpan.setAttribute('onmouseleave', "this.style.textShadow = '5px 5px 5px rgba(0,0,0,1)';");
             }
 
-            img.setAttribute('data-carousel-' + carouselNum + '-img', i);
-            img.style.display = 'none';
+
         });
 
         el.appendChild(carouselDiv);
@@ -117,6 +126,8 @@ class ctcCarousel {
             }
 
         }
+
+
 
     }
 
