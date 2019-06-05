@@ -1,84 +1,91 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CTC Overlay Development</title>
+  <script type="text/javascript" src="ctc-gallery-viewer/ctc_overlay.js"></script>
+  <link rel="stylesheet" href="ctc-gallery-viewer/ctc_overlay_style.css" type="text/css" />
+  <style>
+    img {
+      border: 5px solid rgba(0, 0, 0, 0.7);
+      border-radius: 15px 30px;
 
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CTC Overlay Development</title>
-<link rel="stylesheet"  href="overlayjs/ctc_overlay_style.css" type="text/css"  />
-<script type="text/javascript" src="overlayjs/ctc_overlay.js"></script>
-<style >
-
-img{
- border:5px solid rgba(0,0,0,0.7);
- border-radius: 15px 30px;;
-
-
-}
-
-</style>
+    }
+  </style>
 
 </head>
 
 
-<body >
+<body>
 
 
-<div style="margin-left:5%;margin-right:7%;display:block; width:100%;text-align:center;">
+  <div style="margin-left:5%;margin-right:7%;display:block; width:100%;text-align:center;">
 
 
-<h1>CTC Gallery Viewer</h1>
+    <h1>CTC Gallery Viewer</h1>
 
-<div class="image_gallery_2" onmouseenter="new ctcOverlayViewer(this);"  style="width:85%;border:10px solid black;padding-left:2%;padding-right:2%; border-radius:2%;padding-bottom: 2%;" >
+    <div class="image_gallery_2" onmouseenter="new ctcOverlayViewer(this);"
+      style="width:85%;border:10px solid black;padding-left:2%;padding-right:2%; border-radius:2%;padding-bottom: 2%;">
 
-  <h2> Image Gallery 1 </h2>
-
-
-  <img style="width:10%;height:auto;" title="imac-gallery2-201706.jpeg" src="public/image/imac-gallery2-201706.jpeg"/>
-  <img style="width:10%;height:auto;" title="imac-gallery3-201706.jpeg" src="public/image/imac-gallery3-201706.jpeg"/>
-  <img style="width:10%;height:auto;" title="imac-gallery4-201706.jpeg" src="public/image/imac-gallery4-201706.jpeg"/>
-  <img style="width:10%;height:auto;" title="imac-gallery5-201706.jpeg" src="public/image/imac-gallery5-201706.jpeg"/>
-  <img style="width:10%;height:auto;" title="imac-pro-gallery-1.jpeg" src="public/image/imac-pro-gallery-1.jpeg"/>
-  <img style="width:10%;height:auto;" title="imac-pro-gallery-2.jpeg" src="public/image/imac-pro-gallery-2.jpeg"/>
-  <img style="width:10%;height:auto;" title="imac-pro-gallery-3.png" src="public/image/imac-pro-gallery-3.png"/>
-  <img style="width:10%;height:auto;" title="imac-pro-gallery-4.png" src="public/image/imac-pro-gallery-4.png"/>
-  <img style="width:10%;height:auto;" title="imac-pro-gallery-5.jpeg" src="public/image/imac-pro-gallery-5.jpeg"/>
-  <img style="width:10%;height:auto;" title="1.jpg" src="public/image/1.jpg"/>
-  <img style="width:10%;height:auto;" title="12.jpg" src="public/image/12.jpg"/>
-  <img style="width:10%;height:auto;" title="14.jpg" src="public/image/14.jpg"/>
-  <img style="width:10%;height:auto;" title="18.jpg" src="public/image/18.jpg"/>
-  <img style="width:10%;height:auto;" title="19.jpg" src="public/image/19.jpg"/>
-  <img style="width:10%;height:auto;" title="2.jpg" src="public/image/2.jpg"/>
-  <img style="width:10%;height:auto;" title="20.jpg" src="public/image/20.jpg"/>
-  <img style="width:10%;height:auto;" title="3.jpg" src="public/image/3.jpg"/>
-  <img style="width:10%;height:auto;" title="4.jpg" src="public/image/4.jpg"/>
-  <img style="width:10%;height:auto;" title="5.jpg" src="public/image/5.jpg"/>
-  <img style="width:10%;height:auto;" title="air1.jpeg" src="public/image/air1.jpeg"/>
-  <img style="width:10%;height:auto;" title="air2.jpeg" src="public/image/air2.jpeg"/>
-  <img style="width:10%;height:auto;" title="air3.jpeg" src="public/image/air3.jpeg"/>
-  <img style="width:10%;height:auto;" title="air4.jpeg" src="public/image/air4.jpeg"/>
-  <img style="width:10%;height:auto;" title="air5.jpeg" src="public/image/air5.jpeg"/>
-  <img style="width:10%;height:auto;" title="imac-gallery1-201706_GEO_US.jpeg" src="public/image/imac-gallery1-201706_GEO_US.jpeg"/>
-
-  <img style="width:10%;height:auto;" title="pro1.jpeg" src="public/image/pro1.jpeg"/>
-  <img style="width:10%;height:auto;" title="pro2.jpeg" src="public/image/pro2.jpeg"/>
-
-</div>
+      <h2> Image Gallery 1 </h2>
 
 
+      <img style="width:10%;height:auto;" title="imac-gallery2-201706.jpeg"
+        src="public/image/imac-gallery2-201706.jpeg" />
+      <img style="width:10%;height:auto;" title="imac-gallery3-201706.jpeg"
+        src="public/image/imac-gallery3-201706.jpeg" />
+      <img style="width:10%;height:auto;" title="imac-gallery4-201706.jpeg"
+        src="public/image/imac-gallery4-201706.jpeg" />
+      <img style="width:10%;height:auto;" title="imac-gallery5-201706.jpeg"
+        src="public/image/imac-gallery5-201706.jpeg" />
+      <img style="width:10%;height:auto;" title="imac-pro-gallery-1.jpeg" src="public/image/imac-pro-gallery-1.jpeg" />
+      <img style="width:10%;height:auto;" title="imac-pro-gallery-2.jpeg" src="public/image/imac-pro-gallery-2.jpeg" />
+      <img style="width:10%;height:auto;" title="imac-pro-gallery-3.png" src="public/image/imac-pro-gallery-3.png" />
+      <img style="width:10%;height:auto;" title="imac-pro-gallery-4.png" src="public/image/imac-pro-gallery-4.png" />
+      <img style="width:10%;height:auto;" title="imac-pro-gallery-5.jpeg" src="public/image/imac-pro-gallery-5.jpeg" />
+      <img style="width:10%;height:auto;" title="1.jpg" src="public/image/1.jpg" />
+      <img style="width:10%;height:auto;" title="12.jpg" src="public/image/12.jpg" />
+      <img style="width:10%;height:auto;" title="14.jpg" src="public/image/14.jpg" />
+      <img style="width:10%;height:auto;" title="18.jpg" src="public/image/18.jpg" />
+      <img style="width:10%;height:auto;" title="19.jpg" src="public/image/19.jpg" />
+      <img style="width:10%;height:auto;" title="2.jpg" src="public/image/2.jpg" />
+      <img style="width:10%;height:auto;" title="20.jpg" src="public/image/20.jpg" />
+      <img style="width:10%;height:auto;" title="3.jpg" src="public/image/3.jpg" />
+      <img style="width:10%;height:auto;" title="4.jpg" src="public/image/4.jpg" />
+      <img style="width:10%;height:auto;" title="5.jpg" src="public/image/5.jpg" />
+      <img style="width:10%;height:auto;" title="air1.jpeg" src="public/image/air1.jpeg" />
+      <img style="width:10%;height:auto;" title="air2.jpeg" src="public/image/air2.jpeg" />
+      <img style="width:10%;height:auto;" title="air3.jpeg" src="public/image/air3.jpeg" />
+      <img style="width:10%;height:auto;" title="air4.jpeg" src="public/image/air4.jpeg" />
+      <img style="width:10%;height:auto;" title="air5.jpeg" src="public/image/air5.jpeg" />
+      <img style="width:10%;height:auto;" title="imac-gallery1-201706_GEO_US.jpeg"
+        src="public/image/imac-gallery1-201706_GEO_US.jpeg" />
 
-<div class="image_gallery_2"  onmouseenter="new ctcOverlayViewer(this);"    style="width:85%;border:10px solid black;padding-left:2%;padding-right:2%;padding-bottom: 2%;border-radius:2%;" >
+      <img style="width:10%;height:auto;" title="pro1.jpeg" src="public/image/pro1.jpeg" />
+      <img style="width:10%;height:auto;" title="pro2.jpeg" src="public/image/pro2.jpeg" />
 
-    <h2> Image Gallery 2 </h2>
-
-<img style="width:10%;height:auto;" title="2.jpg" src="public/image/2.jpg" />
-<img style="width:10%;height:auto;" title="3.jpg" src="public/image/3.jpg" />
-<img style="width:10%;height:auto;" title="5.jpg" src="public/image/5.jpg" />
-<img style="width:10%;height:auto;" title="2.jpg" src="public/image/2.jpg" />
+    </div>
 
 
-</div>
-<div class="image_gallery_12"  onmouseenter="new ctcOverlayViewer(this);" style="width:85%;border:10px solid black;padding-left:2%;padding-right:2%;padding-bottom: 2%; border-radius:2%;" >
-    <h2> Image Gallery 3 </h2>
-<img style="width:10%;height:auto;" title="iMAc pro" src="public/image/imac-pro-gallery-3.png"/>
-</div>
 
-</div>
+    <div class="image_gallery_2" onmouseenter="new ctcOverlayViewer(this);"
+      style="width:85%;border:10px solid black;padding-left:2%;padding-right:2%;padding-bottom: 2%;border-radius:2%;">
+
+      <h2> Image Gallery 2 </h2>
+
+      <img style="width:10%;height:auto;" title="2.jpg" src="public/image/2.jpg" />
+      <img style="width:10%;height:auto;" title="3.jpg" src="public/image/3.jpg" />
+      <img style="width:10%;height:auto;" title="5.jpg" src="public/image/5.jpg" />
+      <img style="width:10%;height:auto;" title="2.jpg" src="public/image/2.jpg" />
+
+
+    </div>
+    <div class="image_gallery_12" onmouseenter="new ctcOverlayViewer(this);"
+      style="width:85%;border:10px solid black;padding-left:2%;padding-right:2%;padding-bottom: 2%; border-radius:2%;">
+      <h2> Image Gallery 3 </h2>
+      <img style="width:10%;height:auto;" title="iMAc pro" src="public/image/imac-pro-gallery-3.png" />
+    </div>
+
+  </div>
 </body>
+
 </html>
