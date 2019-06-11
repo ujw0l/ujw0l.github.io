@@ -1,47 +1,64 @@
-# Take Pic Js
-Javascript library which lets user to access user laptop webcam , apply image effects and download them, all on frontend and you will have ability switch camera from front facing to environment
+﻿<h1 align="center">Welcome to take-pic-js 👋</h1>
+<p>
+  <img src="https://img.shields.io/badge/version-1.2.5-blue.svg?cacheSeconds=2592000" />
+  <a href="https://bktujwol.github.io/take-pic-js/">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" target="_blank" />
+  </a>
+  <a href="https://github.com/bktujwol/takePicNpm/graphs/commit-activity">
+    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" target="_blank" />
+  </a>
+  <a href="https://github.com/bktujwol/takePicNpm/blob/master/LICENSE">
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" target="_blank" />
+  </a>
+</p>
 
-# USAGE
-Below are some of the most common ways to include take-pic-js
+> javascript library which lets user to access user laptop webcam , apply image effects and download them, all on frontend
 
-<dl>
-<dt>Take Pic Js<dt> 
-<dt>Below are some of the most common ways to include take-pic-js</dd> 
+## Install
 
-## 1.Script tag
+```sh
+npm install take-pic-js
+```
 
+## Script Tag
 
-######<dt> Download and include files </dt>
+```sh
+Download and include files
+1. ctc_overlay.js
+2. take-pic.js
+3. ctc_overlay_style.css
+4. take-pic.css
+5. icons (folder)
+```
 
+## Plugin Options
 
-<dd>1. ctc_overlay.js</dd>
-<dd>2. take-pic.js</dd>
-<dd>3. ctc_overlay_style.css</dd>
-<dd>4. take-pic.css</dd>
-<dd>5. icons (folder)</dd>
+```sh
+onclick="new takePic();"
 
+Note: Add above code inside the html tag that you want to load webcam view on clicking that element, it can be any other events supported by javascript
+```
 
-</dl>
-<dl>
+## Contributing
 
-## 2.Node
-<dd>To include Take Pic in Node, first it install with npm</dd>
+Contributions, issues and feature requests are welcome. Feel free to check [issues page](https://github.com/bktujwol/takePicNpm/issues) if you want to contribute.
 
-#### <dd> npm install take-pic-js</dd>
+## Author
 
+👤 **UjW0L**
 
-</dl>
-<dl>
+* Twitter 👉 [@bastakotiujwol](https://twitter.com/bastakotiujwol)
+* Github 👉 [@bktujwol](https://github.com/bktujwol)
 
+## Show your support
 
-### Script  Options :
-#### <dt> Take Pic Js </dt>
-		onclick="new takePic();"
-	
-  <dd>Note: Add above code inside the html tag that you want to load webcam view on clicking that element, it can be any other events supported by javascript <dd>
+Please ⭐️ this repository if you like it.
 
-</dl>
+## License
 
-# License 
-<dd>MIT</dd>
+Copyright © 2019 [UjW0L](https://github.com/bktujwol).
 
+📜 This project is [MIT](https://github.com/bktujwol/takePicNpm/blob/master/LICENSE) licensed.
+
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_

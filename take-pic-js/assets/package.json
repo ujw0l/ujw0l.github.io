@@ -1,6 +1,6 @@
 {
   "name": "take-pic-js",
-  "version": "1.2.0",
+  "version": "1.2.5",
   "description": "javascript library which lets user to access user laptop webcam , apply image effects and download them, all on frontend",
   "main": "take-pic.js",
   "scripts": {
@@ -17,12 +17,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bktujwol/takePicNpm.git"
+    "url": "git+https://github.com/ujw0l/takePicNpm.git"
   },
   "bugs": {
-    "url": "https://github.com/bktujwol/takePicNpm/issues"
+    "url": "https://github.com/ujw0l/takePicNpm/issues"
   },
-  "homepage": "https://bktujwol.github.io/take-pic-js/",
+  "homepage": "https://ujw0l.github.io/take-pic-js/",
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.4"
