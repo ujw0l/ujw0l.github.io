@@ -1,0 +1,26 @@
+<div style="padding:20px; font-size:15px;">
+
+    <h2> About Me </h2>
+    <p>
+        Hello I am Ujwol I am a Web Programmer . I am an experienced and passionate Web Programmer. In addition to my
+        Web
+        Development skills, I also possess a great eye for frontend design and specially love the fun things (animation)
+        one
+        can
+        do with HTML5, CSS and jQuery these days.I am highly skilled with WordPress, PHP, jQuery HTML, CSS, and
+        Javascript
+        and
+        just love the AJAX( ninja emoji~wish there was one). I have over 9 years of experience with each of these
+        technologies,
+        and I love to learn even more technologies . In addition to web technologies, I do have a passion for mobile
+        technologies as well. I have programmed some Android application for personal purpose in the past and I am
+        learning
+        Swift programming in my spare time, hopefully soon you will be using one of my iOS app. I program WordPress
+        plugins,
+        which I also have published on official WordPress plugin site. With almost 20000 downloads and 1000 active
+        install.
+        Currently I am working on lightweight WordPress e-commerce plugin written from scratch. Beta version is out,
+        don’t
+        forget to play with it and report bug
+    </p>
+</div>

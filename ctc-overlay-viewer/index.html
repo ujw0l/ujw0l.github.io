@@ -1,0 +1,188 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CTC Overlay Viewer Demo</title>
+
+  <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.2.0/imagesloaded.pkgd.min.js"></script>
+  <script type="text/javascript" src="ctc-overlay/ctc_overlay.jquery.js"></script>
+  <link rel="stylesheet" href="ctc-overlay/ctc_overlay_style.css" type="text/css" />
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+
+      background: #ccc;
+      line-height: 1.2;
+      margin: 4em;
+    }
+
+    .image_gallery_2 img {
+      width: 320px;
+      border: 1px dotted rgba(0, 0, 0, 1);
+      margin-top: 20px;
+    }
+
+    div.content_loading,
+    div.image_gallery_2 {
+      padding: 20px;
+      border: 1px solid #999;
+      border-radius: 5px;
+      background: #fff;
+    }
+
+    a:link,
+    a:visited {
+      color: black;
+    }
+
+    h3 {
+      margin-top: 0;
+      margin-left: 0.75rem;
+      z-index: 1000;
+      margin-bottom: 20px;
+      color: black !important;
+    }
+
+    main {
+      columns: 250px;
+      column-gap: 20px;
+    }
+
+    div {
+      break-inside: avoid-column;
+      margin-bottom: 1rem;
+    }
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <div id="ctc-overlay-viewer">
+
+    <div>
+      <h1>CTC Gallery Viewer</h1>
+
+      <div class="image_gallery_2">
+
+        <h3> Image Gallery 1 </h3>
+
+        <img title="imac-gallery2-201706.jpeg" src="public/image/imac-gallery2-201706.jpeg" />
+        <img title="imac-gallery3-201706.jpeg" src="public/image/imac-gallery3-201706.jpeg" />
+        <img title="14.jpg" src="public/image/14.jpg" />
+        <img title="18.jpg" src="public/image/18.jpg" />
+        <img title="19.jpg" src="public/image/19.jpg" / <img title="imac-gallery4-201706.jpeg"
+          src="public/image/imac-gallery4-201706.jpeg" />
+        <img title="imac-gallery5-201706.jpeg" src="public/image/imac-gallery5-201706.jpeg" />
+        <img title="imac-pro-gallery-1.jpeg" src="public/image/imac-pro-gallery-1.jpeg" />
+        <img title="imac-pro-gallery-2.jpeg" src="public/image/imac-pro-gallery-2.jpeg" />
+        <img title="3.jpg" src="public/image/3.jpg" />
+        <img title="4.jpg" src="public/image/4.jpg" />
+        <img title="5.jpg" src="public/image/5.jpg" />
+        <img title="imac-pro-gallery-3.png" src="public/image/imac-pro-gallery-3.png" />
+        <img title="imac-pro-gallery-4.png" src="public/image/imac-pro-gallery-4.png" />
+        <img title="imac-pro-gallery-5.jpeg" src="public/image/imac-pro-gallery-5.jpeg" />
+        <img title="1.jpg" src="public/image/1.jpg" />
+        <img title="12.jpg" src="public/image/12.jpg" />
+        <img title="14.jpg" src="public/image/14.jpg" />
+        <img title="18.jpg" src="public/image/18.jpg" />
+        <img title="19.jpg" src="public/image/19.jpg" />
+        <img title="2.jpg" src="public/image/2.jpg" />
+        <img title="20.jpg" src="public/image/20.jpg" />
+        <img title="3.jpg" src="public/image/3.jpg" />
+        <img title="4.jpg" src="public/image/4.jpg" />
+        <img title="5.jpg" src="public/image/5.jpg" />
+        <img title="air1.jpeg" src="public/image/air1.jpeg" />
+        <img title="air2.jpeg" src="public/image/air2.jpeg" />
+        <img title="air3.jpeg" src="public/image/air3.jpeg" />
+        <img title="3.jpg" src="public/image/3.jpg" />
+        <img title="4.jpg" src="public/image/4.jpg" />
+        <img title="5.jpg" src="public/image/5.jpg" />
+        <img title="air4.jpeg" src="public/image/air4.jpeg" />
+        <img title="air5.jpeg" src="public/image/air5.jpeg" />
+        <img title="imac-gallery1-201706_GEO_US.jpeg" src="public/image/imac-gallery1-201706_GEO_US.jpeg" />
+
+        <img title="pro1.jpeg" src="public/image/pro1.jpeg" />
+        <img title="pro2.jpeg" src="public/image/pro2.jpeg" />
+
+      </div>
+
+
+      <div class="image_gallery_2">
+        <h3> Image Gallery 2 </h3>
+        <img title="iMAc pro" style="margin-left:auto;margin-right:auto;display:block;"
+          src="public/image/imac-pro-gallery-3.png" />
+      </div>
+
+      <div class="content_loading">
+        <h3> Content Loading </h3>
+        <ul>
+          <li> <a id="ajaxLoad" href="javascrip:void(0);"> Load content with ajax </a></li>
+          <li> <a id="elemSelector" href="javascrip:void(0);"> Load content of page </a> </li>
+          <li> <a id="dialogContent" href="javascrip:void(0);"> Dialog loading </a> </li>
+          <li> <a id="iframeContent" href="javascrip:void(0);"> Load iframe </a> </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+<script>
+  var grid = document.querySelector('.image_gallery_2');
+  var msnry = new Masonry(grid, {
+    itemSelector: '.image_gallery_2 img',
+    percentPosition: true,
+    gutter: 20
+  });
+
+  imagesLoaded(grid).on('progress', function () {
+    // layout Masonry after each image loads
+    msnry.layout();
+  });
+
+  $('.image_gallery_2').ctcOverlay();
+  $('#ajaxLoad').on('click', function (response) {
+    $.ctcOverlayEl({
+      elemHeight: '370px',
+      elemWidth: '600px',
+      ajaxUrl: 'ajax_content.txt',
+      ajaxMethod: 'GET'
+    });
+
+  });
+
+  $('#elemSelector').on('click', function (response) {
+    $.ctcOverlayEl({
+      elemHeight: '800px',
+      elemWidth: '90%',
+      elemSelector: '#ctc-overlay-viewer'
+    });
+
+  });
+
+
+  $('#dialogContent').on('click ', function (response) {
+    $.ctcOverlayEl({
+      elemHeight: '150px',
+      elemWidth: '190px',
+      modalMessage: '<p style="padding-left:10px;"> Hello! I am dialog box.</p>'
+    });
+
+  });
+
+  $('#iframeContent').on('click ', function (response) {
+    $.ctcOverlayEl({
+      elemHeight: '800px',
+      elemWidth: '1200px',
+      iframeUrl: 'https://ujwolbastakoti.wordpress.com/'
+    });
+  });
+</script>
+
+
+</html>
