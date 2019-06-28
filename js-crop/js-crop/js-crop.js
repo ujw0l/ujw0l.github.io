@@ -42,7 +42,7 @@ class jsCrop {
 
         let overlayDiv = document.querySelector('#js-crop-overlay');
         let opImgDim = this.getOptimizedImageSize(overlayDiv.offsetWidth, overlayDiv.offsetHeight, imgActWidth, imgActHeight);
-        let imgStyle = `transition: 0.5s;box-shadow:0px 0px 5px rgba(255,255,255,1);display:inline-block;margin:${((overlayDiv.offsetHeight - opImgDim.height) / 2)}px ${(((0.94 * overlayDiv.offsetWidth) - opImgDim.width) / 2)}px;vertical-align:top;`;
+        let imgStyle = `box-shadow:0px 0px 5px rgba(255,255,255,1);display:inline-block;margin:${((overlayDiv.offsetHeight - opImgDim.height) / 2)}px ${(((0.94 * overlayDiv.offsetWidth) - opImgDim.width) / 2)}px;vertical-align:top;`;
 
 
         orgImage.id = "js-crop-image";
@@ -50,7 +50,7 @@ class jsCrop {
         orgImage.height = opImgDim.height;
         orgImage.width = opImgDim.width;
         orgImage.setAttribute('draggable', 'false');
-        orgImage.setAttribute('data-dim-ratio', `${imgActWidth/opImgDim.width},${imgActHeight/opImgDim.height}`);
+        orgImage.setAttribute('data-dim-ratio', `${imgActWidth / opImgDim.width},${imgActHeight / opImgDim.height}`);
         overlayDiv.appendChild(jsCropCloseBtn);
         overlayDiv.appendChild(orgImage);
 
@@ -76,11 +76,11 @@ class jsCrop {
 
         loadedImg.height = opImgDim.height
         loadedImg.width = opImgDim.width;
-        loadedImg.style.margin = `${(((overlayDiv.offsetHeight - opImgDim.height) / 2 ))  }px ${(((0.94 * overlayDiv.offsetWidth) - opImgDim.width) / 2)}px`;
+        loadedImg.style.margin = `${(((overlayDiv.offsetHeight - opImgDim.height) / 2))}px ${(((0.94 * overlayDiv.offsetWidth) - opImgDim.width) / 2)}px`;
 
         let toolbarOpts = Array.from(toolbarDiv.querySelectorAll('div'));
 
-        toolbarDiv.style.paddingTop = ((toolbarDiv.offsetHeight - (toolbarOpts.length * toolbarDiv.offsetWidth)) / 2) + 'px';
+        toolbarDiv.style.paddingTop = ((overlayDiv.offsetHeight - (toolbarOpts.length * toolbarDiv.offsetWidth)) / 2) + 'px';
         toolbarOpts.map(x => {
             x.style.height = x.offsetWidth - 5 + 'px';
             x.style.fontSize = (0.70 * x.offsetWidth) + 'px';
@@ -91,10 +91,10 @@ class jsCrop {
 
         let toolbar = document.createElement('div');
         toolbar.id = `js-crop-toolbar`;
-        toolbar.style = `transition: 0.8s ease-in-out;padding:2px;padding-top:13%;color:rgba(255,255,255,1);display:inline-block;width:5%;height:100%;position:absolute;float:right;right:0;background-color:rgba(255,255,255,1);`;
+        toolbar.style = `transition: 0.8s ease-in-out;padding:2px;color:rgba(255,255,255,1);display:inline-block;width:5%;height:${overlayDiv.offsetHeight}px;position:absolute;float:right;right:0;background-color:rgba(255,255,255,1);`;
         overlayDiv.appendChild(toolbar);
 
-        let spanStyle = `opacity:0;transition: 0.8s ease-in-out;font-size:300%;cursor:pointer;border-radius:0%;margin-bottom:3px;padding-bottom:5px;background-color:rgba(0,0,0,1);box-shadow:-1px -1px 10px rgba(0,0,0,1);text-align:center;width:98%;height:${toolbar.offsetWidth-6}px;border:1px solid rgba(0,0,0,1);`;
+        let spanStyle = `opacity:0;transition: 0.8s ease-in-out;font-size:300%;cursor:pointer;border-radius:0%;margin-bottom:3px;background-color:rgba(0,0,0,1);box-shadow:-1px -1px 10px rgba(0,0,0,1);text-align:center;width:98%;height:${toolbar.offsetWidth - 6}px;border:1px solid rgba(0,0,0,1);`;
         let spanMouseenter = `this.style.boxShadow ='-2px -2px 10px rgba(0,0,0,1)'; this.style.borderRadius='20%'`;
         let spanMouseleave = `this.style.boxShadow ='-1px -1px 1px rgba(0,0,0,1)';this.style.borderRadius='25%'`;
 
@@ -153,11 +153,14 @@ class jsCrop {
         toolbar.appendChild(saveImgDiv);
 
         let toolbarDiv = document.querySelector('#js-crop-toolbar');
-        let toolbarOpts = Array.from(toolbarDiv.querySelectorAll('div'));
-        toolbarDiv.style.paddingTop = ((toolbarDiv.offsetHeight - (toolbarOpts.length * toolbarDiv.offsetWidth)) / 2) + 'px';
+        let toolbarOpts = Array.from(toolbarDiv.querySelectorAll('div'));;
+
+        toolbarDiv.style.paddingTop = ((overlayDiv.offsetHeight - (toolbarOpts.length * toolbarDiv.offsetWidth)) / 2) + 'px'
+
 
         toolbarOpts.map((x, i) => {
             setTimeout(() => {
+
                 x.style.height = x.offsetWidth - 5 + 'px';
                 x.style.opacity = '1';
                 x.style.boxShadow = '-1px -1px 1px rgba(0,0,0,1)';
@@ -224,7 +227,7 @@ class jsCrop {
                 let imgWidth = parseFloat(imgDimension[1]);
 
                 setTimeout(() => {
-                    imgEl.style.margin = `${(((overlayDiv.offsetHeight - imgHeight) / 2)-38 )}px ${(((0.94 * overlayDiv.offsetWidth) - imgWidth) / 2)}px`;
+                    imgEl.style.margin = `${(((overlayDiv.offsetHeight - imgHeight) / 2) - 38)}px ${(((0.94 * overlayDiv.offsetWidth) - imgWidth) / 2)}px`;
                     imgEl.height = imgHeight;
                     imgEl.width = imgWidth;
                     imgEl.src = e.target.getAttribute('data-img-src');
@@ -242,7 +245,7 @@ class jsCrop {
             let imgDimension = e.target.getAttribute('data-img-dimension').split(',');
             let imgHeight = parseFloat(imgDimension[0]);
             let imgWidth = parseFloat(imgDimension[1]);
-            imgEl.style.margin = `${(( (overlayDiv.offsetHeight - imgHeight) / 2)-38 )}px ${(((0.94 * overlayDiv.offsetWidth) - imgWidth) / 2)}px`;
+            imgEl.style.margin = `${(((overlayDiv.offsetHeight - imgHeight) / 2) - 38)}px ${(((0.94 * overlayDiv.offsetWidth) - imgWidth) / 2)}px`;
             imgEl.height = imgHeight;
             imgEl.width = imgWidth;
             imgEl.src = e.target.getAttribute('data-img-src');
@@ -292,7 +295,7 @@ class jsCrop {
             let imgWdRatio = parseFloat(origImgRatio[0]);
             let cropImgWd = cropRect.offsetWidth * imgWdRatio;
             let cropImgHt = cropRect.offsetHeight * imgHtRatio;
-            cropImg.style.margin = `${(((overlayDiv.offsetHeight - cropRect.offsetHeight) / 2)-38 )}px ${(((0.94 * overlayDiv.offsetWidth) - cropRect.offsetWidth) / 2)}px`;
+            cropImg.style.margin = `${(((overlayDiv.offsetHeight - cropRect.offsetHeight) / 2) - 38)}px ${(((0.94 * overlayDiv.offsetWidth) - cropRect.offsetWidth) / 2)}px`;
 
             tempCanv.height = cropRect.offsetHeight;
             tempCanv.width = cropRect.offsetWidth;
