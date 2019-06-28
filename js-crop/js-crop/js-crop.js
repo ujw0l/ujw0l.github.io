@@ -80,10 +80,10 @@ class jsCrop {
 
         let toolbarOpts = Array.from(toolbarDiv.querySelectorAll('div'));
 
-        toolbarDiv.style.paddingTop = ((toolbarDiv.offsetHeight - (toolbarOpts.length * toolbarDiv.offsetWidth)) / 3.2) + 'px';
+        toolbarDiv.style.paddingTop = ((toolbarDiv.offsetHeight - (toolbarOpts.length * toolbarDiv.offsetWidth)) / 2) + 'px';
         toolbarOpts.map(x => {
             x.style.height = x.offsetWidth - 5 + 'px';
-            x.style.fontSize = (0.80 * x.offsetWidth) + 'px';
+            x.style.fontSize = (0.70 * x.offsetWidth) + 'px';
         });
     }
 
@@ -94,7 +94,7 @@ class jsCrop {
         toolbar.style = `transition: 0.8s ease-in-out;padding:2px;padding-top:13%;color:rgba(255,255,255,1);display:inline-block;width:5%;height:100%;position:absolute;float:right;right:0;background-color:rgba(255,255,255,1);`;
         overlayDiv.appendChild(toolbar);
 
-        let spanStyle = `opacity:0;transition: 0.8s ease-in-out;font-size:300%;cursor:pointer;border-radius:0%;margin-bottom:3px;padding-bottom:3px;background-color:rgba(0,0,0,1);box-shadow:-1px -1px 10px rgba(0,0,0,1);text-align:center;width:98%;height:${toolbar.offsetWidth-6}px;border:1px solid rgba(0,0,0,1);`;
+        let spanStyle = `opacity:0;transition: 0.8s ease-in-out;font-size:300%;cursor:pointer;border-radius:0%;margin-bottom:3px;padding-bottom:5px;background-color:rgba(0,0,0,1);box-shadow:-1px -1px 10px rgba(0,0,0,1);text-align:center;width:98%;height:${toolbar.offsetWidth-6}px;border:1px solid rgba(0,0,0,1);`;
         let spanMouseenter = `this.style.boxShadow ='-2px -2px 10px rgba(0,0,0,1)'; this.style.borderRadius='20%'`;
         let spanMouseleave = `this.style.boxShadow ='-1px -1px 1px rgba(0,0,0,1)';this.style.borderRadius='25%'`;
 
@@ -154,14 +154,14 @@ class jsCrop {
 
         let toolbarDiv = document.querySelector('#js-crop-toolbar');
         let toolbarOpts = Array.from(toolbarDiv.querySelectorAll('div'));
-        toolbarDiv.style.paddingTop = ((toolbarDiv.offsetHeight - (toolbarOpts.length * toolbarDiv.offsetWidth)) / 3.2) + 'px';
+        toolbarDiv.style.paddingTop = ((toolbarDiv.offsetHeight - (toolbarOpts.length * toolbarDiv.offsetWidth)) / 2) + 'px';
 
         toolbarOpts.map((x, i) => {
             setTimeout(() => {
                 x.style.height = x.offsetWidth - 5 + 'px';
                 x.style.opacity = '1';
                 x.style.boxShadow = '-1px -1px 1px rgba(0,0,0,1)';
-                x.style.fontSize = (0.80 * x.offsetWidth) + 'px';
+                x.style.fontSize = (0.70 * x.offsetWidth) + 'px';
                 x.style.borderRadius = '25%';
             }, (150 * i))
         });
