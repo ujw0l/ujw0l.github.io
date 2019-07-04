@@ -1,0 +1,167 @@
+@font-face {
+    font-family: appleBerry;
+    src: url(../font/appleberry.ttf)
+}
+
+@font-face {
+    font-family: chalKFont;
+    src: url(../font/chalk.ttf)
+}
+
+
+body {
+    margin: 0;
+    overflow: hidden;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 1);
+}
+
+::-moz-scrollbar-track {
+    background: rgba(255, 255, 255, 1);
+}
+
+.site-info-container::-webkit-scrollbar {
+    display: none;
+}
+
+.site-info-container::-moz-scrollbar {
+    display: none;
+}
+
+
+div.site-overlay {
+    transition: 0.8s ease-in-out;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 1);
+    z-index: 100000;
+    opacity: 0.7;
+}
+
+div.site-info-container {
+    font-family: appleBerry;
+    width: 88%;
+    height: 91%;
+    border: 1px solid rgba(0, 0, 0, 1);
+    background-color: rgba(255, 255, 255, 1);
+    display: inline-block;
+    float: left;
+    position: absolute;
+    margin: 2.5% 2% 3% 2.5%;
+    overflow: auto;
+    text-shadow: -1px -1px 1px rgba(0, 0, 0, 1);
+}
+
+
+div.site-info-container h1 {
+
+    text-align: center;
+}
+
+div.site-info-container h1 b {
+    font-family: chalkFont;
+    text-transform: uppercase;
+    margin: 3px;
+}
+
+div.about-me-info {
+    margin: 3%;
+    text-align: left;
+    padding-left: 5%;
+    padding-right: 5%;
+    font-size: 20px;
+    overflow: auto;
+}
+
+div.about-me-info b {
+    font-size: 19px;
+    transition: 0.3s ease;
+    margin: 2px;
+}
+
+div.contact-me-info {
+    text-align: center;
+    font-family: chalkFont;
+    padding: 8%;
+    font-size: 22px;
+}
+
+div.my-work-info{
+
+    text-align: center;
+    font-family: chalkFont;
+    padding: 8%;
+    font-size: 25px;
+
+}
+div.prof-div{
+    margin:5%;
+}
+
+div.prof-div a{
+
+    text-decoration: none;
+}
+
+div.prof-div a:hover{
+    font-size: 26px;
+}
+
+
+/*Site side bar css*/
+
+
+.site-sidebar {
+    transition: 0.8s ease-in-out;
+    padding: 2px;
+    color: rgba(255, 255, 255, 1);
+    display: inline-block;
+    position: absolute;
+    float: right;
+    right: 0;
+    background-color: rgba(255, 255, 255, 1);
+    text-align: center;
+}
+
+.site-sidebar div {
+    border-radius: 50px;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+    border-radius: 0%;
+    margin-bottom: 3px;
+    background-color: rgba(0, 0, 0, 1);
+    box-shadow: -1px -1px 10px rgba(0, 0, 0, 1);
+    text-align: center;
+    width: 98%;
+    border: 1px solid rgba(0, 0, 0, 1);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 1);
+}
+
+
+.site-sidebar div:hover {
+
+    box-shadow: -2px -2px 20px rgba(255, 255, 255, 1);
+    border-radius: 10%;
+    text-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+
+}
+
+div.about-me:hover {
+    text-decoration: line-through;
+    text-decoration-style: dashed;
+}
+
+p.info-para {
+    text-align: center;
+    font-size: 8px;
+    text-shadow: -1px -1px 5px rgba(0, 0, 0, 1);
+    font-family: chalkFont;
+    text-transform: uppercase;
+}
