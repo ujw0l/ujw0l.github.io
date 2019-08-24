@@ -14,7 +14,7 @@ class takePic {
 
 		this.accessCamera();
 		this.webCamOverlayHtml();
-		window.addEventListener("resize", this.resizeSnapShot);
+		window.addEventListener("resize", ()=>{this.resizeSnapShot()});
 
 	}
 
@@ -38,7 +38,6 @@ class takePic {
 		overlayDiv.className = "takePicOverlay";
 		document.body.insertBefore(overlayDiv, document.body.firstChild);
 
-
 		//add loading div
 		this.webCamloading('takePicOverlay');
 
@@ -53,9 +52,10 @@ class takePic {
 		let sideGallery = document.createElement('div');
 		sideGallery.id = "sideImageGallery";
 		sideGallery.className = "sideImageGallery";
-		sideGallery.title = "Click to crop";
+		sideGallery.title = "Click to enlarge image";
 		overlayDiv.appendChild(sideGallery);
 
+		
 		//video container
 		let videoContainer = document.createElement('div');
 		videoContainer.id = "videoContainer";
@@ -64,7 +64,7 @@ class takePic {
 
 		let closeButton = document.createElement('span');
 		closeButton.id = `takePicClose`;
-		closeButton.style = `margin-top:2%;margin-left:-2%;position:absolute;width:20px;height;20px;font-size:30px;color:rgba(255,255,255,1);cursor:pointer;`;
+		closeButton.style = `;position:absolute;width:20px;height;20px;font-size:20px;color:rgba(255,255,255,1);cursor:pointer;`;
 		closeButton.title = "Close";
 		closeButton.innerHTML = "&#10539;";
 		closeButton.addEventListener('click', () => {
@@ -88,10 +88,7 @@ class takePic {
 		let buttonDiv = document.createElement('div');
 		buttonDiv.id = "buttonsDiv";
 		buttonDiv.classList = 'buttonsDiv';
-
-
-
-
+	
 
 		//create element for take take snap shot
 		let captureButton = document.createElement('span');
@@ -134,7 +131,11 @@ class takePic {
 	accessCamera() {
 
 		var video = document.getElementById("videoStream");
+		
 		var imageCapture;
+
+		
+
 
 		if (navigator.mediaDevices.getUserMedia) {
 
@@ -154,12 +155,20 @@ class takePic {
 
 					document.getElementById('takePicLoading').parentNode.removeChild(document.getElementById('takePicLoading'));
 					setTimeout(function () {
-
+						let video = document.getElementById("videoStream");
+						let overlayDiv = document.getElementById('takePicOverlay');
+					
+						let optVideoSize = takePic.getOptimizedVideoSize(overlayDiv.offsetWidth, overlayDiv.offsetHeight, video.videoWidth, video.videoHeight)
 						document.getElementById("captureButton").style.opacity = '1';
-						document.getElementById("videoStream").style.opacity = '1';
-						if (document.getElementById("changeCamButton") !== 'undefined') {
+						video.style.width = optVideoSize.width+'px';
+						video.style.height = optVideoSize.height+'px'
+						video.style.opacity = '1';
+						if (null != document.getElementById("changeCamButton") ) {
 							document.getElementById("changeCamButton").style.opacity = '1';
 						}
+
+						
+
 						takePic.positionDivs();
 					}, 350);
 
@@ -206,9 +215,15 @@ class takePic {
 				})
 				.then((mediaStream) => {
 
-					document.getElementById('videoStream').srcObject = mediaStream;
+						let video = document.getElementById("videoStream");
+						video.srcObject = mediaStream;
 
-					document.getElementById('videoStream').srcObject = mediaStream;
+						let overlayDiv = document.getElementById('takePicOverlay');
+						let optVideoSize = takePic.getOptimizedVideoSize(overlayDiv.offsetWidth, overlayDiv.offsetHeight, video.videoWidth, video.videoHeight)
+						document.getElementById("captureButton").style.opacity = '1';
+						video.style.width = optVideoSize.width+'px';
+						video.style.height = optVideoSize.height+'px'
+						
 					let imgStreams = document.getElementsByClassName('filterVideoStream');
 					for (var i in imgStreams) {
 						if (i >= 0) {
@@ -216,7 +231,7 @@ class takePic {
 						}
 					}
 
-					setTimeout(function () {
+					setTimeout(()=> {
 						document.getElementById("captureButton").style.opacity = '1';
 						document.getElementById('buttonsDiv').style.display = '';
 
@@ -299,11 +314,13 @@ class takePic {
 	//function to resize the the components based on screen size
 	resizeSnapShot() {
 
-
-
+		let overlayDiv = document.getElementById('takePicOverlay');
 		let sideGallery = document.getElementById('sideImageGallery');
 		let video = document.getElementById('videoStream');
 		let sideGalImgs = sideGallery.querySelectorAll('img');
+		let capturButton = document.getElementById('captureButton');
+		let camChangeButton = document.getElementById('changeCamButton');
+		let buttonWidthHeight = overlayDiv.offsetHeight > overlayDiv.offsetWidth ? (0.051 * overlayDiv.offsetWidth) : (0.051 * overlayDiv.offsetHeight);
 
 		if (undefined != sideGalImgs) {
 
@@ -316,22 +333,6 @@ class takePic {
 
 			}
 		}
-
-		takePic.positionDivs();
-
-	}
-
-
-	static positionDivs() {
-
-		let overlayDiv = document.getElementById('takePicOverlay');
-		let buttonsDiv = document.getElementById('buttonsDiv');
-		let videoStream = document.getElementById('videoStream');
-		let capturButton = document.getElementById('captureButton');
-		let camChangeButton = document.getElementById('changeCamButton');
-
-
-		let buttonWidthHeight = overlayDiv.offsetHeight > overlayDiv.offsetWidth ? (0.051 * overlayDiv.offsetWidth) : (0.051 * overlayDiv.offsetHeight);
 
 		if (buttonWidthHeight < 50) {
 			capturButton.style.width = buttonWidthHeight + 'px';
@@ -350,15 +351,28 @@ class takePic {
 				camChangeButton.style.fontSize = '40px';
 			}
 		}
+	
+	takePic.positionDivs();
+
+	}
 
 
-		buttonsDiv.style.marginTop = ((videoStream.offsetHeight - (1.5 * capturButton.offsetHeight)) / 2) + 'px';
-		document.getElementById('videoStream').style.marginTop = ((videoContainer.offsetHeight - videoStream.offsetHeight) / 4) + 'px';
-		document.getElementById('videoStream').style.marginBottom = ((videoContainer.offsetHeight - videoStream.offsetHeight) / 4) + 'px';
-		document.querySelector('#takePicClose').style.marginTop = (((videoContainer.offsetHeight - videoStream.offsetHeight) / 4) - 30) + 'px';
-		document.querySelector('#takePicClose').style.marginLeft = videoStream.style.marginLeft + 'px';
+	static positionDivs() {
 
-
+		
+		let overlayDiv = document.getElementById('takePicOverlay');
+		let closeBtn = document.querySelector('#takePicClose');
+		let videoStream = document.getElementById('videoStream');
+		let vidRect = videoStream.getBoundingClientRect();
+		let buttonsDiv = document.getElementById('buttonsDiv');
+		let videoContainer = document.getElementById('videoContainer'); 
+		let capturButton = document.getElementById('captureButton');
+		let optVideoSize = takePic.getOptimizedVideoSize(overlayDiv.offsetWidth, overlayDiv.offsetHeight, videoStream.videoWidth, videoStream.videoHeight);
+		videoContainer.style = `height:${0.8*overlayDiv.offsetHeight}px;width:${0.8*overlayDiv.offsetWidth}px;top:${0.1*overlayDiv.offsetHeight}px;left:${0.1*overlayDiv.offsetWidth}px;`;
+		videoStream.style =`height:${optVideoSize.height}px;width:${optVideoSize.width}px;margin-top:${((videoContainer.offsetHeight - videoStream.offsetHeight) / 2)}px`;
+		buttonsDiv.style.marginTop = ((videoContainer.offsetHeight/2)-capturButton.offsetHeight)+ 'px';
+		closeBtn.style.marginTop = (((videoContainer.offsetHeight - videoStream.offsetHeight)/2)-closeBtn.offsetHeight) + 'px';
+		closeBtn.style.marginLeft = (videoStream.style.marginLeft-closeBtn.offsetWidth) + 'px';
 
 	}
 
@@ -366,9 +380,13 @@ class takePic {
 	//css to apply filter to video
 	static applyFilter(filter) {
 		let video = document.getElementById("videoStream");
+		let overlayDiv = document.getElementById('takePicOverlay');
 		let marginTop = video.style.marginTop;
 		let marginBottom = video.style.marginBottom;
 		let opacity = video.style.opacity;
+		let optVideoSize = takePic.getOptimizedVideoSize(overlayDiv.offsetWidth, overlayDiv.offsetHeight, video.videoWidth, video.videoHeight)
+		video.style.width = optVideoSize.width+'px';
+		video.style.height = optVideoSize.height+'px'
 		video.style = takePic.getFilterArrayObj(filter);
 		video.style.marginTop = marginTop;
 		video.style.marginBottom = marginBottom;
@@ -428,6 +446,97 @@ class takePic {
 		return cleanFilter;
 
 	}
+
+
+    // function to optimize video site
+   static getOptimizedVideoSize(screenWidth, screenHeight, videoActualWidth, videoActualHeight) {
+
+        var videoScreenHeightRatio = 0,
+            videoScreenWidthRatio = 0,
+            optimizedVideoHeight = 0,
+            optimizedVideoWidth = 0;
+        var vidPercent = 0.7,
+            marginPercent = 0.2;
+
+        if ((videoActualWidth >= screenWidth) && (videoActualHeight >= screenHeight)) {
+            if (videoActualWidth >= videoActualHeight) {
+                if (videoActualWidth > videoActualHeight) {
+
+                    videoScreenWidthRatio = videoActualWidth / screenWidth;
+                    optimizedVideoWidth = (videoActualWidth / videoScreenWidthRatio) - (marginPercent * screenWidth);
+                    optimizedVideoHeight = videoActualHeight * (optimizedVideoWidth / videoActualWidth);
+                    if (optimizedVideoHeight >= (vidPercent * screenHeight)) {
+                        videoScreenHeightRatio = screenHeight / videoActualHeight;
+                        optimizedVideoHeight = videoActualHeight * videoScreenHeightRatio - (marginPercent * screenHeight);
+                        optimizedVideoWidth = videoActualWidth * (optimizedVideoHeight / videoActualHeight);
+                    }
+                } else {
+
+                    if (screenWidth > screenHeight) {
+                        optimizedVideoHeight = (vidPercent * screenHeight);
+                        optimizedVideoWidth = optimizedVideoHeight;
+
+                    } else if (screenHeight > screenWidth) {
+                        optimizedVideoWidth = (vidPercent * screenWidth);
+                        optimizedVideoHeight = optimizedVideoWidth;
+
+                    } else {
+                        videoScreenHeightRatio = screenHeight / videoActualHeight;
+                        optimizedVideoHeight = videoActualHeight * videoScreenHeightRatio - (marginPercent * screenHeight);
+                        optimizedVideoWidth = videoActualWidth * (optimizedVideoHeight / videoActualHeight);
+                    }
+                }
+
+            } else {
+                videoScreenHeightRatio = videoActualHeight / screenHeight;
+                optimizedVideoHeight = (videoActualHeight / videoScreenHeightRatio) - (marginPercent * screenHeight);
+                optimizedVideoWidth = videoActualWidth * (optimizedVideoHeight / videoActualHeight);
+            }
+
+        } else if (videoActualWidth >= screenWidth && videoActualHeight < screenHeight) {
+            videoScreenWidthRatio = screenWidth / videoActualWidth;
+            optimizedVideoWidth = videoActualWidth * videoScreenWidthRatio - (marginPercent * screenWidth);
+            optimizedVideoHeight = videoActualHeight * (optimizedVideoWidth / videoActualWidth);
+        } else if (videoActualHeight >= screenHeight && videoActualWidth < screenWidth) {
+            videoScreenHeightRatio = screenHeight / videoActualHeight;
+            optimizedVideoHeight = videoActualHeight * videoScreenHeightRatio - (marginPercent * screenHeight);
+            optimizedVideoWidth = videoActualWidth * (optimizedVideoHeight / videoActualHeight);
+            optimizedVideoHeight = videoActualHeight * (optimizedVideoWidth / videoActualWidth);
+        } else {
+            var avilableVideoWidth = vidPercent * screenWidth;
+            var avilableVideoHeight = vidPercent * screenHeight;
+            if (videoActualWidth >= avilableVideoWidth && videoActualHeight >= avilableVideoHeight) {
+                var videoAvilableWidthRatio = avilableVideoWidth / videoActualWidth;
+                videoAvilableHeightRatio = avilableVideoHeight / videoActualHeight;
+                optimizedVideoWidth = avilableVideoWidth * videoAvilableWidthRatio;
+                optimizedVideoHeight = screenHeight * videoScreenHeightRatio;
+            } else if (videoActualWidth >= avilableVideoWidth && videoActualHeight < avilableVideoHeight) {
+                var videoAvilableWidthRatio = avilableVideoWidth / videoActualWidth;
+                optimizedVideoWidth = videoActualWidth * videoAvilableWidthRatio;
+                optimizedVideoHeight = videoActualHeight * (optimizedVideoWidth / videoActualWidth);
+            } else if (videoActualHeight >= avilableVideoHeight && videoActualWidth < avilableVideoWidth) {
+                var videoAvilableHeightRatio = avilableVideoHeight / videoActualHeight;
+                optimizedVideoHeight = videoActualHeight * videoAvilableHeightRatio;
+                optimizedVideoWidth = videoActualWidth * (optimizedVideoHeight / videoActualHeight);
+            } else {
+                optimizedVideoWidth = videoActualWidth;
+                optimizedVideoHeight = videoActualHeight;
+            }
+            optimizedVideoHeight = videoActualHeight * (optimizedVideoWidth / videoActualWidth);
+        }
+
+
+        //at last check it optimized width is still large			
+        if (optimizedVideoWidth > (vidPercent * screenWidth)) {
+            optimizedVideoWidth = vidPercent * screenWidth;
+            optimizedVideoHeight = videoActualHeight * (optimizedVideoWidth / videoActualWidth);
+        }
+
+        return {
+            width: optimizedVideoWidth,
+            height: optimizedVideoHeight
+        };
+    }
 
 
 }
