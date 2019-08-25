@@ -9,16 +9,16 @@
 'use strict'
 class jsCrop {
 
-    constructor(sel) {
+    constructor(sel,param2) {
         let elList = Array.from(document.querySelectorAll(sel));
         elList.forEach((el) => {
-            el.addEventListener('click', event => this.createOverlay(event));
+            el.addEventListener('click', event => this.createOverlay(event,param2));
         });
 
         window.addEventListener('resize', () => this.adjustApp());
     }
 
-    createOverlay(e) {
+    createOverlay(e,param2) {
         let orgImage = new Image();
         orgImage.src = e.target.src;
         let imgActHeight = orgImage.height;
@@ -58,7 +58,7 @@ class jsCrop {
             height: opImgDim.height,
             width: opImgDim.width,
             dimRatio: `${imgActWidth / opImgDim.width},${imgActHeight / opImgDim.height}`
-        });
+        },param2);
         document.querySelector('#js-crop-close-btn').addEventListener('click', () => this.closeOverlay());
     }
 
@@ -87,7 +87,7 @@ class jsCrop {
         });
     }
 
-    createToolbar(overlayDiv, imgSrc, imgDim) {
+    createToolbar(overlayDiv, imgSrc, imgDim,param2) {
 
         let toolbar = document.createElement('div');
         toolbar.id = `js-crop-toolbar`;
@@ -142,25 +142,62 @@ class jsCrop {
         nextStepDiv.addEventListener('click', event => this.restoreNextCrop(event));
         toolbar.appendChild(nextStepDiv);
 
-        let saveImgDiv = document.createElement('div');
+
+
+if(undefined != param2 && 0 !== param2.length ){
+
+            if(false !== param2.saveButton){
+                let saveImgDiv = document.createElement('div');
+                saveImgDiv.id = `save-image`;
+                saveImgDiv.title = `Save Image`;
+                saveImgDiv.style = spanStyle;
+                saveImgDiv.setAttribute('onmouseenter', spanMouseenter);
+                saveImgDiv.setAttribute('onmouseleave', spanMouseleave);
+                saveImgDiv.innerHTML = '&#10515;';
+                saveImgDiv.addEventListener('click',()=>{
+                                                            let downloadLink = document.createElement('a');
+                                                            downloadLink.href = this.currentImgToBlob();
+                                                            downloadLink.setAttribute('download', 'image.png');
+                                                            downloadLink.click();
+                });
+                toolbar.appendChild(saveImgDiv);
+            }
+            
+            if(undefined != param2.extButton  && 0 !== param2.extButton.length && 'function' == typeof(param2.extButton.callBack)){ 
+                let extBtnDiv = document.createElement('div');
+                extBtnDiv.id = `ext-button`;
+                extBtnDiv.style = spanStyle;
+                extBtnDiv.setAttribute('onmouseenter', spanMouseenter);
+                extBtnDiv.setAttribute('onmouseleave', spanMouseleave);
+                extBtnDiv.title = param2.extButton.buttonTitle ? param2.extButton.buttonTitle: 'Extension';
+                extBtnDiv.innerHTML = param2.extButton.buttonText ? param2.extButton.buttonText: 'ext';
+                extBtnDiv.addEventListener('click', ()=>param2.extButton.callBack(this.currentImgToBlob()));
+                toolbar.appendChild(extBtnDiv);
+            }
+}else{
+    let saveImgDiv = document.createElement('div');
         saveImgDiv.id = `save-image`;
         saveImgDiv.title = `Save Image`;
         saveImgDiv.style = spanStyle;
         saveImgDiv.setAttribute('onmouseenter', spanMouseenter);
         saveImgDiv.setAttribute('onmouseleave', spanMouseleave);
         saveImgDiv.innerHTML = '&#10515;';
-        saveImgDiv.addEventListener('click', event => this.downloadCurrentImg());
+        saveImgDiv.addEventListener('click',()=>{
+                                                    let downloadLink = document.createElement('a');
+                                                    downloadLink.href = this.currentImgToBlob();
+                                                    downloadLink.setAttribute('download', 'image.png');
+                                                    downloadLink.click();
+        });
         toolbar.appendChild(saveImgDiv);
+}
+        
 
         let toolbarDiv = document.querySelector('#js-crop-toolbar');
         let toolbarOpts = Array.from(toolbarDiv.querySelectorAll('div'));;
 
         toolbarDiv.style.paddingTop = ((overlayDiv.offsetHeight - (toolbarOpts.length * toolbarDiv.offsetWidth)) / 2) + 'px'
-
-
         toolbarOpts.map((x, i) => {
             setTimeout(() => {
-
                 x.style.height = x.offsetWidth - 5 + 'px';
                 x.style.opacity = '1';
                 x.style.boxShadow = '-1px -1px 1px rgba(0,0,0,1)';
@@ -169,6 +206,7 @@ class jsCrop {
             }, (150 * i))
         });
     }
+
 
     addCropEventListener() {
         document.querySelector('#js-crop-image').style.cursor = 'crosshair';
@@ -252,7 +290,7 @@ class jsCrop {
         }
     }
 
-    downloadCurrentImg() {
+    currentImgToBlob() {
         let loadedImg = document.querySelector('#js-crop-image');
         let origImgRatio = loadedImg.getAttribute('data-dim-ratio').split(',');
         let tempCanv = document.createElement('canvas');
@@ -265,9 +303,7 @@ class jsCrop {
         tempCtx.imageSmoothingEnabled = true;
         tempCtx.imageSmoothingQuality = 'high';
         tempCtx.drawImage(loadedImg, 0, 0, loadedImg.offsetWidth * imgWdRatio, loadedImg.offsetHeight * imgHtRatio, 0, 0, loadedImg.offsetWidth, loadedImg.offsetHeight);
-        downloadLink.href = tempCanv.toDataURL();
-        downloadLink.setAttribute('download', 'image.png');
-        downloadLink.click();
+        return tempCanv.toDataURL();
     }
 
     closeOverlay() {
@@ -399,9 +435,9 @@ class jsCrop {
             var avilableImageWidth = imgPercent * screenWidth;
             var avilableImageHeight = imgPercent * screenHeight;
             if (imageActualWidth >= avilableImageWidth && imageActualHeight >= avilableImageHeight) {
-                var imageAvilableWidthRatio = avilableWidth / imageActualWidth;
-                imageAvilableHeightRatio = avilableHeight / imageActualHeight;
-                optimizedImageWidth = avilableWidth * imageAvilableWidthRatio;
+                var imageAvilableWidthRatio = avilableImageWidth / imageActualWidth;
+                imageAvilableHeightRatio = avilableImageHeight / imageActualHeight;
+                optimizedImageWidth = avilableImageWidth * imageAvilableWidthRatio;
                 optimizedImageHeight = screenHeight * imageScreenHeightRatio;
             } else if (imageActualWidth >= avilableImageWidth && imageActualHeight < avilableImageHeight) {
                 var imageAvilableWidthRatio = avilableImageWidth / imageActualWidth;
