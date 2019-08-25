@@ -114,7 +114,14 @@
 
 </body>
 <script>
-  new jsCrop('.cropImg');
+  new jsCrop('.cropImg',
+  { 
+   extButton :{ 
+                callBack: imgBlob => alert('Cropped image blob passed to callback function :-  '+imgBlob)
+    },
+    saveButton:true
+  }
+  );
 
 
   var grid = document.querySelector('.image_gallery_2');
