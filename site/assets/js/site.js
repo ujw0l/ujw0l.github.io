@@ -353,9 +353,9 @@ class mySite {
         xhttp.send();
 
         setTimeout(() => {
-            document.querySelector('#contact-me').style.borderRadius = '10%';
+            document.querySelector('#contact-me').style.borderRadius = '';
             document.querySelector('#about-me').style.borderRadius = '';
-            document.querySelector('#my-work').style.borderRadius = '';
+            document.querySelector('#my-work').style.borderRadius = '10%';
 
         }, 1100);
 
