@@ -4,16 +4,18 @@ class mySite {
     constructor() {
 
         this.createOverlayAndSideBar();
-        this.requiredEventListener();
+        
     }
 
     createOverlayAndSideBar() {
         let colorCodes = ['rgba(40,116,166,1)', 'rgba(127, 63, 191,1)', 'rgba(102, 51, 153,1)', 'rgba(242, 126, 42, 1)', 'rgba(49, 42, 242, 1)', 'rgba(27, 167, 201, 1)', 'rgba(27, 201, 149, 1)', 'rgba(180, 23, 26, 1)', 'rgba(23, 141, 180, 1)', 'rgba(rgba(60, 178, 20,1)', 'rgba(60, 178, 20, 1)', 'rgba(20, 178, 138, 1)', 'rgba(20, 178, 138, 1)', 'rgba(240, 34, 220, 1)', 'rgba(218, 11, 52, 1)', 'rgba(11, 28, 218, 1)', 'rgba(27, 247, 189, 1)'];
         let sidebarOpts = Array();
         let overlayDiv = document.createElement("div");
+        let bgColor = colorCodes[Math.floor(Math.random() * (colorCodes.length + 1))];
+
         overlayDiv.id = "site-overlay";
         overlayDiv.classList.add(`site-overlay`);
-        overlayDiv.style.backgroundColor = colorCodes[Math.floor(Math.random() * (colorCodes.length + 1))];
+        overlayDiv.style.backgroundColor = bgColor;
         document.body.appendChild(overlayDiv);
 
 
@@ -26,7 +28,7 @@ class mySite {
         let sidebarDiv = document.createElement('div');
         sidebarDiv.id = `site-sidebar`;
         sidebarDiv.classList.add(`site-sidebar`);
-        sidebarDiv.style = `width:${0.06*overlayDiv.offsetWidth};height:${overlayDiv.offsetHeight}px;`;
+        sidebarDiv.style = `width:5%; height:${overlayDiv.offsetHeight}px;`;
         overlayDiv.appendChild(sidebarDiv);
         let divStyle = `height:${toolbar.offsetWidth - 6}px;`;
 
@@ -39,8 +41,6 @@ class mySite {
         aboutMeDiv.innerHTML = '&#581;';
         sidebarOpts.push(aboutMeDiv);
 
-
-
         let contactMeDiv = document.createElement('div');
         contactMeDiv.id = `contact-me`;
         contactMeDiv.classList.add(`contact-me`);
@@ -50,7 +50,7 @@ class mySite {
         contactMeDiv.innerHTML = '&#9743;';
         sidebarOpts.push(contactMeDiv);
 
-
+    
         let myWork = document.createElement('div');
         myWork.id = `my-work`;
         myWork.classList.add(`my-work`);
@@ -59,25 +59,56 @@ class mySite {
         myWork.innerHTML = '&#9816;';
         sidebarOpts.push(myWork);
 
+        let supportMeDiv = document.createElement('div');
+        supportMeDiv.id = `support-me`;
+        supportMeDiv.classList.add(`support-me`);
+        supportMeDiv.setAttribute('data-title', `Support Me`);
+        supportMeDiv.style = divStyle;
+        supportMeDiv.innerHTML = '$';
+        supportMeDiv.addEventListener('click', ()=>window.open('https://www.patreon.com/ujw0l', '_blank'));
+        sidebarOpts.push(supportMeDiv);
+
+
 
         sidebarDiv.style.paddingTop = ((overlayDiv.offsetHeight - (sidebarOpts.length * sidebarDiv.offsetWidth)) / 2) + 'px'
 
-         let backColor = colorCodes[Math.floor(Math.random() * (colorCodes.length + 1))];
         sidebarOpts.map((x, i) => {
             setTimeout(() => {
                 sidebarDiv.appendChild(x);
-                x.style.backgroundColor = backColor;
+                x.style.backgroundColor = bgColor;
                 x.style.height = x.offsetWidth - 5 + 'px';
                 x.style.opacity = '1';
-                x.style.boxShadow = '-1px -1px 1px rgba(0,0,0,1)';
+                x.style.boxShadow = `-1px -1px 1px ${bgColor}`;
                 x.style.fontSize = (0.70 * x.offsetWidth) + 'px';
                 x.addEventListener('mouseenter', event => this.animateTitle(event));
                 x.addEventListener('mouseleave', () => document.querySelector('#site-sidebar').removeChild(document.querySelector('#info-para')));
             }, (150 * i))
         });
 
+        this.requiredEventListener();
+        window.addEventListener('resize',()=>this.resizePage());
         this.loadAboutMe();
+
     }
+
+
+    resizePage(){
+
+        let overlayDiv = document.querySelector('#site-overlay');
+        let toolbarDiv = document.querySelector('#site-sidebar');
+        let siteContent = document.querySelector('#site-info-container');
+        let toolbarOpts = Array.from(toolbarDiv.querySelectorAll('div'));
+
+        siteContent.style.width = (0.90*overlayDiv.offsetWidth)+'px';
+        toolbarDiv.style.paddingTop = ((overlayDiv.offsetHeight - (toolbarOpts.length * toolbarDiv.offsetWidth)) / 2) + 'px';
+        toolbarDiv.style.width = (0.05*overlayDiv.offsetWidth)+'px';
+        toolbarDiv.style.height = overlayDiv.offsetHeight+'px';
+        toolbarOpts.map(x => {
+            x.style.height = x.offsetWidth + 'px';
+            x.style.fontSize = (0.70 * x.offsetWidth) + 'px';
+        });
+    }
+
 
 
     animateTitle(e) {
@@ -140,6 +171,10 @@ class mySite {
                             }, (100 * i));
                         });
                     } else {
+
+                        secInfo.appendChild(document.createElement('br'));
+                        secInfo.appendChild(document.createElement('br'));
+                        secInfo.appendChild(document.createElement('br'));
                         content.split('').map((x, i) => {
                             setTimeout(() => {
                                 let infoB = document.createElement('b')
@@ -200,6 +235,8 @@ class mySite {
                 secInfo.id = 'contact-me-info';
                 secInfo.classList.add('contact-me-info');
                 infoDiv.appendChild(secInfo);
+
+                console.log(secInfo);
 
                 let contentArr = this.response.split('<break>');
 
