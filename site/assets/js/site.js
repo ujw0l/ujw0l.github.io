@@ -50,7 +50,7 @@ class mySite {
         contactMeDiv.innerHTML = '&#9743;';
         sidebarOpts.push(contactMeDiv);
 
-
+    
         let myWork = document.createElement('div');
         myWork.id = `my-work`;
         myWork.classList.add(`my-work`);
@@ -58,6 +58,16 @@ class mySite {
         myWork.style = divStyle;
         myWork.innerHTML = '&#9816;';
         sidebarOpts.push(myWork);
+
+        let supportMeDiv = document.createElement('div');
+        supportMeDiv.id = `support-me`;
+        supportMeDiv.classList.add(`support-me`);
+        supportMeDiv.setAttribute('data-title', `Support Me`);
+        supportMeDiv.style = divStyle;
+        supportMeDiv.innerHTML = '$';
+        supportMeDiv.addEventListener('click', ()=>window.open('https://www.patreon.com/ujw0l', '_blank'));
+        sidebarOpts.push(supportMeDiv);
+
 
 
         sidebarDiv.style.paddingTop = ((overlayDiv.offsetHeight - (sidebarOpts.length * sidebarDiv.offsetWidth)) / 2) + 'px'
