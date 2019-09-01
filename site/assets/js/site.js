@@ -23,6 +23,7 @@ class mySite {
         infoContainer.id = 'site-info-container';
         infoContainer.classList.add('site-info-container');
         overlayDiv.appendChild(infoContainer);
+        this.loadAboutMe();
 
 
         let sidebarDiv = document.createElement('div');
@@ -87,7 +88,7 @@ class mySite {
 
         this.requiredEventListener();
         window.addEventListener('resize',()=>this.resizePage());
-        this.loadAboutMe();
+        
 
     }
 
