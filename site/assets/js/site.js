@@ -8,11 +8,12 @@ class mySite {
     }
 
     createOverlayAndSideBar() {
-        let colorCodes = ['rgba(40,116,166,1)', 'rgba(127, 63, 191,1)', 'rgba(102, 51, 153,1)', 'rgba(242, 126, 42, 1)', 'rgba(49, 42, 242, 1)', 'rgba(27, 167, 201, 1)', 'rgba(27, 201, 149, 1)', 'rgba(180, 23, 26, 1)', 'rgba(23, 141, 180, 1)', 'rgba(rgba(60, 178, 20,1)', 'rgba(60, 178, 20, 1)', 'rgba(20, 178, 138, 1)', 'rgba(20, 178, 138, 1)', 'rgba(240, 34, 220, 1)', 'rgba(218, 11, 52, 1)', 'rgba(11, 28, 218, 1)', 'rgba(27, 247, 189, 1)'];
+       
         let sidebarOpts = Array();
         let overlayDiv = document.createElement("div");
-        let bgColor = colorCodes[Math.floor(Math.random() * (colorCodes.length + 1))];
+        let bgColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 190)},${Math.floor(Math.random() * 256)},1)`;
 
+        console.log(bgColor);
         overlayDiv.id = "site-overlay";
         overlayDiv.classList.add(`site-overlay`);
         overlayDiv.style.backgroundColor = bgColor;
@@ -112,8 +113,6 @@ class mySite {
 
 
     animateTitle(e) {
-
-        let colorCodes = ['rgba(40,116,166,1)', 'rgba(127, 63, 191,1)', 'rgba(102, 51, 153,1)', 'rgba(242, 126, 42, 1)', 'rgba(49, 42, 242, 1)', 'rgba(27, 167, 201, 1)', 'rgba(27, 201, 149, 1)', 'rgba(180, 23, 26, 1)', 'rgba(23, 141, 180, 1)', 'rgba(rgba(60, 178, 20,1)', 'rgba(60, 178, 20, 1)', 'rgba(20, 178, 138, 1)', 'rgba(20, 178, 138, 1)', 'rgba(240, 34, 220, 1)', 'rgba(218, 11, 52, 1)', 'rgba(11, 28, 218, 1)', 'rgba(27, 247, 189, 1)'];
         let sidebarDiv = document.querySelector('#site-sidebar');
         let infoPara = document.createElement('p');
         infoPara.id = 'info-para';
@@ -123,7 +122,7 @@ class mySite {
         e.target.getAttribute('data-title').split('').map((x, i) => {
             setTimeout(() => {
                 let letterB = document.createElement('b');
-                let randColor = colorCodes[Math.floor(Math.random() * (colorCodes.length + 1))];
+                let randColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 190)},${Math.floor(Math.random() * 256)},1)`;
                 letterB.innerHTML = x;
                 letterB.style.color = randColor;
                 letterB.style.textShadow = `0px 1px 5px ${randColor}`;
@@ -138,7 +137,6 @@ class mySite {
     loadAboutMe() {
         let infoDiv = document.querySelector('#site-info-container');
         infoDiv.innerHTML = '';
-        let colorCodes = ['rgba(40,116,166,1)', 'rgba(127, 63, 191,1)', 'rgba(102, 51, 153,1)', 'rgba(242, 126, 42, 1)', 'rgba(49, 42, 242, 1)', 'rgba(27, 167, 201, 1)', 'rgba(27, 201, 149, 1)', 'rgba(180, 23, 26, 1)', 'rgba(23, 141, 180, 1)', 'rgba(rgba(60, 178, 20,1)', 'rgba(60, 178, 20, 1)', 'rgba(20, 178, 138, 1)', 'rgba(20, 178, 138, 1)', 'rgba(240, 34, 220, 1)', 'rgba(218, 11, 52, 1)', 'rgba(11, 28, 218, 1)', 'rgba(27, 247, 189, 1)'];
         var xhttp = new XMLHttpRequest();
         xhttp.open("GET", 'site/assets/ajax-content/about-me.txt', true);
         xhttp.responseType = "text";
@@ -163,7 +161,7 @@ class mySite {
                         content.split('').map((x, i) => {
                             setTimeout(() => {
                                 let headerB = document.createElement('b');
-                                let randColor = colorCodes[Math.floor(Math.random() * (colorCodes.length + 1))];
+                                let randColor =  `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 190)},${Math.floor(Math.random() * 256)},1)`;
                                 headerB.innerHTML = x;
                                 headerB.style.color = randColor;
                                 headerB.style.textShadow = `0px 2px 10px ${randColor}`;
@@ -178,7 +176,7 @@ class mySite {
                         content.split('').map((x, i) => {
                             setTimeout(() => {
                                 let infoB = document.createElement('b')
-                                let randColor = colorCodes[Math.floor(Math.random() * (colorCodes.length + 1))];
+                                let randColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 190)},${Math.floor(Math.random() * 256)},1)`;
                                 if (i == 704) {
                                     infoB.innerHTML = x + '<br/><br/>';
                                 } else {
@@ -217,8 +215,6 @@ class mySite {
 
         let infoDiv = document.querySelector('#site-info-container');
         infoDiv.innerHTML = '';
-
-        let colorCodes = ['rgba(40,116,166,1)', 'rgba(127, 63, 191,1)', 'rgba(102, 51, 153,1)', 'rgba(242, 126, 42, 1)', 'rgba(49, 42, 242, 1)', 'rgba(27, 167, 201, 1)', 'rgba(27, 201, 149, 1)', 'rgba(180, 23, 26, 1)', 'rgba(23, 141, 180, 1)', 'rgba(rgba(60, 178, 20,1)', 'rgba(60, 178, 20, 1)', 'rgba(20, 178, 138, 1)', 'rgba(20, 178, 138, 1)', 'rgba(240, 34, 220, 1)', 'rgba(218, 11, 52, 1)', 'rgba(11, 28, 218, 1)', 'rgba(27, 247, 189, 1)'];
         var xhttp = new XMLHttpRequest();
         xhttp.open("GET", 'site/assets/ajax-content/contact-me.txt', true);
         xhttp.responseType = "text";
@@ -247,7 +243,7 @@ class mySite {
                         content.split('').map((x, i) => {
                             setTimeout(() => {
                                 let headerB = document.createElement('b');
-                                let randColor = colorCodes[Math.floor(Math.random() * (colorCodes.length + 1))];
+                                let randColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 190)},${Math.floor(Math.random() * 256)},1)`;
                                 headerB.innerHTML = x;
                                 headerB.style.color = randColor;
                                 headerB.style.textShadow = `0px 2px 10px ${randColor}`;
@@ -259,7 +255,7 @@ class mySite {
                         content.split('').map((x, i) => {
                             setTimeout(() => {
                                 let infoB = document.createElement('b')
-                                let randColor = colorCodes[Math.floor(Math.random() * (colorCodes.length + 1))];
+                                let randColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 190)},${Math.floor(Math.random() * 256)},1)`;
                                 if (i === 27 || i === 55 || i === 82 || i === 101) {
                                     infoB.innerHTML = x + '<br/><br/>';
                                 } else {
@@ -297,8 +293,6 @@ class mySite {
 
         let infoDiv = document.querySelector('#site-info-container');
         infoDiv.innerHTML = '';
-
-        let colorCodes = ['rgba(40,116,166,1)', 'rgba(127, 63, 191,1)', 'rgba(102, 51, 153,1)', 'rgba(242, 126, 42, 1)', 'rgba(49, 42, 242, 1)', 'rgba(27, 167, 201, 1)', 'rgba(27, 201, 149, 1)', 'rgba(180, 23, 26, 1)', 'rgba(23, 141, 180, 1)', 'rgba(rgba(60, 178, 20,1)', 'rgba(60, 178, 20, 1)', 'rgba(20, 178, 138, 1)', 'rgba(20, 178, 138, 1)', 'rgba(240, 34, 220, 1)', 'rgba(218, 11, 52, 1)', 'rgba(11, 28, 218, 1)', 'rgba(27, 247, 189, 1)'];
         var xhttp = new XMLHttpRequest();
         xhttp.open("GET", 'site/assets/ajax-content/my-work.txt', true);
         xhttp.responseType = "text";
@@ -325,7 +319,7 @@ class mySite {
                         content.split('').map((x, i) => {
                             setTimeout(() => {
                                 let headerB = document.createElement('b');
-                                let randColor = colorCodes[Math.floor(Math.random() * (colorCodes.length + 1))];
+                                let randColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 190)},${Math.floor(Math.random() * 256)},1)`;
                                 headerB.style.color = randColor;
                                 headerB.style.textShadow = `0px 2px 10px ${randColor}`;
                                 headerB.innerHTML = x;
@@ -354,7 +348,7 @@ class mySite {
 
                                 setTimeout(()=>{
                                     let profTxtB = document.createElement('b');
-                                    let randColor = colorCodes[Math.floor(Math.random() * (colorCodes.length + 1))];
+                                    let randColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 190)},${Math.floor(Math.random() * 256)},1)`;
                                     profTxtB.style.color = randColor;
                                     profTxtB.style.textShadow = `0px 1px 5px ${randColor}`;
                                     profTxtB.innerHTML = x;
@@ -366,7 +360,7 @@ class mySite {
                             clickText.map((a,indx)=>{
                                 setTimeout(()=>{
                                     let lnkTxtB = document.createElement('b');
-                                    let randColor = colorCodes[Math.floor(Math.random() * (colorCodes.length + 1))];
+                                    let randColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 190)},${Math.floor(Math.random() * 256)},1)`;
                                     lnkTxtB.style.color = randColor;
                                     lnkTxtB.style.textShadow = `0px 1px 5px ${randColor}`;
                                     lnkTxtB.innerHTML = a;
