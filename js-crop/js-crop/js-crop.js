@@ -31,7 +31,7 @@ class jsCrop {
 
         let overlayDivEl = document.createElement("div");
         overlayDivEl.id = "js-crop-overlay";
-        overlayDivEl.style = `transition: 0.8s ease-in-out;top:0%;left:0%;right:0%;bottom:0%;height:${document.body.clientHeight}px;width:${document.body.clientWidth}px;background-color:rgba(0,0,0,1);z-index:100000;`;
+        overlayDivEl.style = `transition: 0.8s ease-in-out;top:0%;left:0%;right:0%;bottom:0%;height:100%;width:100%;background-color:rgba(0,0,0,1);z-index:100000;`;
         document.body.insertBefore(overlayDivEl, document.body.firstChild);
 
         let jsCropCloseBtn = document.createElement('span');
