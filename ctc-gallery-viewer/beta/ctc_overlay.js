@@ -408,7 +408,7 @@
 	
 					let bufferImg = new Image();
 						bufferImg.src = loadedImg.src;
-						console.log(loadedImg);			
+						console.log(typeof(loadeImg));			
 					let opImgDim = this.getOptimizedImageSize(overlayWidth, overlayHeight, bufferImg.width, bufferImg.height,imgCount);
 					let imgDisplay =  loadedImg.style.display;	
 						loadedImg.style = `height:${opImgDim.height}px;width:${opImgDim.width}px;display:${imgDisplay};margin:${((overlayHeight- opImgDim.height) / 2)}px ${(((alltImgWidth * overlayWidth) - opImgDim.width) / 2)}px;`;	
