@@ -95,12 +95,12 @@
 				overlayDivEl.appendChild(imgEl);
 				if( 1< gal.length ){
 					this.createToolbar(overlayDivEl,gal,imgEl,imgNum,param2);
-					this.createSidebar(overlayDivEl,gal,imgEl,imgNum,param2);
+					this.createSidebar(overlayDivEl,gal,imgEl,imgNum,loadingInt,param2);
 				}
 			}
 
 
-			createToolbar(overlayDivEl,gal,imgEl,imgNum,param2){
+			createToolbar(overlayDivEl,gal,imgEl,imgNum,loadingInt,param2){
 					let toolbarDiv = overlayDivEl.querySelector('#toolbar-div');
 					let ovWidth = overlayDivEl.offsetWidth;
 					let ovHeight = overlayDivEl.offsetHeight;
@@ -261,7 +261,7 @@
 		
 			
 		
-			createSidebar(overlayDiv,gal,imgEl,imgClicked,param2) {
+			createSidebar(overlayDiv,gal,imgEl,imgClicked,loadingInt,param2) {
 							let sidebar = document.createElement('div');
 							sidebar.id = `gal-sidebar`;
 							sidebar.style = `overflow:auto;tex-align:center;display:inline-block;width:${0.04*overlayDiv.offsetWidth}px;height:${overlayDiv.offsetHeight}px;float:left;left:0;background-color:rgba(255,255,255,0.7);`;
@@ -314,14 +314,14 @@
 									sidebarImg.style.backgroundImage = `url('${event.target.src}')`;
 									});
 								
-								sidebarImg.addEventListener('click', () => this.loadImg(i,gal,overlayDiv,imgEl) );	
+								sidebarImg.addEventListener('click', () => this.loadImg(i,gal,overlayDiv,imgEl,loadingInt) );	
 							});
 
 					this.scrollToPrev(imgClicked);
 					sidebar.style.paddingTop = 1 <= ((overlayDiv.offsetHeight - (gal.length * sidebar.offsetWidth)) / 2) ?  `${((overlayDiv.offsetHeight - (gal.length * sidebar.offsetWidth)) / 2)}px`: `0px`;
 			}
 
-		loadImg(imgNum,gal,overlayDiv,imgEl){
+		loadImg(imgNum,gal,overlayDiv,imgEl,prevLoadingInt){
 				
 				var clickedImg = new Image();
 				clickedImg.src =  gal[imgNum].src;
@@ -329,6 +329,10 @@
 				
 				let imgLoading = overlayDiv.querySelector('#image-loading-main');
 				imgLoading.style.display = 'inline-block';
+
+				if(undefined != prevLoadingInt){
+					clearInterval(prevLoadingInt);
+				}
 
 				let loadingInt = setInterval( ()=>{
 					switch(imgLoading.innerHTML){
@@ -354,7 +358,6 @@
 				clickedImg.addEventListener('load',()=>{
 					clearInterval(loadingInt);
 					imgLoading.style.display = 'none';
-					let toolbarDiv = overlayDiv.querySelector('#toolbar-div');
 					let imgSrc = event.target.src;
 					let opImgDim = this.getOptimizedImageSize(overlayDiv.offsetWidth, overlayDiv.offsetHeight, clickedImg.width, clickedImg.height,gal.length);
 					
