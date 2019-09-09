@@ -90,12 +90,14 @@
 						imgEl.style = `height:${opImgDim.height}px;width:${opImgDim.width}px;display:inline-block;margin:${((overlayHeight - opImgDim.height) / 2)}px ${(((alltImgWidth * overlayWidth) - opImgDim.width) / 2)}px;`;
 						imgEl.src = loadedImg.src;
 						imgEl.title =  undefined!= img.getAttribute('title') || null != img.getAttribute('title') ? img.getAttribute('title') :'';	
-						overlayDivEl.appendChild(imgEl);
-						if( 1< gal.length ){
-							this.createToolbar(overlayDivEl,gal,imgEl,imgNum,param2);
-						}
+						overlayDivEl.appendChild(imgEl);	
 				});
-				this.createSidebar(overlayDivEl,gal,imgEl,imgNum,param2);
+
+				if( 1< gal.length ){
+					this.createToolbar(overlayDivEl,gal,imgEl,imgNum,param2);
+					this.createSidebar(overlayDivEl,gal,imgEl,imgNum,param2);
+				}
+				
 			}
 
 
@@ -258,7 +260,7 @@
 			
 		
 			createSidebar(overlayDiv,gal,imgEl,imgClicked,param2) {
-				if( 1 < gal.length ){
+				
 							let sidebar = document.createElement('div');
 							sidebar.id = `gal-sidebar`;
 							sidebar.style = `overflow:auto;tex-align:center;display:inline-block;width:${0.04*overlayDiv.offsetWidth}px;height:${overlayDiv.offsetHeight}px;float:left;left:0;background-color:rgba(255,255,255,0.7);`;
@@ -315,7 +317,6 @@
 
 							this.scrollToPrev(imgClicked);
 							sidebar.style.paddingTop = 1 <= ((overlayDiv.offsetHeight - (gal.length * sidebar.offsetWidth)) / 2) ?  `${((overlayDiv.offsetHeight - (gal.length * sidebar.offsetWidth)) / 2)}px`: `0px`;
-				}
 			}
 
 		loadImg(imgNum,gal,overlayDiv,imgEl){
@@ -361,9 +362,11 @@
 					imgEl.src = imgSrc;
 					imgEl.title =  undefined!= gal[imgNum].getAttribute('title') || null != gal[imgNum].getAttribute('title') ? gal[imgNum].getAttribute('title') :'';	
 
-						this.createToolbar(overlayDiv,gal,imgEl,imgNum)
-						this.scrollToPrev(imgNum);
+					
 			});	
+
+			this.createToolbar(overlayDiv,gal,imgEl,imgNum)
+			this.scrollToPrev(imgNum);
 		}
 
 
