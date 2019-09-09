@@ -29,6 +29,7 @@
 			}
 		
 			createOverlay(img,imgNum, gal,param2) {
+
 				let overlayWidth = window.innerWidth;
 				let overlayHeight = window.innerHeight;
 				let alltImgWidth = 1 < gal.length ? 0.94 : 1;
@@ -97,7 +98,6 @@
 					this.createToolbar(overlayDivEl,gal,imgEl,imgNum,param2);
 					this.createSidebar(overlayDivEl,gal,imgEl,imgNum,param2);
 				}
-				
 			}
 
 
@@ -260,7 +260,6 @@
 			
 		
 			createSidebar(overlayDiv,gal,imgEl,imgClicked,param2) {
-				
 							let sidebar = document.createElement('div');
 							sidebar.id = `gal-sidebar`;
 							sidebar.style = `overflow:auto;tex-align:center;display:inline-block;width:${0.04*overlayDiv.offsetWidth}px;height:${overlayDiv.offsetHeight}px;float:left;left:0;background-color:rgba(255,255,255,0.7);`;
@@ -311,12 +310,13 @@
 									clearInterval(rotateInterval);
 									sidebarImg.innerHTML = '';
 									sidebarImg.style.backgroundImage = `url('${event.target.src}')`;
-									sidebarImg.addEventListener('click', () => this.loadImg(i,gal,overlayDiv,imgEl) );
 									});
+								
+								sidebarImg.addEventListener('click', () => this.loadImg(i,gal,overlayDiv,imgEl) );	
 							});
 
-							this.scrollToPrev(imgClicked);
-							sidebar.style.paddingTop = 1 <= ((overlayDiv.offsetHeight - (gal.length * sidebar.offsetWidth)) / 2) ?  `${((overlayDiv.offsetHeight - (gal.length * sidebar.offsetWidth)) / 2)}px`: `0px`;
+					this.scrollToPrev(imgClicked);
+					sidebar.style.paddingTop = 1 <= ((overlayDiv.offsetHeight - (gal.length * sidebar.offsetWidth)) / 2) ?  `${((overlayDiv.offsetHeight - (gal.length * sidebar.offsetWidth)) / 2)}px`: `0px`;
 			}
 
 		loadImg(imgNum,gal,overlayDiv,imgEl){
