@@ -95,12 +95,12 @@
 				overlayDivEl.appendChild(imgEl);
 				if( 1< gal.length ){
 					this.createToolbar(overlayDivEl,gal,imgEl,imgNum,param2);
-					this.createSidebar(overlayDivEl,gal,imgEl,imgNum,loadingInt,param2);
+					this.createSidebar(overlayDivEl,gal,imgEl,imgNum,param2);
 				}
 			}
 
 
-			createToolbar(overlayDivEl,gal,imgEl,imgNum,loadingInt,param2){
+			createToolbar(overlayDivEl,gal,imgEl,imgNum,param2){
 					let toolbarDiv = overlayDivEl.querySelector('#toolbar-div');
 					let ovWidth = overlayDivEl.offsetWidth;
 					let ovHeight = overlayDivEl.offsetHeight;
@@ -216,9 +216,11 @@
 													
 									}else{
 
-										if(undefined != loadingInt){
-											clearInterval(loadingInt);
+										let imgLoading = overlayDivEl.querySelector('#image-loading-main');
+										if(undefined != imgLoading){
+											overlayDivEl.removeChild(imgLoading);
 										}
+
 										toolbarDiv.removeChild(document.querySelector('#gal-prev-img'));
 										toolbarDiv.removeChild(document.querySelector('#gal-next-img'));
 
@@ -257,14 +259,12 @@
 											event.target.style.fontWeight = '';
 										});	
 										toolbarDiv.appendChild(nextBtn);
-
-									}
-									
+									}			
 			}
 		
 			
 		
-			createSidebar(overlayDiv,gal,imgEl,imgClicked,loadingInt,param2) {
+			createSidebar(overlayDiv,gal,imgEl,imgClicked,param2) {
 							let sidebar = document.createElement('div');
 							sidebar.id = `gal-sidebar`;
 							sidebar.style = `overflow:auto;tex-align:center;display:inline-block;width:${0.04*overlayDiv.offsetWidth}px;height:${overlayDiv.offsetHeight}px;float:left;left:0;background-color:rgba(255,255,255,0.7);`;
@@ -317,7 +317,7 @@
 									sidebarImg.style.backgroundImage = `url('${event.target.src}')`;
 									});
 								
-								sidebarImg.addEventListener('click', () => this.loadImg(i,gal,overlayDiv,imgEl,loadingInt) );	
+								sidebarImg.addEventListener('click', () => this.loadImg(i,gal,overlayDiv,imgEl) );	
 							});
 
 					this.scrollToPrev(imgClicked);
@@ -330,8 +330,13 @@
 				clickedImg.src =  gal[imgNum].src;
 				imgEl.style.display = 'none';
 				
-				let imgLoading = overlayDiv.querySelector('#image-loading-main');
-				imgLoading.style.display = 'inline-block';
+				
+
+				let imgLoading =  document.createElement('span');
+				imgLoading.id = 'image-loading-main';
+				imgLoading.style = `left:${0.992*overlayDiv.offsetWidth/2};top:${overlayDiv.offsetHright/2};font-size:${0.016*overlayDiv.offsetWidth}px;display:inline-block;position:fixed;color:rgba(255,255,255,1);`;
+				imgLoading.innerHTML = 'Loading';
+				overlayDiv.appendChild(imgLoading);
 
 				let loadingInt = setInterval( ()=>{
 					switch(imgLoading.innerHTML){
@@ -365,7 +370,7 @@
 					imgEl.title =  undefined!= gal[imgNum].getAttribute('title') || null != gal[imgNum].getAttribute('title') ? gal[imgNum].getAttribute('title') :'';		
 			});	
 
-			this.createToolbar(overlayDiv,gal,imgEl,imgNum,loadingInt);
+			this.createToolbar(overlayDiv,gal,imgEl,imgNum);
 			this.scrollToPrev(imgNum);
 		}
 
