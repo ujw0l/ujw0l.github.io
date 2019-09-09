@@ -216,6 +216,9 @@
 													
 									}else{
 
+										if(undefined != loadingInt){
+											clearInterval(loadingInt);
+										}
 										toolbarDiv.removeChild(document.querySelector('#gal-prev-img'));
 										toolbarDiv.removeChild(document.querySelector('#gal-next-img'));
 
@@ -321,7 +324,7 @@
 					sidebar.style.paddingTop = 1 <= ((overlayDiv.offsetHeight - (gal.length * sidebar.offsetWidth)) / 2) ?  `${((overlayDiv.offsetHeight - (gal.length * sidebar.offsetWidth)) / 2)}px`: `0px`;
 			}
 
-		loadImg(imgNum,gal,overlayDiv,imgEl,prevLoadingInt){
+		loadImg(imgNum,gal,overlayDiv,imgEl){
 				
 				var clickedImg = new Image();
 				clickedImg.src =  gal[imgNum].src;
@@ -329,10 +332,6 @@
 				
 				let imgLoading = overlayDiv.querySelector('#image-loading-main');
 				imgLoading.style.display = 'inline-block';
-
-				if(undefined != prevLoadingInt){
-					clearInterval(prevLoadingInt);
-				}
 
 				let loadingInt = setInterval( ()=>{
 					switch(imgLoading.innerHTML){
@@ -366,7 +365,7 @@
 					imgEl.title =  undefined!= gal[imgNum].getAttribute('title') || null != gal[imgNum].getAttribute('title') ? gal[imgNum].getAttribute('title') :'';		
 			});	
 
-			this.createToolbar(overlayDiv,gal,imgEl,imgNum);
+			this.createToolbar(overlayDiv,gal,imgEl,imgNum,loadingInt);
 			this.scrollToPrev(imgNum);
 		}
 
