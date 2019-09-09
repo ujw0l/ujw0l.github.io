@@ -269,10 +269,10 @@
 			createSidebar(overlayDiv,gal,imgEl,imgClicked,param2) {
 							let sidebar = document.createElement('div');
 							sidebar.id = `gal-sidebar`;
-							sidebar.style = `overflow:auto;tex-align:center;display:inline-block;width:${0.04*overlayDiv.offsetWidth}px;height:${overlayDiv.offsetHeight}px;float:left;left:0;background-color:rgba(255,255,255,0.7);`;
+							sidebar.style = `overflow:auto;tex-align:center;display:inline-block;width:${0.04*overlayDiv.offsetWidth}px;height:${overlayDiv.offsetHeight}px;float:left;left:0;background-color:rgba(0,0,0,0.7);`;
 							overlayDiv.appendChild(sidebar);
 					
-							let sidebarImgStyle = `border-radius:2%;cursor:pointer;margin-bottom:1px;background-color:rgba(255,255,255,1);width:98%;height:${0.98*sidebar.offsetWidth}px;border:1px solid rgba(0,0,0,0.8);background-repeat: no-repeat;background-size:contain;background-position: center;`;
+							let sidebarImgStyle = `border-radius:2%;cursor:pointer;margin-bottom:1px;background-color:rgba(255,255,255,1);width:93%;height:${0.93*sidebar.offsetWidth}px;border:1px solid rgba(0,0,0,0.8);background-repeat: no-repeat;background-size:contain;background-position: center;`;
 							gal.map((img,i)=>{
 				
 								let imgPrev = new Image();
@@ -323,7 +323,7 @@
 							});
 
 					this.scrollToPrev(imgClicked);
-					sidebar.style.paddingTop = 1 <= ((overlayDiv.offsetHeight - (gal.length * sidebar.offsetWidth)) / 2) ?  `${((overlayDiv.offsetHeight - (gal.length * sidebar.offsetWidth)) / 2)}px`: `0px`;
+					sidebar.style.paddingTop = 1 <= ((overlayDiv.offsetHeight - (gal.length * 0.94*sidebar.offsetWidth)) / 2) ?  `${((overlayDiv.offsetHeight - (gal.length * 0.94*sidebar.offsetWidth)) / 2)}px`: `0px`;
 			}
 
 		loadImg(imgNum,gal,overlayDiv,imgEl){
@@ -418,7 +418,7 @@
              if(undefined != sidebarDiv){						
 					
 						let sidebarImgs = Array.from(sidebarDiv.querySelectorAll('div'));
-							sidebarDiv.style.paddingTop =  1 <= ((overlayHeight - (sidebarImgs.length * 0.04*overlayWidth)) / 2) ?  `${((overlayHeight - (sidebarImgs.length * 0.04*overlayWidth)) / 2)}px`:'0px';
+							sidebarDiv.style.paddingTop =  1 <= ((overlayHeight - (sidebarImgs.length * 0.94*sidebarDiv.offsetWidth)) / 2) ?  `${((overlayHeight - (sidebarImgs.length * 0.94*sidebarDiv.offsetWidth)) / 2)}px`:'0px';
 							sidebarDiv.style.height = overlayHeight+'px';
 							sidebarDiv.style.width = (0.04*overlayWidth)+'px';
 							sidebarImgs.map(x => {
