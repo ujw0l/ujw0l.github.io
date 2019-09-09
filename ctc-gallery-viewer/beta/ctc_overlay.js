@@ -217,6 +217,9 @@
 													
 									}else{
 
+										toolbarDiv.removeChild(document.querySelector('#gal-prev-img'));
+										toolbarDiv.removeChild(document.querySelector('#gal-next-img'));
+
 										let prevBtn =  document.createElement('div');
 										prevBtn.id = 'gal-prev-img';
 										prevBtn.style = btnStyle;
@@ -353,8 +356,6 @@
 					clearInterval(loadingInt);
 					imgLoading.style.display = 'none';
 					let toolbarDiv = overlayDiv.querySelector('#toolbar-div');
-					toolbarDiv.removeChild(document.querySelector('#gal-prev-img'));
-					toolbarDiv.removeChild(document.querySelector('#gal-next-img'));
 					let imgSrc = event.target.src;
 					let opImgDim = this.getOptimizedImageSize(overlayDiv.offsetWidth, overlayDiv.offsetHeight, clickedImg.width, clickedImg.height,gal.length);
 					
@@ -365,7 +366,7 @@
 					
 			});	
 
-			this.createToolbar(overlayDiv,gal,imgEl,imgNum)
+			this.createToolbar(overlayDiv,gal,imgEl,imgNum);
 			this.scrollToPrev(imgNum);
 		}
 
