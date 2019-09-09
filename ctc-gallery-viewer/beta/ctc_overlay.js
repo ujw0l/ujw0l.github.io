@@ -82,16 +82,18 @@
 			 let imgEl = document.createElement('img');
 			 let loadedImg = new Image();
 				 loadedImg.src = img.src;
+				 imgEl.id = 'loaded-img';	
 				 imgEl.src =  img.src;
 				 imgEl.style.display = 'none';
+				 
 				 loadedImg.addEventListener('load', (event)=>{	
 						clearInterval(loadingInt);
 						imgLoading.style.display = 'none';
-						let opImgDim = this.getOptimizedImageSize(overlayWidth, overlayHeight, loadedImg.width, loadedImg.height,gal.length);
-						imgEl.id = 'loaded-img';	 
+						let opImgDim = this.getOptimizedImageSize(overlayWidth, overlayHeight, loadedImg.width, loadedImg.height,gal.length); 
 						imgEl.style = `height:${opImgDim.height}px;width:${opImgDim.width}px;display:inline-block;margin:${((overlayHeight - opImgDim.height) / 2)}px ${(((alltImgWidth * overlayWidth) - opImgDim.width) / 2)}px;`;
 						imgEl.title =  undefined!= img.getAttribute('title') || null != img.getAttribute('title') ? img.getAttribute('title') :'';			
 				});
+				
 				overlayDivEl.appendChild(imgEl);
 				if( 1< gal.length ){
 					this.createToolbar(overlayDivEl,gal,imgEl,imgNum,param2);
@@ -391,9 +393,10 @@
 				let overlayWidth = window.innerWidth;
 				let overlayHeight = window.innerHeight;
 				let overlayDiv = document.querySelector('#gallery-overlay');
-				let closeBtn = overlayDiv.querySelector('#overlay-close-btn');
+				
 			
 				if(undefined != overlayDiv ){
+					let closeBtn = overlayDiv.querySelector('#overlay-close-btn');
 					overlayDiv.style.height = `${overlayHeight}px`;
 					overlayDiv.style.width = `${overlayWidth}px`;
 					closeBtn .style.fontSize = `${0.016*overlayWidth}`;
@@ -407,8 +410,7 @@
 						imgLoading.style.fontSize =  `${0.016*overlayWidth}px`
 	
 					let bufferImg = new Image();
-						bufferImg.src = loadedImg.src;
-						console.log(typeof(loadedImg));			
+						bufferImg.src = loadedImg.src;		
 					let opImgDim = this.getOptimizedImageSize(overlayWidth, overlayHeight, bufferImg.width, bufferImg.height,imgCount);
 					let imgDisplay =  loadedImg.style.display;	
 						loadedImg.style = `height:${opImgDim.height}px;width:${opImgDim.width}px;display:${imgDisplay};margin:${((overlayHeight- opImgDim.height) / 2)}px ${(((alltImgWidth * overlayWidth) - opImgDim.width) / 2)}px;`;	
