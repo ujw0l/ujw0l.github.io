@@ -406,16 +406,21 @@
 					let imgCount =  undefined != sidebarDiv ? 2 :1;
 					let alltImgWidth = undefined != sidebarDiv ? 0.94 : 1;
 					let imgLoading = overlayDiv.querySelector('#image-loading-main');
+					if(undefined != imgLoading){
+
 						imgLoading.style.left  = `${0.992*overlayWidth/2}`;
 						imgLoading.style.top = `${overlayHeight/2}`;
 						imgLoading.style.fontSize =  `${0.016*overlayWidth}px`
-	
-					let bufferImg = new Image();
+					}else{
+						let bufferImg = new Image();
 						bufferImg.src = loadedImg.src;			
-					let opImgDim = this.getOptimizedImageSize(overlayWidth, overlayHeight, bufferImg.width, bufferImg.height,imgCount);
-					let imgDisplay =  loadedImg.style.display;	
-						loadedImg.style = `height:${opImgDim.height}px;width:${opImgDim.width}px;display:${imgDisplay};margin:${((overlayHeight- opImgDim.height) / 2)}px ${(((alltImgWidth * overlayWidth) - opImgDim.width) / 2)}px;`;	
-							
+						let opImgDim = this.getOptimizedImageSize(overlayWidth, overlayHeight, bufferImg.width, bufferImg.height,imgCount);
+						loadedImg.style = `height:${opImgDim.height}px;width:${opImgDim.width}px;display:inline-block;margin:${((overlayHeight- opImgDim.height) / 2)}px ${(((alltImgWidth * overlayWidth) - opImgDim.width) / 2)}px;`;
+					}
+						
+	
+						
+					
              if(undefined != sidebarDiv){						
 					
 						let sidebarImgs = Array.from(sidebarDiv.querySelectorAll('div'));
