@@ -54,7 +54,7 @@
 
 			 let imgLoading =  document.createElement('span');
 				  imgLoading.id = 'image-loading-main';
-				  imgLoading.style = `left:${(alltImgWidth-0.075)*overlayWidth/2};top:${overlayHeight/2};font-size:${0.016*overlayWidth}px;display:inline-block;position:fixed;color:rgba(255,255,255,1);`;
+				  imgLoading.style = `left:${0.992*overlayWidth/2};top:${overlayHeight/2};font-size:${0.016*overlayWidth}px;display:inline-block;position:fixed;color:rgba(255,255,255,1);`;
 				  imgLoading.innerHTML = 'Loading';
 				  overlayDivEl.appendChild(imgLoading);
 				  let loadingInt = setInterval( ()=>{
@@ -80,20 +80,20 @@
 
 			 let imgEl = document.createElement('img');
 			 let loadedImg = new Image();
-				clearInterval(loadingInt);
-				imgLoading.style.display = 'none';
 				 loadedImg.src = img.src;
 				 imgEl.style.display = 'none';
 				 loadedImg.addEventListener('load', (event)=>{	
-					let opImgDim = this.getOptimizedImageSize(overlayWidth, overlayHeight, loadedImg.width, loadedImg.height,gal.length);
-					imgEl.id = 'loaded-img';	 
-					imgEl.style = `height:${opImgDim.height}px;width:${opImgDim.width}px;display:inline-block;margin:${((overlayHeight - opImgDim.height) / 2)}px ${(((alltImgWidth * overlayWidth) - opImgDim.width) / 2)}px;`;
-					imgEl.src = loadedImg.src;
-					imgEl.title =  undefined!= img.getAttribute('title') || null != img.getAttribute('title') ? img.getAttribute('title') :'';	
-					overlayDivEl.appendChild(imgEl);
-					if( 1< gal.length ){
-						this.createToolbar(overlayDivEl,gal,imgEl,imgNum,param2);
-					}
+						clearInterval(loadingInt);
+						imgLoading.style.display = 'none';
+						let opImgDim = this.getOptimizedImageSize(overlayWidth, overlayHeight, loadedImg.width, loadedImg.height,gal.length);
+						imgEl.id = 'loaded-img';	 
+						imgEl.style = `height:${opImgDim.height}px;width:${opImgDim.width}px;display:inline-block;margin:${((overlayHeight - opImgDim.height) / 2)}px ${(((alltImgWidth * overlayWidth) - opImgDim.width) / 2)}px;`;
+						imgEl.src = loadedImg.src;
+						imgEl.title =  undefined!= img.getAttribute('title') || null != img.getAttribute('title') ? img.getAttribute('title') :'';	
+						overlayDivEl.appendChild(imgEl);
+						if( 1< gal.length ){
+							this.createToolbar(overlayDivEl,gal,imgEl,imgNum,param2);
+						}
 				});
 				this.createSidebar(overlayDivEl,gal,imgEl,imgNum,param2);
 			}
@@ -399,7 +399,7 @@
 					let imgCount =  undefined != sidebarDiv ? 2 :1;
 					let alltImgWidth = undefined != sidebarDiv ? 0.94 : 1;
 					let imgLoading = overlayDiv.querySelector('#image-loading-main');
-						imgLoading.style.left  = `${(alltImgWidth-0.075)*overlayWidth/2}`;
+						imgLoading.style.left  = `${0.992*overlayWidth/2}`;
 						imgLoading.style.top = `${overlayHeight/2}`;
 						imgLoading.style.fontSize =  `${0.016*overlayWidth}px`
 	
