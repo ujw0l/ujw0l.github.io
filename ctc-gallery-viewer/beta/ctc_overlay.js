@@ -334,7 +334,7 @@
 
 				let imgLoading =  document.createElement('span');
 				imgLoading.id = 'image-loading-main';
-				imgLoading.style = `left:${0.992*overlayDiv.offsetWidth/2};top:${overlayDiv.offsetHright/2};font-size:${0.016*overlayDiv.offsetWidth}px;display:inline-block;position:fixed;color:rgba(255,255,255,1);`;
+				imgLoading.style = `left:${0.992*overlayDiv.offsetWidth/2};top:${overlayDiv.offsetHeight/2};font-size:${0.016*overlayDiv.offsetWidth}px;display:inline-block;position:fixed;color:rgba(255,255,255,1);`;
 				imgLoading.innerHTML = 'Loading';
 				overlayDiv.appendChild(imgLoading);
 
@@ -364,7 +364,6 @@
 					imgLoading.style.display = 'none';
 					let imgSrc = event.target.src;
 					let opImgDim = this.getOptimizedImageSize(overlayDiv.offsetWidth, overlayDiv.offsetHeight, clickedImg.width, clickedImg.height,gal.length);
-					
 					imgEl.style = `height:${opImgDim.height}px;width:${opImgDim.width}px;display:inline-block;margin:${((overlayDiv.offsetHeight- opImgDim.height) / 2)}px ${(((0.94 * overlayDiv.offsetWidth) - opImgDim.width) / 2)}px;`;	
 					imgEl.src = imgSrc;
 					imgEl.title =  undefined!= gal[imgNum].getAttribute('title') || null != gal[imgNum].getAttribute('title') ? gal[imgNum].getAttribute('title') :'';		
