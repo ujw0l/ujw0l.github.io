@@ -90,10 +90,9 @@
 						imgEl.id = 'loaded-img';	 
 						imgEl.style = `height:${opImgDim.height}px;width:${opImgDim.width}px;display:inline-block;margin:${((overlayHeight - opImgDim.height) / 2)}px ${(((alltImgWidth * overlayWidth) - opImgDim.width) / 2)}px;`;
 						imgEl.src = loadedImg.src;
-						imgEl.title =  undefined!= img.getAttribute('title') || null != img.getAttribute('title') ? img.getAttribute('title') :'';	
-						overlayDivEl.appendChild(imgEl);	
+						imgEl.title =  undefined!= img.getAttribute('title') || null != img.getAttribute('title') ? img.getAttribute('title') :'';			
 				});
-
+				overlayDivEl.appendChild(imgEl);
 				if( 1< gal.length ){
 					this.createToolbar(overlayDivEl,gal,imgEl,imgNum,param2);
 					this.createSidebar(overlayDivEl,gal,imgEl,imgNum,param2);
@@ -361,9 +360,7 @@
 					
 					imgEl.style = `height:${opImgDim.height}px;width:${opImgDim.width}px;display:inline-block;margin:${((overlayDiv.offsetHeight- opImgDim.height) / 2)}px ${(((0.94 * overlayDiv.offsetWidth) - opImgDim.width) / 2)}px;`;	
 					imgEl.src = imgSrc;
-					imgEl.title =  undefined!= gal[imgNum].getAttribute('title') || null != gal[imgNum].getAttribute('title') ? gal[imgNum].getAttribute('title') :'';	
-
-					
+					imgEl.title =  undefined!= gal[imgNum].getAttribute('title') || null != gal[imgNum].getAttribute('title') ? gal[imgNum].getAttribute('title') :'';		
 			});	
 
 			this.createToolbar(overlayDiv,gal,imgEl,imgNum);
