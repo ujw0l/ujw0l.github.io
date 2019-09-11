@@ -366,7 +366,8 @@
 								
 
 								imgPrev.addEventListener('load',(event)=>{
-									clearInterval(laodingInterval);
+									clearInterval(loadingInterval);
+									sidebarImg.removeChild(loadingDiv);
 									sidebarImg.innerHTML = '';
 									sidebarImg.style.backgroundImage = `url('${event.target.src}')`;
 									});
