@@ -337,36 +337,39 @@
 								sidebarImg.addEventListener('mouseenter', event=>event.target.style.borderRadius='12%');
 								sidebarImg.addEventListener('mouseleave', event=>event.target.style.borderRadius='5%');
 
-								let rotateDiv = document.createElement('div');
-									rotateDiv.classList.add('img-loading');
-									rotateDiv.style = `text-align:center;color:rgba(0,0,0,1);font-size:${0.6*sidebar.offsetWidth}px;`;
-									rotateDiv.title = 'Loading';
-									rotateDiv.innerHTML = `<b>.</b>`;
-									sidebarImg.appendChild(rotateDiv);
+								let loadingDiv = document.createElement('div');
+									loadingDiv.classList.add('img-loading');
+									loadingDiv.style = `text-align:center;color:rgba(0,0,0,1);font-size:${0.6*sidebar.offsetWidth}px;`;
+									loadingDiv.title = 'Loading';
+									laadingDiv.innerHTML = `<b>....</b>`;
+									sidebarImg.appendChild(loadingDiv);
 
 								sidebar.appendChild(sidebarImg);
-								let rotateInterval = setInterval( ()=>{
-										let rotateSpan = sidebarImg.querySelector('.img-loading');
+								/*
+								let loadingInterval = setInterval( ()=>{
+										let loadingSpan = sidebarImg.querySelector('.img-loading');
 
-										switch(rotateSpan.innerHTML){
+										switch(loadingSpan.innerHTML){
 											case '<b>.</b>':
-												rotateSpan.innerHTML = '<b>.</b>.'
+												loadingSpaninnerHTML = '<b>.</b>.'
 											  break;
 										    case '<b>.</b>.':
-													rotateSpan.innerHTML = '.<b>.</b>.'
+												loadingSpan.innerHTML = '.<b>.</b>.'
 											break;
 											case '.<b>.</b>.':
-													rotateSpan.innerHTML = '...<b>.</b>'
+													loadingSpan.innerHTML = '...<b>.</b>'
 											break;
 											case '...<b>.</b>':
-													rotateSpan.innerHTML = '<b>.</b>'
+													rloadingSpan.innerHTML = '<b>.</b>'
 											break;		
 											default:
 										}
 								},500); 
+								*/
+								
 
 								imgPrev.addEventListener('load',(event)=>{
-									clearInterval(rotateInterval);
+									clearInterval(laodingInterval);
 									sidebarImg.innerHTML = '';
 									sidebarImg.style.backgroundImage = `url('${event.target.src}')`;
 									});
