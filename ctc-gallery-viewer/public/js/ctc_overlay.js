@@ -98,7 +98,7 @@
 								imgLoading.innerHTML = 'Loading<b>.</b>'
 						break;
 					}
-				},1000); 
+				},500); 
 
 			 let imgEl = document.createElement('img');
 			 let loadedImg = new Image();
@@ -363,7 +363,7 @@
 											break;		
 											default:
 										}
-								},250); 
+								},500); 
 
 								imgPrev.addEventListener('load',(event)=>{
 									clearInterval(rotateInterval);
@@ -419,7 +419,7 @@
 						break;		
 						default:
 					}
-				},1000); 
+				},500); 
 
 			let opImgDim = this.getOptimizedImageSize(overlayDiv.offsetWidth, overlayDiv.offsetHeight, clickedImg.width, clickedImg.height,gal.length);
 				clickedImg.addEventListener('load',()=>{
