@@ -341,7 +341,7 @@
 									loadingDiv.classList.add('img-loading');
 									loadingDiv.style = `text-align:center;color:rgba(0,0,0,1);font-size:${0.6*sidebar.offsetWidth}px;`;
 									loadingDiv.title = 'Loading';
-									laadingDiv.innerHTML = `<b>....</b>`;
+									loadingDiv.innerHTML = `<b>....</b>`;
 									sidebarImg.appendChild(loadingDiv);
 
 								sidebar.appendChild(sidebarImg);
@@ -351,7 +351,7 @@
 
 										switch(loadingSpan.innerHTML){
 											case '<b>.</b>':
-												loadingSpaninnerHTML = '<b>.</b>.'
+												loadingSpan.innerHTML = '<b>.</b>.'
 											  break;
 										    case '<b>.</b>.':
 												loadingSpan.innerHTML = '.<b>.</b>.'
