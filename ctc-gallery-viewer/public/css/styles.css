@@ -158,7 +158,10 @@ p.info-para {
   .image_gallery_1 img,
   .image_gallery_2 img {
     width: 11%;
-    margin:0.05%;
+    margin-right:0.05%;
+    margin-left:0.05%;
+    margin-top:0.08%;
+    margin-bottom:0.08%;
   }
   .image_gallery_1 img:hover,
   .image_gallery_2 img:hover,

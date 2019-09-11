@@ -48,8 +48,8 @@
 
 		createOverlay(img,imgNum, gal,param2) {
 
-				let overlayWidth = window.innerWidth;
-				let overlayHeight = window.innerHeight;
+				let overlayWidth = window.innerWidth+1;
+				let overlayHeight = window.innerHeight+1;
 				let alltImgWidth = 1 < gal.length ? 0.94 : 1;
 				let sideBarWid  = 1 < gal.length ? 0.04 : 0;
 
@@ -471,8 +471,8 @@
 			
 				if(undefined != overlayDiv ){
 						let closeBtn = overlayDiv.querySelector('#overlay-close-btn');
-						overlayDiv.style.height = `${overlayHeight}px`;
-						overlayDiv.style.width = `${overlayWidth}px`;
+						overlayDiv.style.height = `${overlayHeight+1}px`;
+						overlayDiv.style.width = `${overlayWidth+1}px`;
 						closeBtn .style.fontSize = `${0.016*overlayWidth}`;
 						let loadedImg = document.querySelector('#loaded-img');
 						let sidebarDiv = document.querySelector('#gal-sidebar');
@@ -499,9 +499,8 @@
 							
 						if(undefined != sidebarDiv){						
 									let sidebarImgs = Array.from(sidebarDiv.querySelectorAll('div'));
-										sidebarDiv.style.height = overlayHeight+'px';
-										sidebarDiv.style.width = (0.04*overlayWidth)+'px';
-										sidebarDiv.style.paddingTop = 0 < (overlayHeight- (sidebarImgs.length* ((0.93*sidebarDiv.offsetWidth)+2))) / 2 ?  `${(overlayHeight- (sidebarImgs.length* ((0.93*sidebarDiv.offsetWidth)+2))) / 2}px`:'0px';
+										sidebarDiv.style = `overflow-y:auto;tex-align:center;display:inline-block;width:${0.04*overlayWidth}px;height:${overlayHeight}px;float:left;left:0;background-color:rgba(0,0,0,0.1);z-index:105000;`;
+										sidebarDiv.style.paddingTop = 0 < (overlayHeight- (sidebarImgs.length* ((0.0372*overlayWidth)+2))) / 2 ?  `${(overlayHeight- (sidebarImgs.length* ((0.0372*overlayWidth)+2))) / 2}px`:'0px';
 										sidebarImgs.map(x => {
 											x.style.height = (0.93*sidebarDiv.offsetWidth)+ 'px';
 											if(undefined != x.querySelector('.img-loading')){
