@@ -120,7 +120,6 @@ class galViewerSite {
                                                         var msnry = new Masonry(grid, {
                                                         itemSelector: 'img',
                                                         percentPosition: true,
-                                                        gutter: 13,
                                                         });
                                                     
                                                         imagesLoaded(grid).on('progress', function () {
