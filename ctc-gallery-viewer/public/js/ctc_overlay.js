@@ -345,7 +345,7 @@
 									sidebarImg.appendChild(loadingDiv);
 
 								sidebar.appendChild(sidebarImg);
-								/*
+								
 								let loadingInterval = setInterval( ()=>{
 										let loadingSpan = sidebarImg.querySelector('.img-loading');
 
@@ -365,7 +365,7 @@
 											default:
 										}
 								},500); 
-								*/
+								
 								
 
 								imgPrev.addEventListener('load',(event)=>{
