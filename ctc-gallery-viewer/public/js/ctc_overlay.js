@@ -209,7 +209,7 @@
 										zoomOutBtn.title = 'Zoom out';
 										zoomOutBtn.addEventListener('click',()=>{
 											let zoom = parseFloat(imgEl.style.transform.replace('scale(','').replace(')',''))-0.2;
-											let scale = 0 > zoom ? 0.1 : zoom;
+											let scale = 0 >= zoom ? 0.1 : zoom;
 											imgEl.style.transform =  0 === imgEl.style.transform.length ? `scale(0.8)` : `scale(${scale})`
 										});
 										zoomOutBtn.addEventListener('mouseenter',event=>{
@@ -361,8 +361,6 @@
 									sidebarImg.innerHTML = '';
 									sidebarImg.style.backgroundImage = `url('${event.target.src}')`;
 									});
-									
-								
 								sidebarImg.addEventListener('click', () => this.loadImg(i,gal,overlayDiv,imgEl) );	
 							});
 
