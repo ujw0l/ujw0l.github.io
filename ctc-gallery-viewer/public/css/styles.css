@@ -152,22 +152,26 @@ p.info-para {
 
   .image_gallery_1,
   .image_gallery_2{
-    width:100%;
-    margin:30px;
+     margin:10px; 
+    display:block;
   }
   .image_gallery_1 img,
   .image_gallery_2 img {
-    width: 18%;
-    border: 1px solid rgba(0, 0, 0, 0.3);
-    margin-top: 10px;
+    width: 11%;
+    margin:0.05%;
+  }
+  .image_gallery_1 img:hover,
+  .image_gallery_2 img:hover,
+  .image_gallery_3 img:hover{
+
+    box-shadow: -1px 1px 5px rgba(0,0,0,1);
   }
   .image_gallery_3{
-    width:100%;
   }
 
   .image_gallery_3 img{
-    width:96%;
-    margin:1.5%;
+    width:90%;
+    margin:5%;
   }
   
  i{
