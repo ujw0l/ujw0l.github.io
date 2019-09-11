@@ -341,7 +341,7 @@
 									loadingDiv.classList.add('img-loading');
 									loadingDiv.style = `text-align:center;color:rgba(0,0,0,1);font-size:${0.6*sidebar.offsetWidth}px;`;
 									loadingDiv.title = 'Loading';
-									loadingDiv.innerHTML = `<b>....</b>`;
+									loadingDiv.innerHTML = `<b>.</b>..`;
 									sidebarImg.appendChild(loadingDiv);
 
 								sidebar.appendChild(sidebarImg);
@@ -350,17 +350,14 @@
 										let loadingSpan = sidebarImg.querySelector('.img-loading');
 
 										switch(loadingSpan.innerHTML){
-											case '<b>.</b>':
-												loadingSpan.innerHTML = '<b>.</b>.'
-											  break;
-										    case '<b>.</b>.':
+											case '<b>.</b>..':
 												loadingSpan.innerHTML = '.<b>.</b>.'
+											  break;
+										    case '.<b>.</b>.':
+												loadingSpan.innerHTML = '..<b>.</b>'
 											break;
-											case '.<b>.</b>.':
-													loadingSpan.innerHTML = '...<b>.</b>'
-											break;
-											case '...<b>.</b>':
-													rloadingSpan.innerHTML = '<b>.</b>'
+											case '..<b>.</b>':
+													loadingSpan.innerHTML = '<b>.</b>..'
 											break;		
 											default:
 										}
