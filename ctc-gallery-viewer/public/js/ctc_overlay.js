@@ -98,7 +98,7 @@
 								imgLoading.innerHTML = 'Loading<b>.</b>'
 						break;
 					}
-				},350); 
+				},1000); 
 
 			 let imgEl = document.createElement('img');
 			 let loadedImg = new Image();
@@ -107,7 +107,6 @@
 				 imgEl.src =  img.src;
 				 imgEl.style.display = 'none';
 			let opImgDim = this.getOptimizedImageSize(overlayWidth, overlayHeight, loadedImg.width, loadedImg.height,gal.length); 
-
 				 loadedImg.addEventListener('load', (event)=>{	
 						clearInterval(loadingInt);
 						imgLoading.style.display = 'none';
@@ -420,7 +419,7 @@
 						break;		
 						default:
 					}
-				},350); 
+				},1000); 
 
 			let opImgDim = this.getOptimizedImageSize(overlayDiv.offsetWidth, overlayDiv.offsetHeight, clickedImg.width, clickedImg.height,gal.length);
 				clickedImg.addEventListener('load',()=>{
