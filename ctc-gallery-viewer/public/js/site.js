@@ -9,8 +9,8 @@ class galViewerSite {
        
         let sidebarOpts = Array();
         let overlayDiv = document.createElement("div");
-        let bgColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 256)},${(Math.floor(Math.random() * 3)+5)/10})`;
-
+       
+ let bgColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 256)},${(Math.floor(Math.random() * 3)+5)/10})`;
         overlayDiv.id = "site-overlay";
         overlayDiv.classList.add(`site-overlay`);
         overlayDiv.style.backgroundColor = bgColor;
@@ -110,12 +110,11 @@ class galViewerSite {
         xhttp.onload = function () {
             if (this.status >= 200 && this.status < 400) {
             
-                document.querySelector('#site-info-container').innerHTML = this.response;
-                                                
+                document.querySelector('#site-info-container').innerHTML = this.response;                
+                
                                                     var ctcOverlay = new ctcOverlayViewer('.image_gallery_2,.image_gallery_1,.image_gallery_3');
 
                                                     ['.image_gallery_2','.image_gallery_1'].map(x=>{
-
                                                         var grid = document.querySelector(x);
                                                         var msnry = new Masonry(grid, {
                                                         itemSelector: 'img',
