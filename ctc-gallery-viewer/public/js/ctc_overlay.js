@@ -48,8 +48,8 @@
 
 		createOverlay(img,imgNum, gal,param2) {
 
-				let overlayWidth = window.innerWidth;
-				let overlayHeight = window.innerHeight;
+				let overlayWidth = window.innerWidth+1;
+				let overlayHeight = window.innerHeight+1;
 				let alltImgWidth = 1 < gal.length ? 0.94 : 1;
 				let sideBarWid  = 1 < gal.length ? 0.04 : 0;
 
