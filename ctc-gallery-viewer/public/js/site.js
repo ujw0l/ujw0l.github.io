@@ -54,7 +54,7 @@ class galViewerSite {
         supportProj.classList.add(`support-project`);
         supportProj.setAttribute('title', `Support my project`);
         supportProj.style = divStyle+`background-image:url(https://cdn2.hubspot.net/hubfs/4008838/website/logos/Tidelift-shorthand.svg);background-position:center;background-size:100% 100%;background-repeat:no-repeat;`;
-        supportProj.addEventListener('click', ()=>window.open('https://tidelift.com/subscription/pkg/npm-js-crop?utm_source=npm-js-crop&utm_medium=referral&utm_campaign=readme', '_blank'));
+        supportProj.addEventListener('click', ()=>window.open('https://tidelift.com/subscription/pkg/npm-ctc-gallery-viewer?utm_source=npm-ctc-gallery-viewer&utm_medium=referral&utm_campaign=readme', '_blank'));
         sidebarOpts.push(supportProj);
 
 
