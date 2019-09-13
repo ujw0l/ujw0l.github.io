@@ -1,141 +1,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Js Crop Demo</title>
+  <title>Js Crop : Image cropping library</title>
+  <script type="text/javascript" src="public/js/site.js"></script>
   <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.2.0/imagesloaded.pkgd.min.js"></script>
+  <link href="public/css/styles.css" rel="stylesheet" type="text/css" />
   <script type="text/javascript" src="js-crop/js-crop.js"></script>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: sans-serif;
-      background: #ccc;
-      margin: 4em;
-    }
-
-    .image_gallery_2 img {
-      width: 320px;
-      border: 1px dotted rgba(0, 0, 0, 1);
-      margin-top: 20px;
-    }
-
-    div.image_gallery_2 {
-      padding: 20px;
-      border: 1px solid #999;
-      border-radius: 5px;
-      background: #fff;
-    }
-
-    a:link,
-    a:visited {
-      color: black;
-    }
-
-    h3 {
-      margin-top: 0;
-      margin-left: 0.75rem;
-      z-index: 1000;
-      position: absolute;
-      margin-bottom: 20px;
-
-    }
-
-    main {
-      columns: 250px;
-      column-gap: 20px;
-    }
-
-    div {
-      break-inside: avoid-column;
-      margin-bottom: 1rem;
-    }
-  </style>
 </head>
 
 
-<body>
+<body onload="new jsCropSite()">
 
-
-  <div>
-
-
-    <h1>Js Crop Demo</h1>
-
-    <p><i>Click the images after they loaded and test drive the library functionalites.</i></p>
-
-    <div class="image_gallery_2">
-
-      <h3> Image Gallery 1 </h3>
-
-      <img class="cropImg" title="paragliding" src="public/image/pg.jpg" />
-      <img class="cropImg" title="imac-gallery2-201706.jpeg" src="public/image/imac-gallery2-201706.jpeg" />
-      <img class="cropImg" title="imac-gallery3-201706.jpeg" src="public/image/imac-gallery3-201706.jpeg" />
-      <img class="cropImg" title="14.jpg" src="public/image/14.jpg" />
-      <img class="cropImg" title="18.jpg" src="public/image/18.jpg" />
-      <img class="cropImg" title="imac-gallery4-201706.jpeg" src="public/image/imac-gallery4-201706.jpeg" />
-      <img class="cropImg" title="imac-gallery5-201706.jpeg" src="public/image/imac-gallery5-201706.jpeg" />
-      <img class="cropImg" title="19.jpg" src="public/image/19.jpg" />
-      <img class="cropImg" title="2.jpg" src="public/image/2.jpg" />
-      <img class="cropImg" title="imac-pro-gallery-1.jpeg" src="public/image/imac-pro-gallery-1.jpeg" />
-      <img class="cropImg" title="imac-pro-gallery-2.jpeg" src="public/image/imac-pro-gallery-2.jpeg" />
-      <img class="cropImg" title="imac-pro-gallery-3.png" src="public/image/imac-pro-gallery-3.png" />
-      <img class="cropImg" title="imac-pro-gallery-4.png" src="public/image/imac-pro-gallery-4.png" />
-      <img class="cropImg" title="imac-pro-gallery-5.jpeg" src="public/image/imac-pro-gallery-5.jpeg" />
-      <img class="cropImg" title="1.jpg" src="public/image/1.jpg" />
-      <img class="cropImg" title="12.jpg" src="public/image/12.jpg" />
-
-      <img class="cropImg" title="20.jpg" src="public/image/20.jpg" />
-      <img class="cropImg" title="3.jpg" src="public/image/3.jpg" />
-      <img class="cropImg" title="4.jpg" src="public/image/4.jpg" />
-      <img class="cropImg" title="5.jpg" src="public/image/5.jpg" />
-      <img class="cropImg" title="air1.jpeg" src="public/image/air1.jpeg" />
-      <img class="cropImg" title="air2.jpeg" src="public/image/air2.jpeg" />
-      <img class="cropImg" title="air3.jpeg" src="public/image/air3.jpeg" />
-      <img class="cropImg" title="air4.jpeg" src="public/image/air4.jpeg" />
-      <img class="cropImg" title="air5.jpeg" src="public/image/air5.jpeg" />
-      <img class="cropImg" title="imac-gallery1-201706_GEO_US.jpeg"
-        src="public/image/imac-gallery1-201706_GEO_US.jpeg" />
-
-      <img class="cropImg" title="pro1.jpeg" src="public/image/pro1.jpeg" />
-      <img class="cropImg" title="pro2.jpeg" src="public/image/pro2.jpeg" />
-
-    </div>
-
-
-    <div class="image_gallery_2">
-      <h3> Image Gallery 2 </h3>
-      <img class="cropImg" style="margin-left:auto;margin-right:auto;display:block;" title="iMAc pro"
-        src="public/image/imac-pro-gallery-3.png" />
-    </div>
-
+  <a style="display:none;" href="https://tidelift.com/subscription/pkg/npm-ctc-gallery-viewer?utm_source=npm-ctc-gallery-viewer&utm_medium=referral&utm_campaign=readme">Get supported ctc-gallery-viewer with the Tidelift Subscription</a>
 </body>
-<script>
-  new jsCrop('.cropImg',
-  { 
-   extButton :{ 
-                callBack: imgBlob => alert('Cropped image blob passed to callback function :-  '+imgBlob)
-    },
-    saveButton:true
-  }
-  );
-
-
-  var grid = document.querySelector('.image_gallery_2');
-
-  var msnry = new Masonry(grid, {
-    itemSelector: '.cropImg',
-    percentPosition: true,
-    gutter: 20
-  });
-
-  imagesLoaded(grid).on('progress', function () {
-    // layout Masonry after each image loads
-    msnry.layout();
-  });
-</script>
 
 </html>
