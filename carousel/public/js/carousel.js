@@ -111,7 +111,9 @@ class ctcCarousel {
         
         loadedImg.addEventListener('load',event=>{
                                                     clearInterval(loadingInt);
-                                                    imgDiv.removeChild(loadingSpan);
+                                                    if(undefined != loadingSpan){
+                                                        imgDiv.removeChild(loadingSpan);
+                                                    }
                                                     imgDiv.style.backgroundImage = `url('${event.target.src}')`;    
                                                     imgDiv.title = null !== imgGal[imgNum].getAttribute('title') ? imgGal[imgNum].getAttribute('title') :'';
                                                 });  
