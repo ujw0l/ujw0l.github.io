@@ -164,7 +164,7 @@ class ctcCarousel {
                 prevLoadImg.addEventListener('load',()=> {
                                                                 prevSpan.style.backgroundImage = `url('${event.target.src}')`;
                                                                 clearInterval(prevLoadInt);
-                                                                prevSpan = '&#8249;';
+                                                                prevSpan.innerHTML = '&#8249;';
                                                                 prevSpan.title = null != gal[prevImg].getAttribute('title') ? gal[prevImg].getAttribute('title') :'Previous Image'; 
                                                             });     
              prevNav.appendChild(prevSpan);
@@ -191,7 +191,7 @@ class ctcCarousel {
         nextLoadImg.addEventListener('load',()=>{
                     nextSpan.style.backgroundImage = `url('${event.target.src}')` ;
                     clearInterval(nextLoadInt);
-                    nextSpan = '&#8250;'; 
+                    nextSpan.innerHTML = '&#8250;'; 
                     nextSpan.title = null != gal[nextImg].getAttribute('title') ? gal[nextImg].getAttribute('title') :'Next Image'; 
                   
                 });    
