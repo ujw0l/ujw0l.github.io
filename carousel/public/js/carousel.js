@@ -34,7 +34,14 @@ class ctcCarousel {
         window.addEventListener('resize', ()=>this.adjustOnResize(selectedEl));
     }
 
-    //Create carousel div
+    /*
+    * Initialize Carousels
+    *
+    *@param el  The element to turn into carousel
+    *@param carouselNum  Carousel number
+    *@param autoPlay  Autoplay options
+	*@param param2 for future extension
+    */
     createCarouselDiv(el, carouselNum, autoPlay, otherSettings) {
 
         let elWidth = el.offsetWidth;
@@ -54,9 +61,6 @@ class ctcCarousel {
             imgDiv.id = 'ctc-carousel-img-div-' + carouselNum;
             imgDiv.style = `box-shadow: 1px 1px 15px rgba(0,0,0,0.7);transition: 0.3s ease;background :rgba(0, 0 , 0, 0.8) url("") no-repeat center; background-size:contain;height:${elHeight}px;width:${elWidth}px;margin-left:-1px;color:rgba(255,255,255,1);text-align:center;`;
 
-           
-        
-        
         carouselDiv.appendChild(imgDiv);
         el.appendChild(carouselDiv);
         this.loadImage(0,imgDiv,carouselImgs,carouselNum);
@@ -64,19 +68,21 @@ class ctcCarousel {
         if(0 !== autoPlay.length && true === autoPlay.auto){
             setInterval(() => imgDiv.querySelector('#next-img-'+carouselNum).click(), autoPlay.interval);
         } 
-
-         el.style.visibility = '';
-        
+         el.style.visibility = '';   
     }
 
+    /*
+    * Load image on button click
+    *
+    *@param imgNum  Image number in gallery
+    *@param imgDiv  Image div
+    *@param imgGal  Array of images
+	*@param carouselNum Carousel number
+    */
     loadImage( imgNum,imgDiv,imgGal,carouselNum,){
-
-        imgDiv.style.backgroundImage = `url('')`;
-        
-        
+        imgDiv.style.backgroundImage = `url('')`;  
         let loadedImg =  new Image();
         loadedImg.src = imgGal[imgNum].src;
-
          if(undefined != imgDiv.querySelector(`#img-loading-${carouselNum}`) ){
              imgDiv.removeChild(imgDiv.querySelector(`#img-loading-${carouselNum}`)) 
             }
@@ -114,12 +120,21 @@ class ctcCarousel {
                                                     if(undefined != loadingSpan){
                                                         imgDiv.removeChild(loadingSpan);
                                                     }
-                                                    imgDiv.style.backgroundImage = `url('${event.target.src}')`;    
+                                                    imgDiv.style.backgroundImage = `url('${imgGal[imgNum].src}')`;    
                                                     imgDiv.title = null !== imgGal[imgNum].getAttribute('title') ? imgGal[imgNum].getAttribute('title') :'';
                                                 });  
                                                                                                                                                               
          this.navButton(imgNum,imgDiv,imgGal,carouselNum);                                       
     }
+
+    /*
+    * Create navigation button
+    *
+    *@param imgNum  Image number in gallery
+    *@param imgDiv  Image div
+    *@param gal  Array of images
+	*@param carouselNum Carousel number
+    */
 
     navButton(imgNum,imgDiv,gal,carouselNum){
 
@@ -144,14 +159,13 @@ class ctcCarousel {
                 prevSpan.innerHTML =   '' == prevSpan.innerHTML ? '&#8249;' : '';
              },500);
 
-                let prevLoadImg = new Image();
-                    prevLoadImg.src = gal[prevImg].src;
-                    
-                    prevLoadImg.addEventListener('load',()=> {
+            let prevLoadImg = new Image();
+                prevLoadImg.src = gal[prevImg].src;
+                prevLoadImg.addEventListener('load',()=> {
                                                                 prevSpan.style.backgroundImage = `url('${event.target.src}')`;
                                                                 clearInterval(prevLoadInt);
-                                                                prevSpan.title = null != gal[prevImg].getAttribute('title') ? gal[prevImg].getAttribute('title') :'Previous Image'; 
                                                                 prevSpan = '&#8249;';
+                                                                prevSpan.title = null != gal[prevImg].getAttribute('title') ? gal[prevImg].getAttribute('title') :'Previous Image'; 
                                                             });     
              prevNav.appendChild(prevSpan);
 
@@ -175,10 +189,11 @@ class ctcCarousel {
         let nextLoadImg = new Image();
                     nextLoadImg.src = gal[nextImg].src;
         nextLoadImg.addEventListener('load',()=>{
-                    nextSpan.style.backgroundImage = `url('${event.target.src}')` 
+                    nextSpan.style.backgroundImage = `url('${event.target.src}')` ;
                     clearInterval(nextLoadInt);
-                    nextSpan.title = null != gal[nextImg].getAttribute('title') ? gal[nextImg].getAttribute('title') :'Next Image'; 
                     nextSpan = '&#8250;'; 
+                    nextSpan.title = null != gal[nextImg].getAttribute('title') ? gal[nextImg].getAttribute('title') :'Next Image'; 
+                  
                 });    
             nextNav.appendChild(nextSpan);
 
@@ -198,6 +213,11 @@ class ctcCarousel {
        imgDiv.appendChild( nextNav);
     }
 
+    /*
+    * Adjust carousel on resize
+    *
+    *@param selectedEl  Selected image gallery
+    */
     adjustOnResize(selectedEl){
         selectedEl.forEach((x,i)=>{
             let elWidth = x.offsetWidth;
@@ -211,8 +231,6 @@ class ctcCarousel {
             let nextSpan = nextNav.querySelector(`#next-img-${i}`);
             let navButtonWidth = 0.03 * elWidth;
             let navButtonHeight =  0.07*elWidth;
-
-
 
             imgDiv.style.width = carouselDiv.style.width = `${elWidth}px`;
             imgDiv.style.height = carouselDiv.style.height = `${elHeight}px`;
