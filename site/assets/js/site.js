@@ -16,7 +16,7 @@ class mySite {
         console.log(bgColor);
         overlayDiv.id = "site-overlay";
         overlayDiv.classList.add(`site-overlay`);
-        overlayDiv.style.backgroundColor = bgColor;
+        overlayDiv.style = `height:${window.innerHeight}px;width:${window.innerWidth}px;background-color:${bgColor};`;
         document.body.appendChild(overlayDiv);
 
 
@@ -30,7 +30,7 @@ class mySite {
         let sidebarDiv = document.createElement('div');
         sidebarDiv.id = `site-sidebar`;
         sidebarDiv.classList.add(`site-sidebar`);
-        sidebarDiv.style = `width:5%; height:${overlayDiv.offsetHeight}px;`;
+        sidebarDiv.style = `width:${0.05*window.innerWidth}; height:${window.innerWidth}px;`;
         overlayDiv.appendChild(sidebarDiv);
         let divStyle = `height:${toolbar.offsetWidth - 6}px;`;
 
@@ -70,8 +70,6 @@ class mySite {
         supportMeDiv.addEventListener('click', ()=>window.open('https://www.patreon.com/ujw0l', '_blank'));
         sidebarOpts.push(supportMeDiv);
 
-
-
         sidebarDiv.style.paddingTop = ((overlayDiv.offsetHeight - (sidebarOpts.length * sidebarDiv.offsetWidth)) / 2) + 'px'
 
         sidebarOpts.map((x, i) => {
@@ -101,13 +99,15 @@ class mySite {
         let siteContent = document.querySelector('#site-info-container');
         let toolbarOpts = Array.from(toolbarDiv.querySelectorAll('div'));
 
-        siteContent.style.width = (0.90*overlayDiv.offsetWidth)+'px';
-        toolbarDiv.style.paddingTop = ((overlayDiv.offsetHeight - (toolbarOpts.length * toolbarDiv.offsetWidth)) / 2) + 'px';
-        toolbarDiv.style.width = (0.05*overlayDiv.offsetWidth)+'px';
-        toolbarDiv.style.height = overlayDiv.offsetHeight+'px';
+        overlayDiv.style.width =  `${window.innerWidth}px`;
+        overlayDiv.style.height =  `${window.innerHeight}px`;
+        siteContent.style.width = (0.90*window.innerWidth)+'px';
+        toolbarDiv.style.paddingTop = ((window.innerHeight - (toolbarOpts.length * toolbarDiv.offsetWidth)) / 2) + 'px';
+        toolbarDiv.style.width = (0.05*window.innerWidth)+'px';
+        toolbarDiv.style.height = window.innerHeight+'px';
         toolbarOpts.map(x => {
-            x.style.height = x.offsetWidth + 'px';
-            x.style.fontSize = (0.70 * x.offsetWidth) + 'px';
+            x.style.height = 0.05*window.innerWidth + 'px';
+            x.style.fontSize = (0.70 * 0.05*window.innerWidth) + 'px';
         });
     }
 
@@ -142,8 +142,9 @@ class mySite {
         xhttp.open("GET", 'site/assets/ajax-content/about-me.txt', true);
         xhttp.responseType = "text";
         xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;');
-        xhttp.onload = function () {
-            if (this.status >= 200 && this.status < 400) {
+        xhttp.addEventListener('load', event=>{
+
+            if (event.target.status >= 200 && event.target.status < 400) {
 
                 let secHeader = document.createElement('h1');
                 secHeader.id = `section-header`;
@@ -155,7 +156,7 @@ class mySite {
                 secInfo.classList.add('about-me-info');
                 infoDiv.appendChild(secInfo);
 
-                let contentArr = this.response.split('<break>');
+                let contentArr = event.target.response.split('<break>');
 
                 contentArr.map((content, i) => {
                     if (0 === i) {
@@ -193,13 +194,13 @@ class mySite {
                 });
 
             } else {
-                alert(this.response);
+                alert(even.target.response);
             }
-        };
-        xhttp.onerror = function () {
-            alert(takePicMessage.connection_error);
-        };
 
+
+        });
+      
+       xhttp.addEventListener('error',event=>alert(event.type))
         xhttp.send();
 
         setTimeout(() => {
@@ -220,8 +221,12 @@ class mySite {
         xhttp.open("GET", 'site/assets/ajax-content/contact-me.txt', true);
         xhttp.responseType = "text";
         xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;');
-        xhttp.onload = function () {
-            if (this.status >= 200 && this.status < 400) {
+
+     
+
+        xhttp.addEventListener('load',event=>{
+
+            if (event.target.status >= 200 && event.target.status < 400) {
 
                 let secHeader = document.createElement('h1');
                 secHeader.id = `section-header`;
@@ -235,7 +240,7 @@ class mySite {
 
                 console.log(secInfo);
 
-                let contentArr = this.response.split('<break>');
+                let contentArr = event.target.response.split('<break>');
 
                 contentArr.map((content, i) => {
 
@@ -272,12 +277,13 @@ class mySite {
                 });
 
             } else {
-                alert(this.response);
+                alert(event.target.response);
             }
-        };
-        xhttp.onerror = function () {
-            alert(takePicMessage.connection_error);
-        };
+
+            
+        })
+     
+        xhttp.addEventListener('error',event=>alert(event.type))
 
         xhttp.send();
 
@@ -298,8 +304,9 @@ class mySite {
         xhttp.open("GET", 'site/assets/ajax-content/my-work.txt', true);
         xhttp.responseType = "text";
         xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;');
-        xhttp.onload = function () {
-            if (this.status >= 200 && this.status < 400) {
+        xhttp.addEventListener('load',event=>{
+
+            if (event.target.status >= 200 && event.target.status < 400) {
 
                 let secHeader = document.createElement('h1');
                 secHeader.id = `section-header`;
@@ -311,7 +318,7 @@ class mySite {
                 secInfo.classList.add('my-work-info');
                 infoDiv.appendChild(secInfo);
 
-                let contentArr = this.response.split('<break>');
+                let contentArr = event.target.response.split('<break>');
 
                 contentArr.map((content, i) => {
 
@@ -375,12 +382,13 @@ class mySite {
                 });
 
             } else {
-                alert(this.response);
+                alert(event.target.response);
             }
-        };
-        xhttp.onerror = function () {
-            alert(takePicMessage.connection_error);
-        };
+            
+        });
+       
+        xhttp.addEventListener('error',event=>alert(event.type))
+    
 
         xhttp.send();
 
@@ -395,7 +403,6 @@ class mySite {
     }
 
     requiredEventListener() {
-
         setTimeout(() => {
             document.querySelector('#about-me').addEventListener('click', () => this.loadAboutMe());
             document.querySelector('#contact-me').addEventListener('click', () => this.loadContactMe());
