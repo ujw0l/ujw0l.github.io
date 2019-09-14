@@ -87,7 +87,7 @@ class ctcCarousel {
              imgDiv.removeChild(imgDiv.querySelector(`#img-loading-${carouselNum}`)) 
             }
 
-         let loadingSpan = document.createElement('span');
+        let loadingSpan = document.createElement('span');
             loadingSpan.id = `img-loading-${carouselNum}`;
             loadingSpan.style = `font-size:${0.015*imgDiv.offsetWidth}px;width:${0.05*imgDiv.offsetWidth}px;height:${0.07*imgDiv.offsetHeight}px;margin-top:${imgDiv.offsetHeight/2}px;text-align:center;display:inline-block;`; 
             loadingSpan.innerHTML =  `Loading<b>.</b>`;
@@ -122,8 +122,7 @@ class ctcCarousel {
                                                     }
                                                     imgDiv.style.backgroundImage = `url('${imgGal[imgNum].src}')`;    
                                                     imgDiv.title = null !== imgGal[imgNum].getAttribute('title') ? imgGal[imgNum].getAttribute('title') :'';
-                                                });  
-                                                                                                                                                              
+                                                });                                                                                                                                                            
          this.navButton(imgNum,imgDiv,imgGal,carouselNum);                                       
     }
 
