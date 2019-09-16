@@ -113,7 +113,7 @@ class takePic {
 					videoEl.setAttribute("id", "takePicFilter" + x);
 					videoEl.setAttribute('title', "Apply this effect");
 					videoEl.setAttribute("style", takePic.getFilterArrayObj("cssFilter" + x));
-					videoEl.setAttribute("onclick", "takePic.applyFilter('cssFilter" + x + "');");
+					videoEl.addEventListener('click',()=>this.applyFilter(`cssFilter${x}`) );
 					filterContainer.appendChild(videoEl);
 				});
 		}
@@ -378,16 +378,16 @@ class takePic {
 
 
 	//css to apply filter to video
-	static applyFilter(filter) {
+	 applyFilter(filter) {
 		let video = document.getElementById("videoStream");
 		let overlayDiv = document.getElementById('takePicOverlay');
 		let marginTop = video.style.marginTop;
 		let marginBottom = video.style.marginBottom;
 		let opacity = video.style.opacity;
 		let optVideoSize = takePic.getOptimizedVideoSize(overlayDiv.offsetWidth, overlayDiv.offsetHeight, video.videoWidth, video.videoHeight)
+		video.style = takePic.getFilterArrayObj(filter);
 		video.style.width = optVideoSize.width+'px';
 		video.style.height = optVideoSize.height+'px'
-		video.style = takePic.getFilterArrayObj(filter);
 		video.style.marginTop = marginTop;
 		video.style.marginBottom = marginBottom;
 		video.style.opacity = opacity;
