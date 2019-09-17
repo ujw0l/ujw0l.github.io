@@ -87,7 +87,7 @@ class ctcCarousel {
              imgDiv.removeChild(imgDiv.querySelector(`#img-loading-${carouselNum}`)) 
             }
 
-        let loadingSpan = document.createElement('span');
+         let loadingSpan = document.createElement('span');
             loadingSpan.id = `img-loading-${carouselNum}`;
             loadingSpan.style = `font-size:${0.015*imgDiv.offsetWidth}px;width:${0.05*imgDiv.offsetWidth}px;height:${0.07*imgDiv.offsetHeight}px;margin-top:${imgDiv.offsetHeight/2}px;text-align:center;display:inline-block;`; 
             loadingSpan.innerHTML =  `Loading<b>.</b>`;
@@ -122,7 +122,8 @@ class ctcCarousel {
                                                     }
                                                     imgDiv.style.backgroundImage = `url('${imgGal[imgNum].src}')`;    
                                                     imgDiv.title = null !== imgGal[imgNum].getAttribute('title') ? imgGal[imgNum].getAttribute('title') :'';
-                                                });                                                                                                                                                            
+                                                });  
+                                                                                                                                                              
          this.navButton(imgNum,imgDiv,imgGal,carouselNum);                                       
     }
 
@@ -149,7 +150,7 @@ class ctcCarousel {
             prevNav.style = `height:${navButtonHeight}px;margin-top:${(elHeight -navButtonHeight)/2}px;float:left;color:rgba(0,0,0,0.7);display:flex;font-size:${0.08 * elWidth}px;width:${navButtonWidth}px;background-color:rgba(255, 255 , 255, 1);`;
          let prevSpan =  document.createElement('span');
              prevSpan.id = `prev-img-${carouselNum}`;
-             prevSpan.style = `box-shadow: 1px 1px 15px rgba(0,0,0,0.7);width:${navButtonWidth}px;box-shadow: -1px 1px 5px rgba(255,255,255,0.7);cursor:pointer;color:rgba(0,0,0,0.8);text-shadow: -2px 2px 5px rgba(0,0,0,1); background :rgba(255, 255 , 255, 0.3) url("") no-repeat top; background-size:contain;`;
+             prevSpan.style = `box-shadow: 1px 1px 15px rgba(0,0,0,0.7);width:${navButtonWidth}px;box-shadow: -1px 1px 5px rgba(255,255,255,0.7);cursor:pointer;color:rgba(0,0,0,0.8);text-shadow: -2px 2px 5px rgba(0,0,0,1); background :rgba(255, 255 , 255, 0.3) url("") no-repeat top; background-size:contain;font-family:none;`;
              prevSpan.title = 'Loading';      
              prevSpan.innerHTML = `&#8249;`;
              prevSpan.addEventListener('mouseenter',event=> event.target.style.textShadow ='-4px 4px 10px rgba(0,0,0,0.9 )') ;
@@ -174,7 +175,7 @@ class ctcCarousel {
              nextNav.style = `text-align:center;margin-right:1px;height:${navButtonHeight}px;float:right;margin-top:${(elHeight - navButtonHeight) / 2}px;margin-right:0px;color:rgba(0,0,0,0.7);display:flex; font-size:${0.08 * elWidth}px;width:${navButtonWidth}px;background-color:rgba(255, 255 , 255, 1);`;
         let nextSpan =  document.createElement('span');
             nextSpan.id = `next-img-${carouselNum}`;
-            nextSpan.style = `width:${navButtonWidth}px;box-shadow: -1px 1px 5px rgba(255,255,255,0.7);cursor:pointer;color:rgba(0,0,0,0.8);text-shadow: -2px 2px 5px rgba(0,0,0,1);background :rgba(255, 255 , 255, 0.3) url("") no-repeat top; background-size:contain;`;
+            nextSpan.style = `width:${navButtonWidth}px;box-shadow: -1px 1px 5px rgba(255,255,255,0.7);cursor:pointer;color:rgba(0,0,0,0.8);text-shadow: -2px 2px 5px rgba(0,0,0,1);background :rgba(255, 255 , 255, 0.3) url("") no-repeat top; background-size:contain;font-family:none;`;
             nextSpan.title = 'Next Image';      
             nextSpan.innerHTML = `&#8250;`;
             nextSpan.addEventListener('mouseenter',event=> event.target.style.textShadow ='-4px 4px 10px rgba(0,0,0,0.9 )') ;
