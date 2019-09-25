@@ -131,11 +131,13 @@ p.info-para {
 
   div.image_upload,
   div.image_gallery_2 {
-    padding: 20px;
+    padding-bottom: 20px;
     border-radius: 5px;
     background: #fff;
   }
-
+  div.image_upload input{
+      margin-left:30px;
+  }
   a:link,
   a:visited {
     color: black;

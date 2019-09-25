@@ -48,6 +48,8 @@ class jsCropSite {
        docDiv.innerHTML = '&#9776;';
        sidebarOpts.push(docDiv);
 
+       
+
 
         let supportProj = document.createElement('div');
         supportProj.id = `support-project`;
@@ -56,6 +58,16 @@ class jsCropSite {
         supportProj.style = divStyle+`background-image:url(https://cdn2.hubspot.net/hubfs/4008838/website/logos/Tidelift-shorthand.svg);background-position:center;background-size:100% 100%;background-repeat:no-repeat;`;
         supportProj.addEventListener('click', ()=>window.open('https://tidelift.com/subscription/pkg/npm-js-crop?utm_source=npm-js-crop&utm_medium=referral&utm_campaign=readme', '_blank'));
         sidebarOpts.push(supportProj);
+
+
+        let beta2 = document.createElement('div');
+        beta2.id = `beta-2`;
+        beta2.classList.add(`beta-2`);
+        beta2.setAttribute('title', `Beta test 2.0`);
+        beta2.style = divStyle;
+        beta2.addEventListener('click', ()=>window.open('../js-crop-beta-2'));
+        beta2.innerHTML = '2.0';
+        sidebarOpts.push(beta2);
 
 
         sidebarDiv.style.paddingTop = ((overlayDiv.offsetHeight - (sidebarOpts.length * sidebarDiv.offsetWidth)) / 2) + 'px'
