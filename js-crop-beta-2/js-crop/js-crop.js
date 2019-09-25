@@ -142,7 +142,7 @@ class jsCrop {
                 document.querySelector('#js-crop-close-btn').style.fontSize = (0.45 * toolbarDiv.offsetWidth) + 'px';
                 if(undefined != document.querySelector('#cropRect')){
                     document.querySelector('#js-crop-overlay').removeChild(document.querySelector('#js-crop-overlay').querySelector('#cropRect'));
-                    document.querySelector('#start-crop').innerHTML = '&#9744;';
+                    document.querySelector('#start-crop').innerHTML = '&#8862;';
                     document.querySelector('#start-crop').title = `Select area`;
                     document.querySelector('#js-crop-image').setAttribute('data-crop-status','in-active');
                     document.querySelector('#js-crop-image').removeAttribute('data-start-co');
@@ -300,9 +300,10 @@ if(undefined != param3 && 0 !== param3.length ){
                     if(undefined != document.querySelector('#cropRect')){
                         document.querySelector('#js-crop-overlay').removeChild(document.querySelector('#js-crop-overlay').querySelector('#cropRect'));
                      }
-                     document.querySelector('#start-crop').innerHTML = '&#9744;';
+                     document.querySelector('#start-crop').innerHTML = '&#8862;';
                      document.querySelector('#start-crop').title = `Select area`;
                      document.querySelector('#js-crop-image').setAttribute('data-crop-status','in-active');
+                     document.querySelector('#js-crop-image').style.cursor = '';
                      document.querySelector('#js-crop-image').removeAttribute('data-start-co');
                    }  
                 });
@@ -336,7 +337,7 @@ if(undefined != param3 && 0 !== param3.length ){
 
         } else if ('crop-ready' === imgEl.getAttribute('data-crop-status')){
             this.endCrop();
-            e.target.innerHTML = '&#9744;';
+            e.target.innerHTML = '&#8862;';
             e.target.title = `Select area`;
             imgEl.setAttribute('data-crop-status', `in-active`);
         }
