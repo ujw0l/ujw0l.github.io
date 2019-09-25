@@ -180,7 +180,7 @@ class jsCrop {
         cropIconDiv.style = btnStyle;
         cropIconDiv.setAttribute('onmouseenter', btnMouseenter);
         cropIconDiv.setAttribute('onmouseleave', btnMouseleave);
-        cropIconDiv.innerHTML = '&#9744;';
+        cropIconDiv.innerHTML = '&#8862;';
         cropIconDiv.addEventListener('click', () => this.addCropEventListener(event));
         toolbar.appendChild(cropIconDiv);
 
