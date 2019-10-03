@@ -13,14 +13,14 @@ class jsCropSite {
 
         overlayDiv.id = "site-overlay";
         overlayDiv.classList.add(`site-overlay`);
-        overlayDiv.style.backgroundColor = bgColor;
+        overlayDiv.style = `height:${window.innerHeight}px;width:${window.innerWidth}px;background-color:${bgColor};`;
         document.body.appendChild(overlayDiv);
 
 
         let infoContainer = document.createElement('div');
         infoContainer.id = 'site-info-container';
         infoContainer.classList.add('site-info-container');
-       infoContainer.style = `box-shadow:0px 0px 5px rgba(255,255,255,1);display:inline-block;margin:${(0.1*overlayDiv.offsetHeight) / 2}px ${(0.05 * overlayDiv.offsetWidth / 2)}px;vertical-align:top;`;
+        infoContainer.style = `box-shadow:0px 0px 5px rgba(255,255,255,1);display:inline-block;margin:${(0.1*overlayDiv.offsetHeight) / 2}px ${(0.05 * overlayDiv.offsetWidth / 2)}px;vertical-align:top;`;
         overlayDiv.appendChild(infoContainer);
 
 
@@ -48,8 +48,6 @@ class jsCropSite {
        docDiv.innerHTML = '&#9776;';
        sidebarOpts.push(docDiv);
 
-       
-
 
         let supportProj = document.createElement('div');
         supportProj.id = `support-project`;
@@ -58,16 +56,6 @@ class jsCropSite {
         supportProj.style = divStyle+`background-image:url(https://cdn2.hubspot.net/hubfs/4008838/website/logos/Tidelift-shorthand.svg);background-position:center;background-size:100% 100%;background-repeat:no-repeat;`;
         supportProj.addEventListener('click', ()=>window.open('https://tidelift.com/subscription/pkg/npm-js-crop?utm_source=npm-js-crop&utm_medium=referral&utm_campaign=readme', '_blank'));
         sidebarOpts.push(supportProj);
-
-
-        let beta2 = document.createElement('div');
-        beta2.id = `beta-2`;
-        beta2.classList.add(`beta-2`);
-        beta2.setAttribute('title', `Beta test 2.0`);
-        beta2.style = divStyle;
-        beta2.addEventListener('click', ()=>window.open('../js-crop-beta-2'));
-        beta2.innerHTML = '2.0';
-        sidebarOpts.push(beta2);
 
 
         sidebarDiv.style.paddingTop = ((overlayDiv.offsetHeight - (sidebarOpts.length * sidebarDiv.offsetWidth)) / 2) + 'px'
@@ -96,7 +84,8 @@ class jsCropSite {
         let siteContent = document.querySelector('#site-info-container');
         let toolbarOpts = Array.from(document.getElementById('site-sidebar').querySelectorAll('div'));
 
-      
+        overlayDiv.style.width = `${window.innerWidth}px`;
+        overlayDiv.style.height = `${window.innerHeight}px`;
         toolbarDiv.style.paddingTop = ((overlayDiv.offsetHeight - (toolbarOpts.length * toolbarDiv.offsetWidth)) / 2) + 'px';
         toolbarDiv.style.width = (0.05*overlayDiv.offsetWidth)+'px';
         toolbarDiv.style.height = overlayDiv.offsetHeight+'px';
@@ -119,15 +108,21 @@ class jsCropSite {
         xhttp.open("GET", 'public/ajax/demo.html', true);
         xhttp.responseType = "text";
         xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;');
-        xhttp.onload = function () {
-            if (this.status >= 200 && this.status < 400) {
-            
-                document.querySelector('#site-info-container').innerHTML = this.response;
+        xhttp.addEventListener('load',event=>{
 
-                new jsCrop('.gal-viewer-mas,#upload-demo',
+
+            if (event.target.status >= 200 && event.target.status < 400) {
+            
+                document.querySelector('#site-info-container').innerHTML = event.target.response;
+
+                new jsCrop(
+                            '.gal-viewer-mas,#upload-demo',
                                                     { 
                                                     extButton :{ 
-                                                                callBack:function(imgBlob){alert('cropped image blob : '+imgBlob)}
+                                                                callBack:(imgBlob)=>alert(imgBlob),
+                                                                buttonTitle : 'Display cropped image blob in alert box',
+                                                                buttonCSS : 'color:rgba(255,255,255,1);',
+                                                                buttonText : '&#9991;'
                                                     },
                                                     imageType:'png',
                                                     imageQuality: 0.9,
@@ -136,34 +131,51 @@ class jsCropSite {
                                                         overlayBgColor :document.querySelector('#site-overlay').style.backgroundColor,
                                                         buttonBgColor :document.querySelector('#site-overlay').style.backgroundColor,
                                                         }
-                                                    }
+                                                    },
+                                                    [
+                                                        {
+                                                            buttonText : '&#10063;', 
+                                                            buttonTitle : 'Use image as button background',
+                                                            relParam : '',
+                                                            buttonEvent : 'click', 
+                                                            buttonCSS : 'color:rgba(255,255,255,1);',
+                                                            callBack : (imgBlob,relParam) => {
+                                                                                                let btn =  document.querySelector('#ext-button-0');
+                                                                                                btn.style.backgroundImage = `url('${imgBlob}')`;
+                                                                                                btn.style.backgroundRepeat = `no-repeat`;
+                                                                                                btn.innerHTML = ``;
+                                                                                                btn.style.backgroundPosition = `center center`;
+                                                                                                btn.style.backgroundSize = `cover`;
+                                                                                            }
+                    
+                                                        },
+                                                        {
+                                                            buttonText : '', 
+                                                            buttonTitle : 'Dummy extension button',
+                                                            relParam : 'additional parameter 1',
+                                                            buttonEvent : 'click', 
+                                                            buttonCSS : 'color:rgba(255,255,255,1);', 
+                                                            callBack : function(imgBlob,relParam){ console.log(imgBlob)},
+                                                        },
+                                                    ]
                                                     );
                                                 
+                                                    var grid = document.querySelector('.image_gallery_2');
                                                 
-                                                   
-                                                    ['.image_gallery_2','.image_gallery_1'].map(x=>{
-                                                        var grid = document.querySelector(x);
-                                                        var msnry = new Masonry(grid, {
-                                                        itemSelector: 'img',
-                                                        percentPosition: true,
-                                                        });
-                                                    
-                                                        imagesLoaded(grid).on('progress', function () {
-                                                        // layout Masonry after each image loads
-                                                        msnry.layout();
-                                                        });
-
-
-                                                    })
-                                                  
+                                                    var msnry = new Masonry(grid, {
+                                                    itemSelector: 'img',
+                                                    });
+                                                
+                                                    imagesLoaded(grid).on('progress', function () {
+                                                    // layout Masonry after each image loads
+                                                    msnry.layout();
+                                                    });
 
             } else {
-                alert(this.response);
+                alert(event.target.response);
             }
-        };
-        xhttp.onerror = function () {
-            alert(takePicMessage.connection_error);
-        };
+        });
+       
 
         xhttp.send();
 
@@ -183,19 +195,24 @@ class jsCropSite {
         xhttp.open("GET", 'public/ajax/doc.html', true);
         xhttp.responseType = "text";
         xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;');
-        xhttp.onload = function () {
-            if (this.status >= 200 && this.status < 400) {
-                document.querySelector('#site-info-container').innerHTML = this.response;
-
+        xhttp.addEventListener('load',event=>{
+            if (event.target.status >= 200 && event.target.status < 400) {
+                document.querySelector('#site-info-container').innerHTML = event.target.response;
             } else {
-                alert(this.response);
+                alert(event.target.response);
             }
-        };
-        xhttp.onerror = function () {
-            alert(takePicMessage.connection_error);
-        };
+        
+
+        });
+
+        
 
         xhttp.send();
+
+        xhttp.onerror = function () {
+            alert(this.connection_error);
+        };
+
 
         setTimeout(() => {
             document.querySelector('#crop-doc').style.borderRadius = '10%';
