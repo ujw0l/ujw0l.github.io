@@ -131,16 +131,35 @@ p.info-para {
 
   div.image_upload,
   div.image_gallery_2 {
+    padding-bottom: 20px;
     border-radius: 5px;
     background: #fff;
   }
-
+  div.image_upload input{
+      margin-left:30px;
+  }
   a:link,
   a:visited {
     color: black;
   }
 
   h3 {
+    margin-top: 0;
+    margin-left: 0.75rem;
+    z-index: 1000;
+    position: absolute;
+    font-family:appleBerry;
+    font-size:13px;
+
+  }
+
+ i{
+     font-size:8px;
+     font-family: 'Courier New', Courier, monospace;
+ }
+
+
+ h3 {
     margin-top: 0;
     margin-left: 0.75rem;
     z-index: 1000;
@@ -181,8 +200,13 @@ p.info-para {
      font-size:8px;
      font-family: 'Courier New', Courier, monospace;
  }
-
  #doc-info{
-     padding:5%;
+     padding:2%;
  }
+
+ .doc-pre {
+     padding:1%;
+ }
+
+  
   
