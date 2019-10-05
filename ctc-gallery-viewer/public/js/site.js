@@ -112,22 +112,8 @@ class galViewerSite {
             
                 document.querySelector('#site-info-container').innerHTML = this.response;                
                 
-                                                    var ctcOverlay = new ctcOverlayViewer('.image_gallery_2,.image_gallery_1,.image_gallery_3');
-
-                                                    ['.image_gallery_2','.image_gallery_1'].map(x=>{
-                                                        var grid = document.querySelector(x);
-                                                        var msnry = new Masonry(grid, {
-                                                        itemSelector: 'img',
-                                                        percentPosition: true,
-                                                        });
-                                                    
-                                                        imagesLoaded(grid).on('progress', function () {
-                                                        // layout Masonry after each image loads
-                                                        msnry.layout();
-                                                        });
-
-
-                                                    })
+                                                var ctcOverlay = new ctcOverlayViewer('.image_gallery_2,.image_gallery_1,.image_gallery_3');
+                                                 const masnry =  new jsMasonry('.image_gallery_2,.image_gallery_1',{ elSelector: 'img', elWidth:225})
                                                    
 
             } else {
