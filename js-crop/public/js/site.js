@@ -159,17 +159,7 @@ class jsCropSite {
                                                         },
                                                     ]
                                                     );
-                                                
-                                                    var grid = document.querySelector('.image_gallery_2');
-                                                
-                                                    var msnry = new Masonry(grid, {
-                                                    itemSelector: 'img',
-                                                    });
-                                                
-                                                    imagesLoaded(grid).on('progress', function () {
-                                                    // layout Masonry after each image loads
-                                                    msnry.layout();
-                                                    });
+                                                    const masnry =  new jsMasonry('.image_gallery_2',{ elSelector: 'img', elWidth:200})
 
             } else {
                 alert(event.target.response);
