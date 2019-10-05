@@ -1,99 +1,158 @@
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Js Masonry : Vanilla Js Masonry</title>
- <!--<script type="text/javascript" src="public/js/site.js"></script>-->
-  <link href="public/css/styles.css" rel="stylesheet" type="text/css" />
- 
-  <script type="text/javascript" src="js-masonry/js-masonry.js"></script> 
-  <script type="text/javascript">
-
-
-
-
-  window.addEventListener('load',()=> {
-    /*
-  let divContainer = document.querySelector('#div-container')
-  for(let i=0; i<=38; i++){
-    let divEg = document.createElement('div');
-    divEg.classList.add('gal-viewer-mas');
-    divEg.innerHTML = i;
-    divEg.style.backgroundColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 190)},${Math.floor(Math.random() * 256)},0.5)`;
-    divEg.style.height = `${Math.floor(Math.random() * 50)+125}px`;
-    divContainer.appendChild(divEg);
-    
-}
-*/
-const masnry =  new jsMasonry('.image_gallery,#div-container',{ elSelector: '.gal-viewer-mas', elWidth:165,elMargin:0,percentWidth:true, callback:el=>
-  {
-    el.parentNode.style.opacity = '1'
-    let addBtn =   el.parentNode.querySelector('.add-more-el');
-    
-    if(undefined != addBtn){
-    addBtn.addEventListener('click', event=>{
-    let divCount =  el.querySelectorAll('div').length;   
-    let addDiv = 0 !=  el.parentNode.querySelector('.add-el-count').value.length ? parseInt(el.parentNode.querySelector('.add-el-count').value) : 100;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Js Masonry : Vanilla Js Masonry</title>
+   <!--<script type="text/javascript" src="public/js/site.js"></script>-->
+    <link href="public/css/styles.css" rel="stylesheet" type="text/css" />
+   
+    <script type="text/javascript" src="js-masonry/js-masonry.js"></script> 
+    <script type="text/javascript">
   
-     if( 'image_gallery' == el.getAttribute('class')){
-      let imgArr  = Array.from(el.querySelectorAll('img'));
-      for(let i=0; i<=addDiv; i++){
+  
+  
+  
+    window.addEventListener('load',()=> {
+    let divContainer = document.querySelector('#div-container')
+    for(let i=0; i<=38; i++){
+      let divEg = document.createElement('div');
+      divEg.classList.add('gal-viewer-mas');
+      divEg.innerHTML = i;
+      divEg.style.backgroundColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 190)},${Math.floor(Math.random() * 256)},0.5)`;
+      divEg.style.height = `${Math.floor(Math.random() * 50)+125}px`;
+      divContainer.appendChild(divEg);
       
-        let randImg =  new Image();
-           randImg.src = imgArr[Math.floor(Math.random() * imgArr.length)].src
-           randImg.classList.add('gal-viewer-mas');
-        el.appendChild(randImg);
-       
-      }
-      masnry.layBrks(el);
-       
-
-     }else{
-     
-          for(let i=0; i<=addDiv; i++){
-            let divEg = document.createElement('div');
-            divEg.classList.add('gal-viewer-mas');
-            divEg.innerHTML = i+divCount;
-            divEg.style.backgroundColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 190)},${Math.floor(Math.random() * 256)},0.5)`;
-            divEg.style.height = `${Math.floor(Math.random() * 50)+125}px`;
-            el.appendChild(divEg);
-
-        }
-        masnry.layBrks(el); 
-    }
-    
-     
-  });
-}
   }
-})
-
-});
-
-  
-  </script>
-</head>
-
-
-<body >
-
-  <div id="site-info-container" class="site-info-container" style="width:100%;" >
-    <h1>JS  Masonry</h1>
-
+  const masnry =  new jsMasonry('.image_gallery,#div-container',{ elSelector: '.gal-viewer-mas', elWidth:165,elMargin:0,percentWidth:true, callback:el=>
+    {
+      el.parentNode.style.opacity = '1'
+      let addBtn =   el.parentNode.querySelector('.add-more-el');
+      
+      if(undefined != addBtn){
+      addBtn.addEventListener('click', event=>{
+      let divCount =  el.querySelectorAll('div').length;   
+      let addDiv = 0 !=  el.parentNode.querySelector('.add-el-count').value.length ? parseInt(el.parentNode.querySelector('.add-el-count').value) : 100;
     
-    <div class='div-eg'>
-      <h3>Div examples <input class="add-el-count" type="number" max="1000" style="width:50;"/> <a class="add-more-el" href="javascript:void(0);"><i>Add Divs</i></a> </h3>
-
-        <div id="div-container" >
-            <div id="div-container" style="height: 1835px;">
-
-                <div class="gal-viewer-mas" style="background-color: rgba(81, 173, 85, 0.5); height: 149px; width: 165px; position: absolute; left: 10.8px; top: 140px;">0</div><div class="gal-viewer-mas" style="background-color: rgba(119, 106, 124, 0.5); height: 164px; width: 165px; position: absolute; left: 186.6px; top: 140px;">1</div><div class="gal-viewer-mas" style="background-color: rgba(83, 2, 214, 0.5); height: 132px; width: 165px; position: absolute; left: 362.4px; top: 140px;">2</div><div class="gal-viewer-mas" style="background-color: rgba(242, 40, 17, 0.5); height: 145px; width: 165px; position: absolute; left: 538.2px; top: 140px;">3</div><div class="gal-viewer-mas" style="background-color: rgba(158, 138, 242, 0.5); height: 155px; width: 165px; position: absolute; left: 362.4px; top: 307.8px;">4</div><div class="gal-viewer-mas" style="background-color: rgba(177, 82, 143, 0.5); height: 162px; width: 165px; position: absolute; left: 538.2px; top: 320.8px;">5</div><div class="gal-viewer-mas" style="background-color: rgba(149, 81, 254, 0.5); height: 168px; width: 165px; position: absolute; left: 10.8px; top: 324.8px;">6</div><div class="gal-viewer-mas" style="background-color: rgba(215, 143, 134, 0.5); height: 145px; width: 165px; position: absolute; left: 186.6px; top: 339.8px;">7</div><div class="gal-viewer-mas" style="background-color: rgba(67, 99, 200, 0.5); height: 135px; width: 165px; position: absolute; left: 362.4px; top: 498.6px;">8</div><div class="gal-viewer-mas" style="background-color: rgba(4, 139, 17, 0.5); height: 147px; width: 165px; position: absolute; left: 538.2px; top: 518.6px;">9</div><div class="gal-viewer-mas" style="background-color: rgba(223, 15, 248, 0.5); height: 137px; width: 165px; position: absolute; left: 186.6px; top: 520.6px;">10</div><div class="gal-viewer-mas" style="background-color: rgba(96, 53, 56, 0.5); height: 127px; width: 165px; position: absolute; left: 10.8px; top: 528.6px;">11</div><div class="gal-viewer-mas" style="background-color: rgba(196, 66, 30, 0.5); height: 126px; width: 165px; position: absolute; left: 362.4px; top: 669.4px;">12</div><div class="gal-viewer-mas" style="background-color: rgba(126, 124, 171, 0.5); height: 135px; width: 165px; position: absolute; left: 10.8px; top: 691.4px;">13</div><div class="gal-viewer-mas" style="background-color: rgba(68, 7, 221, 0.5); height: 134px; width: 165px; position: absolute; left: 186.6px; top: 693.4px;">14</div><div class="gal-viewer-mas" style="background-color: rgba(30, 6, 36, 0.5); height: 126px; width: 165px; position: absolute; left: 538.2px; top: 701.4px;">15</div><div class="gal-viewer-mas" style="background-color: rgba(21, 148, 47, 0.5); height: 135px; width: 165px; position: absolute; left: 362.4px; top: 831.2px;">16</div><div class="gal-viewer-mas" style="background-color: rgba(28, 69, 46, 0.5); height: 154px; width: 165px; position: absolute; left: 10.8px; top: 862.2px;">17</div><div class="gal-viewer-mas" style="background-color: rgba(225, 62, 182, 0.5); height: 161px; width: 165px; position: absolute; left: 186.6px; top: 863.2px;">18</div><div class="gal-viewer-mas" style="background-color: rgba(149, 99, 88, 0.5); height: 153px; width: 165px; position: absolute; left: 538.2px; top: 863.2px;">19</div><div class="gal-viewer-mas" style="background-color: rgba(224, 91, 239, 0.5); height: 144px; width: 165px; position: absolute; left: 362.4px; top: 1002px;">20</div><div class="gal-viewer-mas" style="background-color: rgba(237, 37, 208, 0.5); height: 126px; width: 165px; position: absolute; left: 10.8px; top: 1052px;">21</div><div class="gal-viewer-mas" style="background-color: rgba(89, 64, 51, 0.5); height: 172px; width: 165px; position: absolute; left: 538.2px; top: 1052px;">22</div><div class="gal-viewer-mas" style="background-color: rgba(82, 183, 107, 0.5); height: 137px; width: 165px; position: absolute; left: 186.6px; top: 1060px;">23</div><div class="gal-viewer-mas" style="background-color: rgba(200, 76, 235, 0.5); height: 172px; width: 165px; position: absolute; left: 362.4px; top: 1181.8px;">24</div><div class="gal-viewer-mas" style="background-color: rgba(109, 128, 184, 0.5); height: 156px; width: 165px; position: absolute; left: 10.8px; top: 1213.8px;">25</div><div class="gal-viewer-mas" style="background-color: rgba(199, 120, 98, 0.5); height: 151px; width: 165px; position: absolute; left: 186.6px; top: 1232.8px;">26</div><div class="gal-viewer-mas" style="background-color: rgba(68, 61, 12, 0.5); height: 158px; width: 165px; position: absolute; left: 538.2px; top: 1259.8px;">27</div><div class="gal-viewer-mas" style="background-color: rgba(46, 154, 70, 0.5); height: 144px; width: 165px; position: absolute; left: 362.4px; top: 1389.6px;">28</div><div class="gal-viewer-mas" style="background-color: rgba(227, 44, 36, 0.5); height: 173px; width: 165px; position: absolute; left: 10.8px; top: 1405.6px;">29</div><div class="gal-viewer-mas" style="background-color: rgba(116, 82, 4, 0.5); height: 157px; width: 165px; position: absolute; left: 186.6px; top: 1419.6px;">30</div><div class="gal-viewer-mas" style="background-color: rgba(178, 57, 255, 0.5); height: 129px; width: 165px; position: absolute; left: 538.2px; top: 1453.6px;">31</div><div class="gal-viewer-mas" style="background-color: rgba(33, 72, 76, 0.5); height: 160px; width: 165px; position: absolute; left: 362.4px; top: 1569.4px;">32</div><div class="gal-viewer-mas" style="background-color: rgba(185, 94, 202, 0.5); height: 156px; width: 165px; position: absolute; left: 186.6px; top: 1612.4px;">33</div><div class="gal-viewer-mas" style="background-color: rgba(61, 158, 11, 0.5); height: 153px; width: 165px; position: absolute; left: 10.8px; top: 1614.4px;">34</div><div class="gal-viewer-mas" style="background-color: rgba(248, 46, 236, 0.5); height: 152px; width: 165px; position: absolute; left: 538.2px; top: 1618.4px;">35</div><div class="gal-viewer-mas" style="background-color: rgba(69, 36, 88, 0.5); height: 150px; width: 165px; position: absolute; left: 362.4px; top: 1765.2px;">36</div><div class="gal-viewer-mas" style="background-color: rgba(15, 16, 9, 0.5); height: 126px; width: 165px; position: absolute; left: 10.8px; top: 1803.2px;">37</div><div class="gal-viewer-mas" style="background-color: rgba(128, 141, 44, 0.5); height: 135px; width: 165px; position: absolute; left: 186.6px; top: 1804.2px;">38</div></div>
-
-    </div>
-  </div>  
- 
-      <div class="img-container">
-          <h3> Gallery  <input class="add-el-count" type="number" max="200" style="width:50;"/> <a class="add-more-el" href="javascript:void(0);"><i>Add Imgs</i></a></h3>
-
+       if( 'image_gallery' == el.getAttribute('class')){
+        let imgArr  = Array.from(el.querySelectorAll('img'));
+        for(let i=0; i<=addDiv; i++){
+        
+          let randImg =  new Image();
+             randImg.src = imgArr[Math.floor(Math.random() * imgArr.length)].src
+             randImg.classList.add('gal-viewer-mas');
+          el.appendChild(randImg);
+         
+        }
+        masnry.layBrks(el);
+         
+  
+       }else{
+       
+            for(let i=0; i<=addDiv; i++){
+              let divEg = document.createElement('div');
+              divEg.classList.add('gal-viewer-mas');
+              divEg.innerHTML = i+divCount;
+              divEg.style.backgroundColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 190)},${Math.floor(Math.random() * 256)},0.5)`;
+              divEg.style.height = `${Math.floor(Math.random() * 50)+125}px`;
+              el.appendChild(divEg);
+  
+          }
+          masnry.layBrks(el); 
+      }
+      
+       
+    });
+  }
+    }
+  })
+  
+  });
+  
+    
+    </script>
+  </head>
+  
+  
+  <body >
+  
+    <div id="site-info-container" class="site-info-container" style="width:100%;" >
+      <h1>JS  Masonry</h1>
+  
+      
+      <div class='div-eg'>
+        <h3>Div examples <input class="add-el-count" type="number" max="1000" style="width:50;"/> <a class="add-more-el" href="javascript:void(0);"><i>Add Divs</i></a> </h3>
+  
+          <div id="div-container" >
+  
+      </div>
+    </div>  
+   
+        <div class="img-container">
+            <h3> Gallery  <input class="add-el-count" type="number" max="200" style="width:50;"/> <a class="add-more-el" href="javascript:void(0);"><i>Add Imgs</i></a></h3>
+  
+            <div class="image_gallery" >
+      
+         
+          <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/2.jpg" >
+              <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/4.jpg" >
+              <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/5.jpg">
+              <img class="gal-viewer-mas" title="Carkeek park" src="public/image/carkeek.JPG" >
+              <img class="gal-viewer-mas" title="Bruno" src="public/image/bruno1.jpg" >
+              <img class="gal-viewer-mas" title="Carkeek park" src="public/image/14.jpg" >
+             
+              <img class="gal-viewer-mas" title="Mystic Mountain" src="public/image/mm.jpg" >
+              <img class="gal-viewer-mas" title="Daman" src="public/image/daman2.JPG" >
+              <img class="gal-viewer-mas" title="Daman" src="public/image/daman3.jpg" >
+              <img class="gal-viewer-mas" title="Daman3" src="public/image/daman4.jpg" >
+              <img class="gal-viewer-mas" title="Daman3" src="public/image/daman5.jpg" >
+              <img class="gal-viewer-mas" title="Daman" src="public/image/daman.png" >
+              <img class="gal-viewer-mas" title="Rafting Arkasas Riover" src="public/image/3.jpg">
+              <img class="gal-viewer-mas" title="Chutney Bistro" src="public/image/cb.JPG" >
+              <img class="gal-viewer-mas" title="Halloween Tree" src="public/image/hw.JPG">
+              <img class="gal-viewer-mas" title="Chitwan" src="public/image/ct2.jpg" >
+              <img class="gal-viewer-mas" title="Mars" src="public/image/1.jpg" >      
+              <img class="gal-viewer-mas" title="Sanga bhaktapur" src="public/image/18.jpg" >
+              <img class="gal-viewer-mas" title="Roseville" src="public/image/rv1.jpg" >
+              <img class="gal-viewer-mas" title="Denver airport bunny" src="public/image/bunny.JPG" >
+              <img class="gal-viewer-mas" title="Hubbard Homstead Park" src="public/image/setattle.JPG">
+              <img class="gal-viewer-mas" title="Roseville" src="public/image/rv5.jpg" >
+              <img class="gal-viewer-mas" title="Roseville" src="public/image/rv4.jpg" >
+              <img class="gal-viewer-mas" title="Roseville" src="public/image/rv2.jpg" >
+          <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/2.jpg" >
+          <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/4.jpg" >
+          <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/5.jpg">
+          <img class="gal-viewer-mas" title="Carkeek park" src="public/image/carkeek.JPG" >
+          <img class="gal-viewer-mas" title="Carkeek park" src="public/image/14.jpg" >
+          <img class="gal-viewer-mas" title="Bruno" src="public/image/bruno1.jpg" >
+          <img class="gal-viewer-mas" title="Mystic Mountain" src="public/image/mm.jpg" >
+       <img class="gal-viewer-mas" title="Daman" src="public/image/daman2.JPG" > 
+       <img class="gal-viewer-mas" title="Rafting Arkasas Riover" src="public/image/3.jpg">
+       <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg4.JPG">
+       <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg2.jpg" >
+       <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg3.JPG" >
+       <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg.jpg" >  
+          <img class="gal-viewer-mas" title="Daman" src="public/image/daman3.jpg" >
+          <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg8.JPG" >
+          <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg7.JPG" >
+          <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg10.JPG">
+          <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg11.JPG" >
+          <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg9.JPG" >
+          <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg6.jpg" >
+          <img class="gal-viewer-mas" title="Daman3" src="public/image/daman4.jpg" >
+          <img class="gal-viewer-mas" title="Daman3" src="public/image/daman5.jpg" >
+          <img class="gal-viewer-mas" title="Daman" src="public/image/daman.png" >
+         
+          <img class="gal-viewer-mas" title="Mars" src="public/image/1.jpg" >
+          
+              
+        
+            </div>
+        </div>
+      
+       
+      
+        <div class="img-container-1">
+          <h3> Gallery  <input class="add-el-count" type="number" max="200" style="width:50;"/> <a class="add-more-el" href="javascript:void(0);"><i>Add Imgs</i></a> </h3>
+  
           <div class="image_gallery" >
     
        
@@ -110,94 +169,30 @@ const masnry =  new jsMasonry('.image_gallery,#div-container',{ elSelector: '.ga
             <img class="gal-viewer-mas" title="Daman3" src="public/image/daman4.jpg" >
             <img class="gal-viewer-mas" title="Daman3" src="public/image/daman5.jpg" >
             <img class="gal-viewer-mas" title="Daman" src="public/image/daman.png" >
+            <img class="gal-viewer-mas" title="Daman" src="public/image/daman2.JPG" > 
             <img class="gal-viewer-mas" title="Rafting Arkasas Riover" src="public/image/3.jpg">
-            <img class="gal-viewer-mas" title="Chutney Bistro" src="public/image/cb.JPG" >
-            <img class="gal-viewer-mas" title="Halloween Tree" src="public/image/hw.JPG">
-            <img class="gal-viewer-mas" title="Chitwan" src="public/image/ct2.jpg" >
-            <img class="gal-viewer-mas" title="Mars" src="public/image/1.jpg" >      
-            <img class="gal-viewer-mas" title="Sanga bhaktapur" src="public/image/18.jpg" >
-            <img class="gal-viewer-mas" title="Roseville" src="public/image/rv1.jpg" >
-            <img class="gal-viewer-mas" title="Denver airport bunny" src="public/image/bunny.JPG" >
-            <img class="gal-viewer-mas" title="Hubbard Homstead Park" src="public/image/setattle.JPG">
-            <img class="gal-viewer-mas" title="Roseville" src="public/image/rv5.jpg" >
-            <img class="gal-viewer-mas" title="Roseville" src="public/image/rv4.jpg" >
-            <img class="gal-viewer-mas" title="Roseville" src="public/image/rv2.jpg" >
-        <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/2.jpg" >
-        <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/4.jpg" >
-        <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/5.jpg">
-        <img class="gal-viewer-mas" title="Carkeek park" src="public/image/carkeek.JPG" >
-        <img class="gal-viewer-mas" title="Carkeek park" src="public/image/14.jpg" >
-        <img class="gal-viewer-mas" title="Bruno" src="public/image/bruno1.jpg" >
-        <img class="gal-viewer-mas" title="Mystic Mountain" src="public/image/mm.jpg" >
-     <img class="gal-viewer-mas" title="Daman" src="public/image/daman2.JPG" > 
-     <img class="gal-viewer-mas" title="Rafting Arkasas Riover" src="public/image/3.jpg">
-     <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg4.JPG">
-     <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg2.jpg" >
-     <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg3.JPG" >
-     <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg.jpg" >  
-        <img class="gal-viewer-mas" title="Daman" src="public/image/daman3.jpg" >
-        <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg8.JPG" >
-        <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg7.JPG" >
-        <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg10.JPG">
-        <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg11.JPG" >
-        <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg9.JPG" >
-        <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg6.jpg" >
-        <img class="gal-viewer-mas" title="Daman3" src="public/image/daman4.jpg" >
-        <img class="gal-viewer-mas" title="Daman3" src="public/image/daman5.jpg" >
-        <img class="gal-viewer-mas" title="Daman" src="public/image/daman.png" >
-       
-        <img class="gal-viewer-mas" title="Mars" src="public/image/1.jpg" >
-        
-            
-      
-          </div>
-      </div>
-    
-     
-    
-      <div class="img-container-1">
-        <h3> Gallery  <input class="add-el-count" type="number" max="200" style="width:50;"/> <a class="add-more-el" href="javascript:void(0);"><i>Add Imgs</i></a> </h3>
-
-        <div class="image_gallery" >
+            <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg4.JPG">
+            <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg2.jpg" >
+            <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg3.JPG" >
+            <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg.jpg" >  
+               <img class="gal-viewer-mas" title="Daman" src="public/image/daman3.jpg" >
+               <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg8.JPG" >
+               <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg7.JPG" >
+               <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg10.JPG">
+               <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg11.JPG" >
+               <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg9.JPG" >
+               <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg6.jpg" >
+               <img class="gal-viewer-mas" title="Daman3" src="public/image/daman4.jpg" >
+               <img class="gal-viewer-mas" title="Daman3" src="public/image/daman5.jpg" >
+               <img class="gal-viewer-mas" title="Daman" src="public/image/daman.png" >
   
-     
-      <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/2.jpg" >
-          <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/4.jpg" >
-          <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/5.jpg">
-          <img class="gal-viewer-mas" title="Carkeek park" src="public/image/carkeek.JPG" >
-          <img class="gal-viewer-mas" title="Bruno" src="public/image/bruno1.jpg" >
-          <img class="gal-viewer-mas" title="Carkeek park" src="public/image/14.jpg" >
-         
-          <img class="gal-viewer-mas" title="Mystic Mountain" src="public/image/mm.jpg" >
-          <img class="gal-viewer-mas" title="Daman" src="public/image/daman2.JPG" >
-          <img class="gal-viewer-mas" title="Daman" src="public/image/daman3.jpg" >
-          <img class="gal-viewer-mas" title="Daman3" src="public/image/daman4.jpg" >
-          <img class="gal-viewer-mas" title="Daman3" src="public/image/daman5.jpg" >
-          <img class="gal-viewer-mas" title="Daman" src="public/image/daman.png" >
-          <img class="gal-viewer-mas" title="Daman" src="public/image/daman2.JPG" > 
-          <img class="gal-viewer-mas" title="Rafting Arkasas Riover" src="public/image/3.jpg">
-          <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg4.JPG">
-          <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg2.jpg" >
-          <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg3.JPG" >
-          <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg.jpg" >  
-             <img class="gal-viewer-mas" title="Daman" src="public/image/daman3.jpg" >
-             <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg8.JPG" >
-             <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg7.JPG" >
-             <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg10.JPG">
-             <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg11.JPG" >
-             <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg9.JPG" >
-             <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg6.jpg" >
-             <img class="gal-viewer-mas" title="Daman3" src="public/image/daman4.jpg" >
-             <img class="gal-viewer-mas" title="Daman3" src="public/image/daman5.jpg" >
-             <img class="gal-viewer-mas" title="Daman" src="public/image/daman.png" >
-
-          </div>
-          </div>
-    
-
-</div>
-
-</body>
-
-
-</html>
+            </div>
+            </div>
+      
+  
+  </div>
+  
+  </body>
+  
+  
+  </html>
