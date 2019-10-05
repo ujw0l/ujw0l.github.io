@@ -1,0 +1,198 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Js Masonry : Vanilla Js Masonry</title>
+ <!--<script type="text/javascript" src="public/js/site.js"></script>-->
+  <link href="public/css/styles.css" rel="stylesheet" type="text/css" />
+ 
+  <script type="text/javascript" src="js-masonry/js-masonry.js"></script> 
+  <script type="text/javascript">
+
+
+
+
+  window.addEventListener('load',()=> {
+  let divContainer = document.querySelector('#div-container')
+  for(let i=0; i<=38; i++){
+    let divEg = document.createElement('div');
+    divEg.classList.add('gal-viewer-mas');
+    divEg.innerHTML = i;
+    divEg.style.backgroundColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 190)},${Math.floor(Math.random() * 256)},0.5)`;
+    divEg.style.height = `${Math.floor(Math.random() * 50)+125}px`;
+    divContainer.appendChild(divEg);
+    
+}
+const masnry =  new jsMasonry('.image_gallery,#div-container',{ elSelector: '.gal-viewer-mas', elWidth:165,elMargin:0,percentWidth:true, callback:el=>
+  {
+    el.parentNode.style.opacity = '1'
+    let addBtn =   el.parentNode.querySelector('.add-more-el');
+    
+    if(undefined != addBtn){
+    addBtn.addEventListener('click', event=>{
+    let divCount =  el.querySelectorAll('div').length;   
+    let addDiv = 0 !=  el.parentNode.querySelector('.add-el-count').value.length ? parseInt(el.parentNode.querySelector('.add-el-count').value) : 100;
+  
+     if( 'image_gallery' == el.getAttribute('class')){
+      let imgArr  = Array.from(el.querySelectorAll('img'));
+      for(let i=0; i<=addDiv; i++){
+      
+        let randImg =  new Image();
+           randImg.src = imgArr[Math.floor(Math.random() * imgArr.length)].src
+           randImg.classList.add('gal-viewer-mas');
+        el.appendChild(randImg);
+       
+      }
+      masnry.layBrks(el);
+       
+
+     }else{
+     
+          for(let i=0; i<=addDiv; i++){
+            let divEg = document.createElement('div');
+            divEg.classList.add('gal-viewer-mas');
+            divEg.innerHTML = i+divCount;
+            divEg.style.backgroundColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 190)},${Math.floor(Math.random() * 256)},0.5)`;
+            divEg.style.height = `${Math.floor(Math.random() * 50)+125}px`;
+            el.appendChild(divEg);
+
+        }
+        masnry.layBrks(el); 
+    }
+    
+     
+  });
+}
+  }
+})
+
+});
+
+  
+  </script>
+</head>
+
+
+<body >
+
+  <div id="site-info-container" class="site-info-container" style="width:100%;" >
+    <h1>JS  Masonry</h1>
+
+    
+    <div class='div-eg'>
+      <h3>Div examples <input class="add-el-count" type="number" max="1000" style="width:50;"/> <a class="add-more-el" href="javascript:void(0);"><i>Add Divs</i></a> </h3>
+
+        <div id="div-container" >
+
+    </div>
+  </div>  
+ 
+      <div class="img-container">
+          <h3> Gallery  <input class="add-el-count" type="number" max="200" style="width:50;"/> <a class="add-more-el" href="javascript:void(0);"><i>Add Imgs</i></a></h3>
+
+          <div class="image_gallery" >
+    
+       
+        <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/2.jpg" >
+            <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/4.jpg" >
+            <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/5.jpg">
+            <img class="gal-viewer-mas" title="Carkeek park" src="public/image/carkeek.JPG" >
+            <img class="gal-viewer-mas" title="Bruno" src="public/image/bruno1.jpg" >
+            <img class="gal-viewer-mas" title="Carkeek park" src="public/image/14.jpg" >
+           
+            <img class="gal-viewer-mas" title="Mystic Mountain" src="public/image/mm.jpg" >
+            <img class="gal-viewer-mas" title="Daman" src="public/image/daman2.JPG" >
+            <img class="gal-viewer-mas" title="Daman" src="public/image/daman3.jpg" >
+            <img class="gal-viewer-mas" title="Daman3" src="public/image/daman4.jpg" >
+            <img class="gal-viewer-mas" title="Daman3" src="public/image/daman5.jpg" >
+            <img class="gal-viewer-mas" title="Daman" src="public/image/daman.png" >
+            <img class="gal-viewer-mas" title="Rafting Arkasas Riover" src="public/image/3.jpg">
+            <img class="gal-viewer-mas" title="Chutney Bistro" src="public/image/cb.JPG" >
+            <img class="gal-viewer-mas" title="Halloween Tree" src="public/image/hw.JPG">
+            <img class="gal-viewer-mas" title="Chitwan" src="public/image/ct2.jpg" >
+            <img class="gal-viewer-mas" title="Mars" src="public/image/1.jpg" >      
+            <img class="gal-viewer-mas" title="Sanga bhaktapur" src="public/image/18.jpg" >
+            <img class="gal-viewer-mas" title="Roseville" src="public/image/rv1.jpg" >
+            <img class="gal-viewer-mas" title="Denver airport bunny" src="public/image/bunny.JPG" >
+            <img class="gal-viewer-mas" title="Hubbard Homstead Park" src="public/image/setattle.JPG">
+            <img class="gal-viewer-mas" title="Roseville" src="public/image/rv5.jpg" >
+            <img class="gal-viewer-mas" title="Roseville" src="public/image/rv4.jpg" >
+            <img class="gal-viewer-mas" title="Roseville" src="public/image/rv2.jpg" >
+        <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/2.jpg" >
+        <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/4.jpg" >
+        <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/5.jpg">
+        <img class="gal-viewer-mas" title="Carkeek park" src="public/image/carkeek.JPG" >
+        <img class="gal-viewer-mas" title="Carkeek park" src="public/image/14.jpg" >
+        <img class="gal-viewer-mas" title="Bruno" src="public/image/bruno1.jpg" >
+        <img class="gal-viewer-mas" title="Mystic Mountain" src="public/image/mm.jpg" >
+     <img class="gal-viewer-mas" title="Daman" src="public/image/daman2.JPG" > 
+     <img class="gal-viewer-mas" title="Rafting Arkasas Riover" src="public/image/3.jpg">
+     <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg4.JPG">
+     <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg2.jpg" >
+     <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg3.JPG" >
+     <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg.jpg" >  
+        <img class="gal-viewer-mas" title="Daman" src="public/image/daman3.jpg" >
+        <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg8.JPG" >
+        <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg7.JPG" >
+        <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg10.JPG">
+        <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg11.JPG" >
+        <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg9.JPG" >
+        <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg6.jpg" >
+        <img class="gal-viewer-mas" title="Daman3" src="public/image/daman4.jpg" >
+        <img class="gal-viewer-mas" title="Daman3" src="public/image/daman5.jpg" >
+        <img class="gal-viewer-mas" title="Daman" src="public/image/daman.png" >
+       
+        <img class="gal-viewer-mas" title="Mars" src="public/image/1.jpg" >
+        
+            
+      
+          </div>
+      </div>
+    
+     
+    
+      <div class="img-container-1">
+        <h3> Gallery  <input class="add-el-count" type="number" max="200" style="width:50;"/> <a class="add-more-el" href="javascript:void(0);"><i>Add Imgs</i></a> </h3>
+
+        <div class="image_gallery" >
+  
+     
+      <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/2.jpg" >
+          <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/4.jpg" >
+          <img class="gal-viewer-mas" title="Hillside village resort" src="public/image/5.jpg">
+          <img class="gal-viewer-mas" title="Carkeek park" src="public/image/carkeek.JPG" >
+          <img class="gal-viewer-mas" title="Bruno" src="public/image/bruno1.jpg" >
+          <img class="gal-viewer-mas" title="Carkeek park" src="public/image/14.jpg" >
+         
+          <img class="gal-viewer-mas" title="Mystic Mountain" src="public/image/mm.jpg" >
+          <img class="gal-viewer-mas" title="Daman" src="public/image/daman2.JPG" >
+          <img class="gal-viewer-mas" title="Daman" src="public/image/daman3.jpg" >
+          <img class="gal-viewer-mas" title="Daman3" src="public/image/daman4.jpg" >
+          <img class="gal-viewer-mas" title="Daman3" src="public/image/daman5.jpg" >
+          <img class="gal-viewer-mas" title="Daman" src="public/image/daman.png" >
+          <img class="gal-viewer-mas" title="Daman" src="public/image/daman2.JPG" > 
+          <img class="gal-viewer-mas" title="Rafting Arkasas Riover" src="public/image/3.jpg">
+          <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg4.JPG">
+          <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg2.jpg" >
+          <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg3.JPG" >
+          <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg.jpg" >  
+             <img class="gal-viewer-mas" title="Daman" src="public/image/daman3.jpg" >
+             <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg8.JPG" >
+             <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg7.JPG" >
+             <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg10.JPG">
+             <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg11.JPG" >
+             <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg9.JPG" >
+             <img class="gal-viewer-mas" title="Paragliding" src="public/image/pg6.jpg" >
+             <img class="gal-viewer-mas" title="Daman3" src="public/image/daman4.jpg" >
+             <img class="gal-viewer-mas" title="Daman3" src="public/image/daman5.jpg" >
+             <img class="gal-viewer-mas" title="Daman" src="public/image/daman.png" >
+
+          </div>
+          </div>
+    
+
+</div>
+
+</body>
+
+
+</html>
