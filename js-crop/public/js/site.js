@@ -159,7 +159,7 @@ class jsCropSite {
                                                         },
                                                     ]
                                                     );
-                                                    const masnry =  new jsMasonry('.image_gallery_2',{ elSelector: 'img', elWidth:200})
+                                                    const masnry =  new jsMasonry('.image_gallery_2',{ elSelector: 'img', elWidth:275})
 
             } else {
                 alert(event.target.response);
