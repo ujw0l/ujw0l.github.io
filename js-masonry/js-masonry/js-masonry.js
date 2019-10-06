@@ -63,13 +63,9 @@ class jsMasonry{
                            x.style.top = `${n[0]}px`;
                            placeCount++;
                            if(x.nodeName.toLowerCase() === 'img'){
-                               let imgLoad =  new Image();    
-                               imgLoad.src =  x.src;
                                x.style.height = '';
                                let  brkHt = brkWidth/ x.offsetWidth * x.offsetHeight;
-                               imgLoad.addEventListener('load',event=>{
-                                   x.style.height = `${brkHt}px`;
-                               });
+                               x.style.height = `${brkHt}px`;
                                availTop[0] =  n[0]+brkHt+brkMargin;
                                availSpots[l] = [n[0]+brkHt+brkMargin, n[1]]
                                availTop.sort((a, b)=> a-b);
