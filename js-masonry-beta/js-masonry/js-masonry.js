@@ -69,7 +69,9 @@ class jsMasonry{
                                let  brkHt = brkWidth/ x.offsetWidth * x.offsetHeight;
                                x.style.height = `${brkHt}px`;
                                x.src= this.loadingImg(brkHt,brkWidth,x);
-                              loadImg.addEventListener('load',event=> x.src = event.target.src);
+                              loadImg.addEventListener('load',event=> {x.src = event.target.src;
+                            console.log(event.target);
+                            });
                                availTop[0] =  n[0]+brkHt+brkMargin;
                                availSpots[l] = [n[0]+brkHt+brkMargin, n[1]]
                                availTop.sort((a, b)=> a-b);
