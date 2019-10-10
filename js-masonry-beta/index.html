@@ -6,74 +6,7 @@
   <link href="public/css/styles.css" rel="stylesheet" type="text/css" />
  
   <script type="text/javascript" src="js-masonry/js-masonry.js"></script> 
-  <script type="text/javascript">
-
-
-
-
-  window.addEventListener('load',()=> {
-    /*
-  let divContainer = document.querySelector('#div-container')
-  for(let i=0; i<=38; i++){
-    let divEg = document.createElement('div');
-    divEg.classList.add('gal-viewer-mas');
-    divEg.innerHTML = i;
-    divEg.style.backgroundColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 190)},${Math.floor(Math.random() * 256)},0.5)`;
-    divEg.style.height = `${Math.floor(Math.random() * 50)+125}px`;
-    divContainer.appendChild(divEg);
-    
-}
-*/
-const masnry =  new jsMasonry('.image_gallery',{ percentWidth:true, callback:el=>
-  {
-    el.parentNode.style.opacity = '1'
-    let addBtn =   el.parentNode.querySelector('.add-more-el');
-    
-    if(undefined != addBtn){
-    addBtn.addEventListener('click', event=>{
-    let divCount =  el.querySelectorAll('div').length;   
-    let addDiv = 0 !=  el.parentNode.querySelector('.add-el-count').value.length ? parseInt(el.parentNode.querySelector('.add-el-count').value) : 100;
-  
-     if( 'image_gallery' == el.getAttribute('class')){
-      let imgArr  = Array.from(el.querySelectorAll('img'));
-      for(let i=0; i<=addDiv; i++){
-      
-        let randImg =  new Image();
-           randImg.src = imgArr[Math.floor(Math.random() * imgArr.length)].src
-           randImg.classList.add('gal-viewer-mas');
-        el.appendChild(randImg);
-       
-      }
-      masnry.layBrks(el);
-       
-
-     }else{
-     
-          for(let i=0; i<=addDiv; i++){
-            let divEg = document.createElement('div');
-            divEg.classList.add('gal-viewer-mas');
-            divEg.innerHTML = i+divCount;
-            divEg.style.backgroundColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 190)},${Math.floor(Math.random() * 256)},0.5)`;
-            divEg.style.height = `${Math.floor(Math.random() * 50)+125}px`;
-            el.appendChild(divEg);
-
-        }
-        masnry.layBrks(el); 
-    }
-    
-     
-  });
-}
-  }
-})
-
-
  
-
-});
-
-  
-  </script>
 </head>
 
 
@@ -177,6 +110,73 @@ const masnry =  new jsMasonry('.image_gallery',{ percentWidth:true, callback:el=
 </div>
 
 </body>
+<script type="text/javascript">
 
+
+
+
+  window.addEventListener('load',()=> {
+    /*
+  let divContainer = document.querySelector('#div-container')
+  for(let i=0; i<=38; i++){
+    let divEg = document.createElement('div');
+    divEg.classList.add('gal-viewer-mas');
+    divEg.innerHTML = i;
+    divEg.style.backgroundColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 190)},${Math.floor(Math.random() * 256)},0.5)`;
+    divEg.style.height = `${Math.floor(Math.random() * 50)+125}px`;
+    divContainer.appendChild(divEg);
+    
+}
+*/
+const masnry =  new jsMasonry('.image_gallery',{ percentWidth:true, callback:el=>
+  {
+    el.parentNode.style.opacity = '1'
+    let addBtn =   el.parentNode.querySelector('.add-more-el');
+    
+    if(undefined != addBtn){
+    addBtn.addEventListener('click', event=>{
+    let divCount =  el.querySelectorAll('div').length;   
+    let addDiv = 0 !=  el.parentNode.querySelector('.add-el-count').value.length ? parseInt(el.parentNode.querySelector('.add-el-count').value) : 100;
+  
+     if( 'image_gallery' == el.getAttribute('class')){
+      let imgArr  = Array.from(el.querySelectorAll('img'));
+      for(let i=0; i<=addDiv; i++){
+      
+        let randImg =  new Image();
+           randImg.src = imgArr[Math.floor(Math.random() * imgArr.length)].src
+           randImg.classList.add('gal-viewer-mas');
+        el.appendChild(randImg);
+       
+      }
+      masnry.layBrks(el);
+       
+
+     }else{
+     
+          for(let i=0; i<=addDiv; i++){
+            let divEg = document.createElement('div');
+            divEg.classList.add('gal-viewer-mas');
+            divEg.innerHTML = i+divCount;
+            divEg.style.backgroundColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 190)},${Math.floor(Math.random() * 256)},0.5)`;
+            divEg.style.height = `${Math.floor(Math.random() * 50)+125}px`;
+            el.appendChild(divEg);
+
+        }
+        masnry.layBrks(el); 
+    }
+    
+     
+  });
+}
+  }
+})
+
+
+ 
+
+});
+
+  
+  </script>
 
 </html>
