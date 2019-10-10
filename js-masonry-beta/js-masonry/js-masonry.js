@@ -29,7 +29,7 @@ class jsMasonry{
                        }  
        });
        if(1 <  massApplied){
-           window.dispatchEvent(new Event('resize'));
+           //window.dispatchEvent(new Event('resize'));
        } 
    }
    /**
@@ -40,7 +40,7 @@ class jsMasonry{
     * @param {*} resizeEvnt Resize event
     */
  layBrks(el,opt,brkPer,resizeEvnt){
-           let allBrks    = undefined != opt && undefined != opt.elSelector ? Array.from(el.querySelectorAll(opt.elSelector))  :  Array.from(el.children); 
+           let allBrks    = undefined != opt && undefined != opt.elSelector ? Array.from(el.querySelectorAll(opt.elSelector+', .mason-img-loading'))  :  Array.from(el.children); 
            let contWidth    = el.offsetWidth;
            let brkWidth    = undefined != opt && undefined != opt.elWidth ? opt.elWidth :  undefined != brkPer || null != brkPer ?contWidth*brkPer :allBrks[0].offsetWidth ; 
            let rawBrkMargin = undefined != opt && undefined != opt.elMargin ?  opt.elMargin : 0;
@@ -63,15 +63,63 @@ class jsMasonry{
                            x.style.top = `${n[0]}px`;
                            placeCount++;
                            if('img' === x.nodeName.toLowerCase()){
-                               let loadImg =  new Image();
-                                   loadImg.src =  x.src;
-                               x.style.height = '';
+                             
+                             
+                            x.style.height = ``;
                                let  brkHt = brkWidth/ x.offsetWidth * x.offsetHeight;
-                               x.style.height = `${brkHt}px`;
-                               x.src= this.loadingImg(brkHt,brkWidth,x);
-                              loadImg.addEventListener('load',event=> {x.src = event.target.src;
-                            console.log(event.target);
-                            });
+
+                              if(undefined == x.getAttribute('data-loaded')){
+                                    x.style.opacity= '0'
+                                    let loadImg =  new Image();
+                                    loadImg.src =  x.src;
+                                    let loadingDiv =  document.createElement('div');
+                                        loadingDiv.id = `mas-loadin-${i}` 
+                                    loadingDiv.classList.add('mason-img-loading');
+                                    let loadingDivCir =  document.createElement('div');
+                                    loadingDivCir.style = `margin-left:${brkWidth/2}px;height:10px;width:10px;border-radius:50%;border-color:rgba(0,0,0,0.5);border-style: solid; border-width: 3px; `;
+                                    loadingDivCir.setAttribute('data-wait','left');
+                                    loadingDiv.appendChild(loadingDivCir);
+                                        loadingDiv.style = `padding-top:${brkHt/2-10}px;width:${brkWidth}px;height:${brkHt}px;position:absolute;left:${n[1]}px;top:${n[0]}px;`;
+                                        el.appendChild(loadingDiv);
+
+                                        let loadingInt = setInterval(()=>{
+                                            switch( loadingDivCir.getAttribute('data-wait')){
+                                                case 'left': 
+                                                    loadingDivCir.setAttribute('data-wait','top');
+                                                    loadingDivCir.style.borderColor = 'rgba(0,0,0,0.5)';
+                                                    loadingDivCir.style.borderTop = '3px solid  rgba(0,0,0,1)';
+                                                break;
+                                                case 'top':
+                                                        loadingDivCir.setAttribute('data-wait','right');
+                                                        loadingDivCir.style.borderColor = 'rgba(0,0,0,0.5)';
+                                                        loadingDivCir.style.borderRight = '3px solid  rgba(0,0,0,1)';
+                                                break;
+                                                case 'right':
+                                                        loadingDivCir.setAttribute('data-wait','bottom');
+                                                        loadingDivCir.style.borderColor = 'rgba(0,0,0,0.5)';
+                                                        loadingDivCir.style.borderBottom = '3px solid  rgba(0,0,0,1)';
+                
+                                                break;
+                                                case 'bottom':
+                                                        loadingDivCir.setAttribute('data-wait','left');
+                                                        loadingDivCir.style.borderColor = 'rgba(0,0,0,0.5)';
+                                                        loadingDivCir.style.borderLeft = '3px solid  rgba(0,0,0,1)';
+                                                break;
+                                            }
+                                            
+                                        }, 250);
+                                  
+                                    loadImg.addEventListener('load',(event)=>{
+                                        el.removeChild(loadingDiv);
+                                        x.style.height = `${brkHt}px`;
+                                        x.style.opacity = ''
+                                        x.setAttribute('data-loaded','loaded');
+                                    });
+                                    
+                              } else{  
+                                x.style.height = `${brkHt}px`;
+                              }
+                               
                                availTop[0] =  n[0]+brkHt+brkMargin;
                                availSpots[l] = [n[0]+brkHt+brkMargin, n[1]]
                                availTop.sort((a, b)=> a-b);
@@ -96,22 +144,6 @@ class jsMasonry{
                        }    
                    }
                }); 
-   }
-
-   loadingImg(ht,wt){
-    var c = document.createElement("canvas");
-    c.height = ht;
-    c.width = wt;
-    var ctx = c.getContext("2d");
-    ctx.beginPath();
-    ctx.rect(5, 5, wt,ht);
-    ctx.fillStyle = "rgba(0,0,0,1)";
-    ctx.fill();
-    ctx.fillStyle = "rgba(255,255,255,1)";
-    ctx.font = "12px Comic Sans MS";
-    ctx.textAlign = "center";
-    ctx.fillText("Loading...", wt/2, ht/2);
-    return c.toDataURL('png',1);
    }
 
 }
