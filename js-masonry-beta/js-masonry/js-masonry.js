@@ -63,8 +63,6 @@ class jsMasonry{
                            x.style.top = `${n[0]}px`;
                            placeCount++;
                            if('img' === x.nodeName.toLowerCase()){
-                             
-                             
                             x.style.height = ``;
                                let  brkHt = brkWidth/ x.offsetWidth * x.offsetHeight;
 
@@ -110,6 +108,7 @@ class jsMasonry{
                                         }, 250);
                                   
                                     loadImg.addEventListener('load',(event)=>{
+                                        clearInterval(loadingInt);
                                         el.removeChild(loadingDiv);
                                         x.style.height = `${brkHt}px`;
                                         x.style.opacity = ''
