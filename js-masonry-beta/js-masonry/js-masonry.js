@@ -71,7 +71,8 @@ class jsMasonry{
                                     let loadImg =  new Image();
                                     loadImg.src =  x.src;
                                     let loadingDiv =  document.createElement('div');
-                                        loadingDiv.id = `mas-loadin-${i}` 
+                                        loadingDiv.id = `mas-loadin-${i}`; 
+                                       lodingDiv.style.height = `${brkHt}px`;
                                     loadingDiv.classList.add('mason-img-loading');
                                     let loadingDivCir =  document.createElement('div');
                                     loadingDivCir.style = `margin-left:${brkWidth/2}px;height:10px;width:10px;border-radius:50%;border-color:rgba(0,0,0,0.5);border-style: solid; border-width: 3px; `;
