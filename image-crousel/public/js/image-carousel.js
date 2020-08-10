@@ -82,6 +82,12 @@ class imageCarousel{
                 }
             }
 
+            if(undefined != param1  && 'function' == typeof(param1.callBack)){
+           
+                param1.callBack(gal);
+    
+        } 
+
             window.addEventListener('resize', ()=>this.adjustOnResize(gal, carDivsObj,galNum)) 
     }
     /*
@@ -198,15 +204,20 @@ class imageCarousel{
 
         carDivs.nextOne.style.backgroundImage = `url('${gal[nextOneNum].src}')`; 
         carDivs.nextOne.title = undefined != gal[nextOneNum].title ? gal[nextOneNum].title:'';
-        carDivs.nextOne.setAttribute('data-num',nextOneNum)
+        carDivs.nextOne.setAttribute('data-num',nextOneNum);
 
         carDivs.nextTwo.style.backgroundImage = `url('${gal[nextTwoNum].src}')`; 
         carDivs.nextTwo.title =  undefined != gal[nextTwoNum].title ? gal[nextTwoNum].title:'';
-        carDivs.nextTwo.setAttribute('data-num',nextTwoNum) 
+        carDivs.nextTwo.setAttribute('data-num',nextTwoNum); 
 
         carDivs.nextThree.style.backgroundImage = `url('${gal[nextThreeNum].src}')`; 
         carDivs.nextThree.title =  undefined != gal[nextThreeNum].title ? gal[nextThreeNum].title:'';
-        carDivs.nextThree.setAttribute('data-num',nextThreeNum) 
+        carDivs.nextThree.setAttribute('data-num',nextThreeNum);
+
+
+
+        
+       
         
     }
 

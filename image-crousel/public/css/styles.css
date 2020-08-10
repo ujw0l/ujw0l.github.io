@@ -11,9 +11,25 @@
 
 body {
     margin: 0;
-
+    overflow: hidden;
 }
 
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 1);
+}
+
+::-moz-scrollbar-track {
+    background: rgba(255, 255, 255, 1);
+}
+
+.site-info-container::-webkit-scrollbar {
+    display: none;
+}
+
+.site-info-container::-moz-scrollbar {
+    display: none;
+}
 
 
 div.site-overlay {
@@ -26,26 +42,18 @@ div.site-overlay {
     width: 100%;
     background-color: rgba(0, 0, 0, 1);
     z-index: 100000;
-
-}
-#image_gallery,
-.image_gallery{
-width:1400px;
-height:700px;
-margin-left:10px;
-max-height: 70%;
-max-width:95%;
-}
-.image_gallery img{
-  width:10%;
-  height:10%;
-  
 }
 
 div.site-info-container {
     /*font-family: appleBerry;*/
+    width: 89%;
+    height: 91%;
+    border: 1px solid rgba(0, 0, 0, 1);
     background-color: rgba(255, 255, 255, 1);
-    width:100%;
+    display: inline-block;
+    float: left;
+    position: absolute;
+    overflow: auto;
 }
 
 
@@ -120,65 +128,54 @@ p.info-para {
 }
 
 
+
+  div.image_upload,
+  div.image_gallery_2 {
+    border-radius: 5px;
+    background: #fff;
+  }
+
   a:link,
   a:visited {
     color: black;
   }
 
   h3 {
-  
+    margin-top: 0;
+    margin-left: 0.75rem;
     z-index: 1000;
+    position: absolute;
     font-family:appleBerry;
-    text-align:center;
+    font-size:13px;
 
   }
 
- i{
-     font-size:8px;
-     font-family: 'Courier New', Courier, monospace;
- }
 
-
-.div-eg,
- .img-container{
-    display:inline-block;
-    width:49.6%;
-    opacity : 0;
+  .image_gallery_2{
+   width:80%;
+   height:59%;
+   margin-left:10%;
+   margin-right:10%;
   }
-  .img-container-1{
-      width:99.9%;
+  
+
+  
+
+  .image_gallery_1 {
+    width:40%;
+    height:25%;
+    margin-left:30%;
+   margin-right:30%;
+   margin-bottom:2%;
   }
-
-
-
-  #div-container div,
-  .image_gallery_1 img,
-  .image_gallery_2 img,
-  .image_gallery_3 img {
-  width:31%;
-
-  }
-  #div-container div{
-    font-size:13;
-    text-align:center;
-    color:rgba(255,255,255,1);
-    font-family:chalKFont; 
-    padding-top:25px;
-      
-  }
-
   
  i{
      font-size:8px;
      font-family: 'Courier New', Courier, monospace;
  }
- #doc-info{
-     padding:2%;
- }
 
- .doc-pre {
-     padding:1%;
+ .doc-page{
+     padding:5%;
  }
-
   
   
