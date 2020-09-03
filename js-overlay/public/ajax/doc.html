@@ -1,0 +1,94 @@
+<div style="padding:20px;">
+  <h1 align="center">JS Overlay Doc 👋</h1>
+  <p>
+    <a href="https://www.npmjs.com/package/js-overlay" target="_blank">
+      <img alt="Version" src="https://img.shields.io/npm/v/js-overlay.svg">
+    </a>
+    <a href="#" target="_blank">
+      <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
+    </a>
+    <a href="https://twitter.com/bastakotiujwol" target="_blank">
+      <img alt="Twitter: bastakotiujwol" src="https://img.shields.io/twitter/follow/bastakotiujwol.svg?style=social" />
+    </a>
+  </p>
+  <p> JS library that lets user to view image gallery, content, iframe content and ajax content in modal box</p>
+  <div style="padding:100px;">
+    <fieldset>
+      <legend>
+        <h2>Install</h2>
+      </legend>
+
+
+      <p>npm i js-overlay</p>
+    </fieldset>
+
+    <fieldset>
+      <legend>
+        <h2>Script Tag</h2>
+      </legend>
+
+      <p>Download and include following file:</p>
+      <p>js-overlay.js</p>
+      <a href="https://github.com/ujw0l/js-overlay/archive/master.zip">Download here</a>
+    </fieldset>
+
+
+    <fieldset>
+      <legend>
+        <h2>Initialization</h2>
+      </legend>
+
+
+      <p>const overlay = new jsOverlay();</p>
+
+
+      <div>
+        <div>
+          <h5>For Content viewer</h5>
+          <p>
+          <p>overlay->createOverlay({ </p>
+          <p style="text-indent: 40px;"> elContent:'String', (String, content to be loaded in modal)</p>
+          <p style="text-indent: 40px;">containerHt: Number, (Number, Modal height.Default 500)</p>
+          <p style="text-indent: 40px;">containerWd: Number, (Number, Modal Width.Default 650)</p>
+        </div>
+        })<br>
+        </p>
+      </div>
+
+      <div>
+        <h5>For Image viewer</h5>
+        <p>
+          <overlay->createOverlay({<p>
+            <p style="text-indent: 40px;">imgGallery:'seletor/s', (String, parent container selector/s of Image/s)</p>
+            <p style="text-indent: 40px;">containerHt: Number, (Number, Modal height.Default 500)</p>
+            <p style="text-indent: 40px;">containerWd: Number, (Number, Modal Width.Default 650)</p>
+            <p>})</p>
+      </div>
+      <div>
+        <h5> For Iframe viewer </h5>
+        <p>overlay->createOverlay({</p>
+        <p style="text-indent: 40px;">iframeUrl:'String', (String, URL of page to be loaded)</p>
+        <p style="text-indent: 40px;">containerHt: Number, (Number, Modal height.Default 500)</p>
+        <p style="text-indent: 40px;">containerWd: Number, (Number, Modal Width.Default 650)</p>
+        <p>})</p>
+
+      </div>
+      <di>
+        <h5>For AJAX viewer</h5>
+        <p>overlay->createOverlay({</p>
+        <p style="text-indent: 40px;">ajaxUrl: 'String',(String, Url Where data to be sent and get reponse from )</p>
+        <p style="text-indent: 40px;"> ajaxData: Any,(Any, Data to be sent to server)</p>
+        <p style="text-indent: 40px;">ajaxMethod: 'String': (String, GET or POSt method, default GET )</p>
+        <p style="text-indent: 40px;">containerHt: Number, (Number, Modal height.Default 500)</p>
+        <p style="text-indent: 40px;">containerWd: Number, (Number, Modal Width.Default 650)</p>
+        <p>})</p>
+
+  </div>
+
+  </fieldset>
+
+</div>
+
+
+
+</div>

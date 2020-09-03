@@ -1,0 +1,141 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CTC Image Viewer Demo</title>
+  
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.2.0/imagesloaded.pkgd.min.js"></script>
+  
+  <script type="text/javascript" src="beta/ctc_overlay.js"></script>
+  <style>
+    body {
+      background: #ccc;
+    }
+
+    .image_gallery_2 img {
+      width: 320px;
+      border: 1px dotted rgba(0, 0, 0, 1);
+      margin-top: 20px;
+    }
+
+    .image_gallery_3 img {
+      width: 520px;
+      border: 1px dotted rgba(0, 0, 0, 1);
+      margin-top: 20px;
+    }
+
+
+    div.image_gallery_2 {
+      padding: 20px;
+      border: 1px solid #999;
+      border-radius: 5px;
+      background: #fff;
+    }
+
+    a:link,
+    a:visited {
+      color: black;
+    }
+
+    h3 {
+      margin-top: 0;
+      margin-left: 0.75rem;
+      z-index: 1000;
+      position: absolute;
+      margin-bottom: 20px;
+    }
+
+    main {
+      columns: 250px;
+      column-gap: 20px;
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <div>
+
+
+    <h1>CTC Gallery Viewer</h1>
+
+    <div class="image_gallery_2" >
+
+      <h3> Image Gallery 1 </h3>
+      <img title="Seattle library" src="public/image/lib.jpg" />
+      <img title="Carkeek park" src="public/image/carkeek.jpg" />
+      <img title="Bruno" src="public/image/bruno1.jpg" />
+      <img title="Roseville" src="public/image/rv2.jpg" />
+      <img title="Roseville" src="public/image/rv1.jpg" />
+      <img title="Chitwan" src="public/image/ct2.jpg" />
+      <img title="Mystic Mountain" src="public/image/mm.jpg" />
+      <img title="Daman3" src="public/image/daman3.jpg" />
+      <img title="Daman2" src="public/image/daman2.jpg" />
+      <img title="PG8" src="public/image/pg8.jpg" />
+      <img title="PG7" src="public/image/pg7.jpg" />
+      <img title="PG6" src="public/image/pg6.jpg" />
+      <img title="PG5" src="public/image/pg5.gif" />
+      <img title="PG4" src="public/image/pg4.jpg" />
+      <img title="PG2" src="public/image/pg2.jpg" />
+      <img title="PG3" src="public/image/pg3.jpg" />
+      <img title="Paragliding" src="public/image/pg.jpg" />
+      <img title="Daman" src="public/image/daman.png" />
+      <img title="Paragliding" src="public/image/pg.jpg" />   
+      <img title="14.jpg" src="public/image/14.jpg" />
+      <img title="18.jpg" src="public/image/18.jpg" />
+      <img title="19.jpg" src="public/image/19.jpg" />
+      <img title="3.jpg" src="public/image/3.jpg" />
+      <img title="4.jpg" src="public/image/4.jpg" />
+      <img title="5.jpg" src="public/image/5.jpg" />
+      <img title="1.jpg" src="public/image/1.jpg" />
+      <img title="12.jpg" src="public/image/12.jpg" />
+      <img title="14.jpg" src="public/image/14.jpg" />
+      <img title="19.jpg" src="public/image/19.jpg" />
+      <img title="2.jpg" src="public/image/2.jpg" />
+      <img title="20.jpg" src="public/image/20.jpg" />
+      <img title="Imac pro" src="public/image/imac-pro-gallery-4.png" />
+    </div>
+
+    <div class="image_gallery_2" >
+
+      <h3> Image Gallery 2 </h3>
+      <img title="Seattle library" src="public/image/lib.jpg" />
+      <img title="Carkeek park" src="public/image/carkeek.jpg" />
+      <img title="Bruno" src="public/image/bruno1.jpg" />
+      <img title="Roseville" src="public/image/rv2.jpg" />
+      <img title="Roseville" src="public/image/rv1.jpg" />
+      <img title="Chitwan" src="public/image/ct2.jpg" />
+      <img title="Mystic Mountain" src="public/image/mm.jpg" />
+      <img title="Daman3" src="public/image/daman3.jpg" />
+      <img title="Daman2" src="public/image/daman2.jpg" />
+    </div >
+    <div class="image_gallery_3">
+      <h3> Image Gallery 2 </h3>
+      <img title="Daman2" src="public/image/pg6.jpg" />
+    </div>
+
+  </div>
+</body>
+<script>
+
+  var ctcOverlay = new ctcOverlayViewer('.image_gallery_2, .image_gallery_3');
+
+  var grid = document.querySelector('.image_gallery_2');
+  var msnry = new Masonry(grid, {
+    itemSelector: '.image_gallery_2 img',
+    percentPosition: true,
+    gutter: 20
+  });
+
+  imagesLoaded(grid).on('progress', function () {
+    // layout Masonry after each image loads
+    msnry.layout();
+  });
+</script>
+
+
+</html>
