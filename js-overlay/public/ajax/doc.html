@@ -46,7 +46,7 @@
         <div>
           <h5>For Content viewer</h5>
           <p>
-          <p>overlay->createOverlay({ </p>
+          <p>overlay.createOverlay({ </p>
           <p style="text-indent: 40px;"> elContent:'String', (String, content to be loaded in modal)</p>
           <p style="text-indent: 40px;">containerHt: Number, (Number, Modal height.Default 500)</p>
           <p style="text-indent: 40px;">containerWd: Number, (Number, Modal Width.Default 650)</p>
@@ -58,15 +58,16 @@
       <div>
         <h5>For Image viewer</h5>
         <p>
-          <overlay->createOverlay({<p>
-            <p style="text-indent: 40px;">imgGallery:'seletor/s', (String, parent container selector/s of Image/s)</p>
-            <p style="text-indent: 40px;">containerHt: Number, (Number, Modal height.Default 500)</p>
-            <p style="text-indent: 40px;">containerWd: Number, (Number, Modal Width.Default 650)</p>
-            <p>})</p>
+          overlay.createOverlay({
+        <p>
+        <p style="text-indent: 40px;">imgGallery:'seletor/s', (String, parent container selector/s of Image/s)</p>
+        <p style="text-indent: 40px;">containerHt: Number, (Number, Modal height.Default 500)</p>
+        <p style="text-indent: 40px;">containerWd: Number, (Number, Modal Width.Default 650)</p>
+        <p>})</p>
       </div>
       <div>
         <h5> For Iframe viewer </h5>
-        <p>overlay->createOverlay({</p>
+        <p>overlay.createOverlay({</p>
         <p style="text-indent: 40px;">iframeUrl:'String', (String, URL of page to be loaded)</p>
         <p style="text-indent: 40px;">containerHt: Number, (Number, Modal height.Default 500)</p>
         <p style="text-indent: 40px;">containerWd: Number, (Number, Modal Width.Default 650)</p>
@@ -75,7 +76,7 @@
       </div>
       <di>
         <h5>For AJAX viewer</h5>
-        <p>overlay->createOverlay({</p>
+        <p>overlay.createOverlay({</p>
         <p style="text-indent: 40px;">ajaxUrl: 'String',(String, Url Where data to be sent and get reponse from )</p>
         <p style="text-indent: 40px;"> ajaxData: Any,(Any, Data to be sent to server)</p>
         <p style="text-indent: 40px;">ajaxMethod: 'String': (String, GET or POSt method, default GET )</p>
