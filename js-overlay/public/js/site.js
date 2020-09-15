@@ -113,7 +113,7 @@ class galViewerSite {
                 document.querySelector('#site-info-container').innerHTML = this.response;
 
                 var overlay = new jsOverlay({ containerHt: 700, containerWd: 900, imgGallery: '.image_gallery_1,.image_gallery_2,.image_gallery_3 ', ajaxUrl: 'text.html', ajaxData: 'some data', ajaxMethod: 'post' });
-                const masnry = new jsMasonry('.image_gallery_2,.image_gallery_1', { elSelector: 'img', elWidth: 225 })
+                const masnry = new jsMasonry('.image_gallery_2,.image_gallery_1', { elSelector: 'img', elWidth: 225, heightSort: 'DESC' })
 
                 document.querySelector('#load-content').addEventListener('click', e => overlay.createOverlay({ elContent: document.querySelector("#load-content-lorem").innerHTML, containerHt: 270, containerWd: 300, }))
                 document.querySelector('#iframe-content').addEventListener('click', e => overlay.createOverlay({ iframeUrl: 'https://ujw0l.github.io/', containerHt: 600, containerWd: 900, }))
