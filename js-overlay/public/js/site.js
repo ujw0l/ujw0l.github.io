@@ -117,7 +117,7 @@ class galViewerSite {
 
                 document.querySelector('#load-content').addEventListener('click', e => overlay.createOverlay({ elContent: document.querySelector("#load-content-lorem").innerHTML, containerHt: 270, containerWd: 300, }))
                 document.querySelector('#iframe-content').addEventListener('click', e => overlay.createOverlay({ iframeUrl: 'https://ujw0l.github.io/', containerHt: 600, containerWd: 900, }))
-                document.querySelector('#ajax-content').addEventListener('click', e => overlay.createOverlay({ ajaxUrl: './public/ajax/ajax.html', ajaxData: 'some data', ajaxMethod: 'post', containerHt: 300, containerWd: 350, }))
+                document.querySelector('#ajax-content').addEventListener('click', e => overlay.createOverlay({ ajaxUrl: './public/ajax/ajax.html', ajaxData: 'some data', ajaxMethod: 'get', containerHt: 300, containerWd: 350, }))
 
             } else {
                 alert(this.response);
