@@ -111,9 +111,9 @@ class galViewerSite {
             if (this.status >= 200 && this.status < 400) {
 
                 document.querySelector('#site-info-container').innerHTML = this.response;
-
-                var ctcOverlay = new ctcOverlayViewer('.image_gallery_2,.image_gallery_1,.image_gallery_3');
                 const masnry = new jsMasonry('.image_gallery_2,.image_gallery_1', { heightSort: "DESC", elSelector: 'img', elWidth: 225 })
+                const ctcOverlay = new ctcOverlayViewer('.image_gallery_2,.image_gallery_1,.image_gallery_3');
+
 
 
             } else {
