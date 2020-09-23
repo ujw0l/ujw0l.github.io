@@ -2,15 +2,15 @@
 class galViewerSite {
 
     constructor() {
-        this.createOverlayAndSideBar();   
+        this.createOverlayAndSideBar();
     }
 
     createOverlayAndSideBar() {
-       
+
         let sidebarOpts = Array();
         let overlayDiv = document.createElement("div");
-       
- let bgColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 256)},${(Math.floor(Math.random() * 3)+5)/10})`;
+
+        let bgColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 256)},${(Math.floor(Math.random() * 3) + 5) / 10})`;
         overlayDiv.id = "site-overlay";
         overlayDiv.classList.add(`site-overlay`);
         overlayDiv.style.backgroundColor = bgColor;
@@ -20,7 +20,7 @@ class galViewerSite {
         let infoContainer = document.createElement('div');
         infoContainer.id = 'site-info-container';
         infoContainer.classList.add('site-info-container');
-       infoContainer.style = `box-shadow:0px 0px 5px rgba(255,255,255,1);display:inline-block;margin:${(0.1*overlayDiv.offsetHeight) / 2}px ${(0.05 * overlayDiv.offsetWidth / 2)}px;vertical-align:top;`;
+        infoContainer.style = `box-shadow:0px 0px 5px rgba(255,255,255,1);display:inline-block;margin:${(0.1 * overlayDiv.offsetHeight) / 2}px ${(0.05 * overlayDiv.offsetWidth / 2)}px;vertical-align:top;`;
         overlayDiv.appendChild(infoContainer);
 
 
@@ -43,18 +43,18 @@ class galViewerSite {
         let docDiv = document.createElement('div');
         docDiv.id = `crop-doc`;
         docDiv.classList.add(`crop-doc`);
-       docDiv.setAttribute('title', `Documentation`);
-       docDiv.style = divStyle;
-       docDiv.innerHTML = '&#9776;';
-       sidebarOpts.push(docDiv);
+        docDiv.setAttribute('title', `Documentation`);
+        docDiv.style = divStyle;
+        docDiv.innerHTML = '&#9776;';
+        sidebarOpts.push(docDiv);
 
 
         let supportProj = document.createElement('div');
         supportProj.id = `support-project`;
         supportProj.classList.add(`support-project`);
         supportProj.setAttribute('title', `Support my project`);
-        supportProj.style = divStyle+`background-image:url(https://cdn2.hubspot.net/hubfs/4008838/website/logos/Tidelift-shorthand.svg);background-position:center;background-size:100% 100%;background-repeat:no-repeat;`;
-        supportProj.addEventListener('click', ()=>window.open('https://tidelift.com/subscription/pkg/npm-ctc-gallery-viewer?utm_source=npm-ctc-gallery-viewer&utm_medium=referral&utm_campaign=readme', '_blank'));
+        supportProj.style = divStyle + `background-image:url(https://cdn2.hubspot.net/hubfs/4008838/website/logos/Tidelift-shorthand.svg);background-position:center;background-size:100% 100%;background-repeat:no-repeat;`;
+        supportProj.addEventListener('click', () => window.open('https://tidelift.com/subscription/pkg/npm-ctc-gallery-viewer?utm_source=npm-ctc-gallery-viewer&utm_medium=referral&utm_campaign=readme', '_blank'));
         sidebarOpts.push(supportProj);
 
 
@@ -64,36 +64,36 @@ class galViewerSite {
             setTimeout(() => {
                 sidebarDiv.appendChild(x);
                 x.style.backgroundColor = bgColor;
-                x.style.height = x.offsetWidth+ 'px';
+                x.style.height = x.offsetWidth + 'px';
                 x.style.boxShadow = `-1px -1px 1px ${bgColor}`;
                 x.style.fontSize = (0.75 * x.offsetWidth) + 'px';
             }, (10 * i))
         });
 
         this.requiredEventListener();
-        window.addEventListener('resize',()=>this.resizePage());
+        window.addEventListener('resize', () => this.resizePage());
         this.loadDemo();
 
     }
 
 
-    resizePage(){
+    resizePage() {
 
         let overlayDiv = document.querySelector('#site-overlay');
         let toolbarDiv = document.querySelector('#site-sidebar');
         let siteContent = document.querySelector('#site-info-container');
         let toolbarOpts = Array.from(document.getElementById('site-sidebar').querySelectorAll('div'));
 
-      
+
         toolbarDiv.style.paddingTop = ((overlayDiv.offsetHeight - (toolbarOpts.length * toolbarDiv.offsetWidth)) / 2) + 'px';
-        toolbarDiv.style.width = (0.05*overlayDiv.offsetWidth)+'px';
-        toolbarDiv.style.height = overlayDiv.offsetHeight+'px';
+        toolbarDiv.style.width = (0.05 * overlayDiv.offsetWidth) + 'px';
+        toolbarDiv.style.height = overlayDiv.offsetHeight + 'px';
         toolbarOpts.map(x => {
             x.style.height = x.offsetWidth + 'px';
             x.style.fontSize = (0.75 * x.offsetWidth) + 'px';
         });
-       
-        siteContent.style = `margin:${(0.1*overlayDiv.offsetHeight) / 2}px ${(0.05 * overlayDiv.offsetWidth / 2)}px;`;
+
+        siteContent.style = `margin:${(0.1 * overlayDiv.offsetHeight) / 2}px ${(0.05 * overlayDiv.offsetWidth / 2)}px;`;
     }
 
 
@@ -109,12 +109,12 @@ class galViewerSite {
         xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;');
         xhttp.onload = function () {
             if (this.status >= 200 && this.status < 400) {
-            
-                document.querySelector('#site-info-container').innerHTML = this.response;                
-                
-                                                var ctcOverlay = new ctcOverlayViewer('.image_gallery_2,.image_gallery_1,.image_gallery_3');
-                                                 const masnry =  new jsMasonry('.image_gallery_2,.image_gallery_1',{ elSelector: 'img', elWidth:225})
-                                                   
+
+                document.querySelector('#site-info-container').innerHTML = this.response;
+
+                var ctcOverlay = new ctcOverlayViewer('.image_gallery_2,.image_gallery_1,.image_gallery_3');
+                const masnry = new jsMasonry('.image_gallery_2,.image_gallery_1', { heightSort: "DESC", elSelector: 'img', elWidth: 225 })
+
 
             } else {
                 alert(this.response);
