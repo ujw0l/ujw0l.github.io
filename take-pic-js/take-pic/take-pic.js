@@ -151,9 +151,10 @@ class takePic {
 							imgStreams[i].srcObject = mediaStream;
 						}
 					}
-					let vidTimeOut = navigator.userAgent.indexOf('Chrome') > -1 ? 350 : 850;
+
 
 					document.getElementById('takePicLoading').parentNode.removeChild(document.getElementById('takePicLoading'));
+					let vidTimeOut = navigator.userAgent.indexOf('Chrome') > -1 ? 350 : 850;
 					setTimeout(function () {
 						let video = document.getElementById("videoStream");
 						let overlayDiv = document.getElementById('takePicOverlay');
