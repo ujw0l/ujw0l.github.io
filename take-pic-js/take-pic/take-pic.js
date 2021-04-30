@@ -151,7 +151,7 @@ class takePic {
 							imgStreams[i].srcObject = mediaStream;
 						}
 					}
-					let vidTimeOut = navigator.userAgent.indexOf('Chrome') > -1 ? 20 : 850;
+					let vidTimeOut = navigator.userAgent.indexOf('Chrome') > -1 ? 350 : 850;
 
 					document.getElementById('takePicLoading').parentNode.removeChild(document.getElementById('takePicLoading'));
 					setTimeout(function () {
