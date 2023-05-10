@@ -4,13 +4,15 @@
   <title>Js Crop : Image cropping library</title>
   <script type="text/javascript" src="public/js/site.js"></script>
   <link href="public/css/styles.css" rel="stylesheet" type="text/css" />
-  <script type="text/javascript" src="js-crop/js-crop.js"></script>
+  <script type="text/javascript" src="js-crop/js-crop.min.js"></script>
   <script type="text/javascript" src="public/js/js-masonry.js"></script>
 </head>
 
 
-<body onload="new jsCropSite()">
-
+<body >
+<script>
+  window.addEventListener('DOMContentLoaded',()=>  new jsCropSite());
+</script>
   <a style="display:none;" href="https://tidelift.com/subscription/pkg/npm-ctc-gallery-viewer?utm_source=npm-ctc-gallery-viewer&utm_medium=referral&utm_campaign=readme">Get supported ctc-gallery-viewer with the Tidelift Subscription</a>
 </body>
 
