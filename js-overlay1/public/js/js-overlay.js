@@ -258,7 +258,7 @@ class jsOverlay {
         if (undefined == elContainer.querySelector('#img-title')) {
             let imgTitle = document.createElement('span');
             imgTitle.id = 'img-title';
-            imgTitle.style = `overflow:scroll;font-size:15px;color:rgba(0,0,0,1);line-height:1.5;font-family:'Courier New', Courier, monospace;text-align:center;position:absolute;left:0px;height:25px;width:${modalHtWd[1]}px;margin-top:${modalHtWd[0] - 25}px;z-index:100;`;
+            imgTitle.style = `overflow:auto;font-size:15px;color:rgba(0,0,0,1);line-height:1.5;font-family:'Courier New', Courier, monospace;text-align:center;position:absolute;left:0px;height:25px;width:${0.97*modalHtWd[1]}px;margin-top:${0.98*modalHtWd[0] - 25}px;z-index:100;`;
             imgTitle.innerHTML = imgTitleCont;
             elContainer.appendChild(imgTitle);
         } else {
@@ -349,7 +349,7 @@ class jsOverlay {
             clearInterval(loadingInt);
             closeBtn.style.display = '';
             elContainer.style.display = '';
-            let optImgDim = this.getOptimizedElSize((modalHtWd[1] - 60), (modalHtWd[0] - 60), e.target.width, e.target.height, 1)
+            let optImgDim = this.getOptimizedElSize((modalHtWd[1] - 80), (modalHtWd[0] - 60), e.target.width, e.target.height, 0.995)
             let contMargLeft = 1 < imgArr.length ? ((modalHtWd[1] - optImgDim.width) / 2) - 26 : (modalHtWd[1] - optImgDim.width) / 2;
             e.target.style = `position:relative;border:1px solid rgba(0,0,0,1);float:left;height:${optImgDim.height}px;width:${optImgDim.width}px;margin-left:${contMargLeft}px;margin-top:${(modalHtWd[0] - optImgDim.height) / 2}px;`;
             elContainer.appendChild(e.target);
@@ -372,7 +372,7 @@ class jsOverlay {
     getOptimizedElSize(scrnWd, scrnHt, elActWd, elActHt, alwdElPrcnt) {
 
         let elScrnHtRatio = 0, elScrnWdRatio = 0, optElHt = 0, optElWd = 0;
-        let elPrcnt = undefined != alwdElPrcnt ? alwdElPrcnt : 0.89;
+        let elPrcnt = undefined != alwdElPrcnt ? alwdElPrcnt : 0.90;
         let margPrcnt = 1 - elPrcnt;
         if ((elActWd >= scrnWd) && (elActHt >= scrnHt)) {
             if (elActWd >= elActHt) {
