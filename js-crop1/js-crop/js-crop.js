@@ -148,6 +148,7 @@ class jsCrop {
                 document.querySelector('#start-crop').innerHTML = '&#8862;';
                 document.querySelector('#start-crop').title = `Select area`;
                 document.querySelector('#js-crop-image').setAttribute('data-crop-status', 'in-active');
+                document.querySelector('#js-crop-image').style.touchAction = '';
                 document.querySelector('#js-crop-image').removeAttribute('data-start-co');
             }
 
@@ -188,7 +189,7 @@ class jsCrop {
             e.target.style.borderRadius = '25%'
         })
         cropIconDiv.innerHTML = '&#8862;';
-        cropIconDiv.addEventListener('click', () => this.addCropEventListener(event));
+        cropIconDiv.addEventListener('click', event => this.addCropEventListener(event));
         toolbar.appendChild(cropIconDiv);
 
 
@@ -353,6 +354,7 @@ class jsCrop {
                         document.querySelector('#start-crop').title = `Select area`;
                         document.querySelector('#js-crop-image').setAttribute('data-crop-status', 'in-active');
                         document.querySelector('#js-crop-image').style.cursor = '';
+                        document.querySelector('#js-crop-image').style.touchAction = '';
                         document.querySelector('#js-crop-image').removeAttribute('data-start-co');
                     }
                 });
@@ -368,13 +370,100 @@ class jsCrop {
     *
     */
 
+    addInputEventListener(el, eventType, callBack) {
+        let pointerEvent = {
+            start: 'pointerdown',
+            move: 'pointermove',
+            end: 'pointerup',
+            cancel: 'pointercancel'
+        };
+        let mouseEvent = {
+            start: 'mousedown',
+            move: 'mousemove',
+            end: 'mouseup'
+        };
+        let touchEvent = {
+            start: 'touchstart',
+            move: 'touchmove',
+            end: 'touchend',
+            cancel: 'touchcancel'
+        };
+
+        if (undefined != window.PointerEvent) {
+            el.addEventListener(pointerEvent[eventType], callBack);
+        } else {
+            if (undefined != mouseEvent[eventType]) {
+                el.addEventListener(mouseEvent[eventType], callBack);
+            }
+            el.addEventListener(touchEvent[eventType], callBack, { passive: false });
+        }
+    }
+
+    getInputCoordinates(e, el) {
+        let input = undefined != e.touches && 0 < e.touches.length ? e.touches[0] :
+            undefined != e.changedTouches && 0 < e.changedTouches.length ? e.changedTouches[0] : e;
+        let clientX = input.clientX;
+        let clientY = input.clientY;
+        let offsetX = e.offsetX;
+        let offsetY = e.offsetY;
+
+        if (undefined == offsetX || undefined == offsetY || e.target != el) {
+            let elRect = el.getBoundingClientRect();
+            offsetX = clientX - elRect.left;
+            offsetY = clientY - elRect.top;
+        }
+
+        return {
+            clientX: clientX,
+            clientY: clientY,
+            offsetX: offsetX,
+            offsetY: offsetY
+        };
+    }
+
+    preventCropScroll(e) {
+        let imgEl = document.querySelector('#js-crop-image');
+        let cropRect = document.querySelector('#cropRect');
+        if (undefined != e.cancelable && e.cancelable &&
+            (('down' == imgEl.getAttribute('data-mouse-status')) ||
+                (null != cropRect && null != cropRect.getAttribute('data-resize')))) {
+            e.preventDefault();
+        }
+    }
+
+    addResizeEventListeners(resizeBox, cropRect, imgEl) {
+        this.addInputEventListener(resizeBox, 'start', event => {
+            if (undefined != event.button && 0 !== event.button) {
+                return;
+            }
+            cropRect.removeAttribute('data-prev-mousepos');
+            imgEl.setAttribute('data-mouse-status', 'up');
+            cropRect.setAttribute('data-resize', resizeBox.id);
+            this.preventCropScroll(event);
+            if (undefined != event.pointerId && undefined != resizeBox.setPointerCapture) {
+                resizeBox.setPointerCapture(event.pointerId);
+            }
+        });
+        let endResize = event => {
+            this.preventCropScroll(event);
+            cropRect.removeAttribute('data-resize');
+        };
+        this.addInputEventListener(resizeBox, 'end', endResize);
+        this.addInputEventListener(resizeBox, 'cancel', endResize);
+    }
+
     addCropEventListener(e) {
         let imgEl = document.querySelector('#js-crop-image');
         imgEl.setAttribute('data-mouse-status', 'up');
         if ('in-active' === imgEl.getAttribute('data-crop-status')) {
             imgEl.style.cursor = 'crosshair';
+            imgEl.style.touchAction = 'none';
             imgEl.setAttribute('data-crop-status', `active`);
-            imgEl.addEventListener("mousedown", event => {
+            this.addInputEventListener(imgEl, 'start', event => {
+
+                if (undefined != event.button && 0 !== event.button) {
+                    return;
+                }
 
                 let cropRect = document.querySelector('#cropRect');
 
@@ -383,11 +472,19 @@ class jsCrop {
                 }
 
 
-                event.target.setAttribute('data-start-co', `${event.offsetX},${event.offsetY}`);
-                event.target.setAttribute('data-mouse-status', 'down');
-                event.target.addEventListener('mousemove', event => {this.createCropBox(event)});
+                let inputCo = this.getInputCoordinates(event, imgEl);
+                imgEl.setAttribute('data-start-co', `${inputCo.offsetX},${inputCo.offsetY}`);
+                imgEl.setAttribute('data-mouse-status', 'down');
+                this.preventCropScroll(event);
+                if (undefined != event.pointerId && undefined != imgEl.setPointerCapture) {
+                    imgEl.setPointerCapture(event.pointerId);
+                }
 
 
+            });
+            this.addInputEventListener(imgEl, 'move', event => {
+                this.preventCropScroll(event);
+                this.createCropBox(event);
             });
             e.target.innerHTML = '&#9986;';
             e.target.title = 'Crop';
@@ -397,13 +494,17 @@ class jsCrop {
             e.target.innerHTML = '&#8862;';
             e.target.title = `Select area`;
             imgEl.setAttribute('data-crop-status', `in-active`);
+            imgEl.style.touchAction = '';
         }
-        document.querySelector('#js-crop-overlay').addEventListener('mouseup', event => {
+        let endGesture = event => {
             if ('start-crop' != event.target.id && 'in-active' != imgEl.getAttribute('data-crop-status')) {
                 imgEl.setAttribute('data-crop-status', 'crop-ready');
                 imgEl.setAttribute('data-mouse-status', 'up');
+                imgEl.style.touchAction = '';
             }
-        });
+        };
+        this.addInputEventListener(document.querySelector('#js-crop-overlay'), 'end', endGesture);
+        this.addInputEventListener(document.querySelector('#js-crop-overlay'), 'cancel', endGesture);
     }
 
 
@@ -430,6 +531,7 @@ class jsCrop {
         imgEl.height = opImgDim.height;
         imgEl.width = opImgDim.width;
         imgEl.setAttribute('data-crop-status', 'in-active');
+        imgEl.style.touchAction = '';
         imgEl.removeAttribute('data-mouse-status');
         imgEl.setAttribute('data-dim-ratio', e.target.getAttribute('data-dim-ratio'));
         imgEl.src = imgEl.getAttribute('data-crop-0');
@@ -531,6 +633,7 @@ class jsCrop {
     endCrop() {
 
         let cropRect = document.querySelector('#cropRect');
+        
         if (undefined != cropRect) {
             let startCo = cropRect.getAttribute('data-start-xy').split(',');
             let cropImg = document.querySelector('#js-crop-image');
@@ -591,15 +694,20 @@ class jsCrop {
                     cropRect = document.createElement('div');
                     cropRect.setAttribute('draggable',false);
                     cropRect.id = 'cropRect';
-                    cropRect.style = `z-index:1001000;cursor:crosshair;position:absolute;border:1px dashed rgba(255,255,255,1);box-shadow:0px 0px 10px rgba(0,0,0,1);left:${parseFloat(imgEl.style.marginLeft) + par.startX}px;top:${parseFloat(imgEl.style.marginTop) + par.startY}px;width:${par.width}px;height:${par.height}px;`;
+                    cropRect.style = `touch-action:none;z-index:1001000;cursor:crosshair;position:absolute;border:1px dashed rgba(255,255,255,1);box-shadow:0px 0px 10px rgba(0,0,0,1);left:${parseFloat(imgEl.style.marginLeft) + par.startX}px;top:${parseFloat(imgEl.style.marginTop) + par.startY}px;width:${par.width}px;height:${par.height}px;`;
                     cropRect.addEventListener("dragover", e => e.preventDefault());
                     cropRect.setAttribute('data-start-xy', par.startX + ',' + par.startY);
                     imgEl.parentNode.insertBefore(cropRect, imgEl);
-                    cropRect.addEventListener('mousedown', () => imgEl.setAttribute('data-mouse-status', 'down'));
-                    cropRect.addEventListener('mouseup', () => imgEl.setAttribute('data-mouse-status', 'up'));
+                    this.addInputEventListener(cropRect, 'start', event => {
+                        imgEl.setAttribute('data-mouse-status', 'down');
+                        this.preventCropScroll(event);
+                    });
+                    this.addInputEventListener(cropRect, 'end', () => imgEl.setAttribute('data-mouse-status', 'up'));
+                    this.addInputEventListener(cropRect, 'cancel', () => imgEl.setAttribute('data-mouse-status', 'up'));
                     this.addResizeBoxes(cropRect, { width: cropRect.offsetWidth, height: cropRect.offsetHeight },e,imgEl);
-                    cropRect.addEventListener('mousemove', e => {
+                    this.addInputEventListener(cropRect, 'move', e => {
                         if ('down' == imgEl.getAttribute('data-mouse-status')) {
+                            this.preventCropScroll(e);
                             this.addResizeBoxes(cropRect, { width: cropRect.offsetWidth, height: cropRect.offsetHeight },e,imgEl);
                             
                         }
@@ -632,7 +740,9 @@ class jsCrop {
     addResizeBoxes(cropRect, par,e, imgEl) {
 
 
-        let boxStyle = `background-color :rgba(0,0,0,0.7);width:10px;height:10px;border:1px solid rgba(255,255,255,255);`;
+        let inputCo = this.getInputCoordinates(e, imgEl);
+        e = { target: e.target, clientX: inputCo.clientX, clientY: inputCo.clientY };
+        let boxStyle = `touch-action:none;background-color :rgba(0,0,0,0.7);width:10px;height:10px;border:1px solid rgba(255,255,255,255);`;
         let resizeBoxes = cropRect.querySelectorAll('span');
      
 
@@ -641,92 +751,56 @@ class jsCrop {
             nwseResizeOne.style = boxStyle + `cursor:nwse-resize;margin-left:-6px;margin-top:-6px;position:absolute;position:absolute;`
             nwseResizeOne.id = "nwse-resize-one";
             nwseResizeOne.setAttribute('draggable', false)
-            nwseResizeOne.addEventListener('mousedown', () => {
-                cropRect.setAttribute('data-prev-mousepos','')
-                imgEl.setAttribute('data-mouse-status','up')
-                cropRect.setAttribute('data-resize', "nwse-resize-one")
-            })
-            nwseResizeOne.addEventListener('mouseup', () => cropRect.setAttribute('data-resize', ""));
+            this.addResizeEventListeners(nwseResizeOne, cropRect, imgEl);
             cropRect.appendChild(nwseResizeOne);
 
             let nsResizeOne = document.createElement('span');
             nsResizeOne.style = boxStyle + `cursor:ns-resize;margin-left:${par.width / 2}px; margin-top: -7px; position:absolute;`
             nsResizeOne.id = "ns-resize-one";
             nsResizeOne.setAttribute('draggable', false)
-            nsResizeOne.addEventListener('mousedown', () => {
-                cropRect.setAttribute('data-prev-mousepos','')
-                imgEl.setAttribute('data-mouse-status','up')
-                cropRect.setAttribute('data-resize', "ns-resize-one")
-            })
-            nsResizeOne.addEventListener('mouseup', () => cropRect.setAttribute('data-resize', ""));
+            this.addResizeEventListeners(nsResizeOne, cropRect, imgEl);
             cropRect.appendChild(nsResizeOne);
 
             let neswResizeOne = document.createElement('span');
             neswResizeOne.style = boxStyle + `cursor:nesw-resize;margin-left:${par.width - 6}px; margin-top: -6px; position:absolute;`
             neswResizeOne.id = 'nesw-resize-one';
             neswResizeOne.setAttribute('draggable', false)
-            neswResizeOne.addEventListener('mousedown', () => {
-                cropRect.setAttribute('data-prev-mousepos','')
-                imgEl.setAttribute('data-mouse-status','up')
-                cropRect.setAttribute('data-resize', "nesw-resize-one")
-            })
-            neswResizeOne.addEventListener('mouseup', () => cropRect.setAttribute('data-resize', ""));;
+            this.addResizeEventListeners(neswResizeOne, cropRect, imgEl);
             cropRect.appendChild(neswResizeOne);
 
             let ewResizeOne = document.createElement('span');
             ewResizeOne.style = boxStyle + `cursor:ew-resize;margin-left:${par.width - 7}px; margin-top: ${(par.height / 2) - 7}px; position:absolute;`
             ewResizeOne.id = 'ew-resize-one';
             ewResizeOne.setAttribute('draggable', false)
-            ewResizeOne.addEventListener('mousedown', () => {
-                cropRect.setAttribute('data-prev-mousepos','')
-                imgEl.setAttribute('data-mouse-status','up')
-                cropRect.setAttribute('data-resize', "ew-resize-one")})
-            ewResizeOne.addEventListener('mouseup', () => cropRect.setAttribute('data-resize', ""));;
+            this.addResizeEventListeners(ewResizeOne, cropRect, imgEl);
             cropRect.appendChild(ewResizeOne);
 
             let nwseResizeTwo = document.createElement('span');
             nwseResizeTwo.style = boxStyle + `cursor:nwse-resize;margin-left:${par.width - 6}px; margin-top: ${par.height - 6}px; position:absolute;`
             nwseResizeTwo.id = 'nwse-resize-two';
             nwseResizeTwo.setAttribute('draggable', false)
-            nwseResizeTwo.addEventListener('mousedown', () => {
-                cropRect.setAttribute('data-prev-mousepos','')
-                imgEl.setAttribute('data-mouse-status','up')
-                cropRect.setAttribute('data-resize', "nwse-resize-two")
-            })
-            nwseResizeTwo.addEventListener('mouseup', () => cropRect.setAttribute('data-resize', ""));
+            this.addResizeEventListeners(nwseResizeTwo, cropRect, imgEl);
             cropRect.appendChild(nwseResizeTwo);
 
             let nsResizeTwo = document.createElement('span');
             nsResizeTwo.style = boxStyle + `cursor:ns-resize;margin-left:${(par.width / 2) - 6}px; margin-top: ${par.height - 7}px; position:absolute;`
             nsResizeTwo.id = 'ns-resize-two';
             nsResizeTwo.setAttribute('draggable', false)
-            nsResizeTwo.addEventListener('mousedown', () =>{ 
-                cropRect.setAttribute('data-prev-mousepos','')
-                imgEl.setAttribute('data-mouse-status','up')
-                cropRect.setAttribute('data-resize', "ns-resize-two")})
-            nsResizeTwo.addEventListener('mouseup', () => cropRect.setAttribute('data-resize', ""));
+            this.addResizeEventListeners(nsResizeTwo, cropRect, imgEl);
             cropRect.appendChild(nsResizeTwo);
 
             let neswResizeTwo = document.createElement('span');
             neswResizeTwo.style = boxStyle + `cursor:nesw-resize;margin-left:-7px; margin-top:${par.height - 7}px;position:absolute;`
             neswResizeTwo.id = 'nesw-resize-two';
             neswResizeTwo.setAttribute('draggable', false)
-            neswResizeTwo.addEventListener('mousedown', () => {
-                cropRect.setAttribute('data-prev-mousepos','')
-                imgEl.setAttribute('data-mouse-status','up')
-                cropRect.setAttribute('data-resize', "nesw-resize-two")})
-            neswResizeTwo.addEventListener('mouseup', () => cropRect.setAttribute('data-resize', ""));;
+            this.addResizeEventListeners(neswResizeTwo, cropRect, imgEl);
             cropRect.appendChild(neswResizeTwo);
 
             let ewResizeTwo = document.createElement('span');
             ewResizeTwo.style = boxStyle + `cursor:ew-resize;margin-left:-6px; margin-top: ${(par.height / 2) - 6}px; position:absolute;`
             ewResizeTwo.id = 'ew-resize-two';
             ewResizeTwo.setAttribute('draggable', false)
-            ewResizeTwo.addEventListener('mousedown', () => {
-                cropRect.setAttribute('data-prev-mousepos','')
-                imgEl.setAttribute('data-mouse-status','up')
-                cropRect.setAttribute('data-resize', "ew-resize-two")})
-            ewResizeTwo.addEventListener('mouseup', () => cropRect.setAttribute('data-resize', ""));;
+            this.addResizeEventListeners(ewResizeTwo, cropRect, imgEl);
             cropRect.appendChild(ewResizeTwo);
         } else {
 
@@ -743,13 +817,14 @@ class jsCrop {
         }else{ 
 
             let imgBdRect = imgEl.getBoundingClientRect();  
+            let bdRect = cropRect.getBoundingClientRect();  
 
           if('cropRect' != e.target.id && imgBdRect.x <= e.clientX && imgBdRect.y <= e.clientY && (imgBdRect.x+imgBdRect.width) >= e.clientX && (imgBdRect.y+imgBdRect.height) >= e.clientY    ){
          
 
 
             if( null != cropRect.getAttribute('data-prev-mousepos') ){
-            let bdRect = cropRect.getBoundingClientRect();   
+            
             let prevPos =  cropRect.getAttribute('data-prev-mousepos').split('-');
                
                 let xDiff =   Math.abs(parseInt( prevPos[0] ) -  e.clientX);
@@ -844,6 +919,8 @@ class jsCrop {
              }
             }
 
+         
+                    cropRect.setAttribute('data-start-xy', (bdRect.x - imgBdRect.x ) + ',' + (bdRect.y - imgBdRect.y));
                     cropRect.querySelector('#nwse-resize-one').style = boxStyle + `cursor:nwse-resize;margin-left:-6px;margin-top:-6px;position:absolute;`;
                     cropRect.querySelector('#ns-resize-one').style = boxStyle + `cursor:ns-resize;margin-left:${( cropRect.offsetWidth / 2) - 6}px; margin-top: -7px; position:absolute;`;
                     cropRect.querySelector('#nesw-resize-one').style = boxStyle + `cursor:nesw-resize;margin-left:${cropRect.offsetWidth - 6}px; margin-top: -6px;position:absolute; `
@@ -853,6 +930,8 @@ class jsCrop {
                     cropRect.querySelector('#nesw-resize-two').style = boxStyle + `cursor:nesw-resize;margin-left:-7px; margin-top:${cropRect.offsetHeight - 7}px;position:absolute;`;
                     cropRect.querySelector('#ew-resize-two').style = boxStyle + `cursor:ew-resize;margin-left:-6px; margin-top: ${(cropRect.offsetHeight / 2) - 6}px; position:absolute;`;
                     cropRect.setAttribute('data-prev-mousepos',`${e.clientX}-${e.clientY}`);
+                    
+                   
             }
             
         }
@@ -955,12 +1034,14 @@ class jsCrop {
     */
     setCanvasCo(e) {
 
-        if (undefined != e.target.getAttribute('data-start-co')) {
-            let startCoArr = e.target.getAttribute('data-start-co').split(',');
+        let imgEl = document.querySelector('#js-crop-image');
+        if (undefined != imgEl.getAttribute('data-start-co')) {
+            let inputCo = this.getInputCoordinates(e, imgEl);
+            let startCoArr = imgEl.getAttribute('data-start-co').split(',');
             let startX = parseInt(startCoArr[0]);
             let startY = parseInt(startCoArr[1]);
-            let endX = e.offsetX < 0 ? 0 : e.offsetX;
-            let endY = e.offsetY < 0 ? 0 : e.offsetY;
+            let endX = Math.min(imgEl.offsetWidth, Math.max(0, inputCo.offsetX));
+            let endY = Math.min(imgEl.offsetHeight, Math.max(0, inputCo.offsetY));
             let cropHeight = endY >= startY ? endY - startY : startY - endY;
             let cropWidth = endX >= startX ? endX - startX : startX - endX;
 
@@ -968,7 +1049,7 @@ class jsCrop {
 
                 if (endX < startX && endY < startY) {
                     return {
-                        el: e.target,
+                        el: imgEl,
                         startX: endX,
                         startY: (startY - cropHeight),
                         height: cropHeight,
@@ -976,7 +1057,7 @@ class jsCrop {
                     }
                 } else if (endX > startX && endY < startY) {
                     return {
-                        el: e.target,
+                        el: imgEl,
                         startX: startX,
                         startY: (startY - cropHeight),
                         height: cropHeight,
@@ -984,7 +1065,7 @@ class jsCrop {
                     }
                 } else if (endX < startX && endY > startY) {
                     return {
-                        el: e.target,
+                        el: imgEl,
                         startX: endX,
                         startY: (endY - cropHeight),
                         height: cropHeight,
@@ -992,7 +1073,7 @@ class jsCrop {
                     }
                 } else {
                     return {
-                        el: e.target,
+                        el: imgEl,
                         startX: startX,
                         startY: startY,
                         height: cropHeight,
@@ -1065,4 +1146,3 @@ class jsCrop {
 
 
 }
-
