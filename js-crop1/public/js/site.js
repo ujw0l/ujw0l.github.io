@@ -9,7 +9,7 @@ class jsCropSite {
 
         let sidebarOpts = Array();
         let overlayDiv = document.createElement("div");
-        let bgColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 256)},${(Math.floor(Math.random() * 3) + 5) / 10})`;
+        let bgColor = `rgba(${Math.floor(Math.random() * 256)},${Math.floor(Math.random() * 255)},${Math.floor(Math.random() * 256)},1)`;
 
         overlayDiv.id = "site-overlay";
         overlayDiv.classList.add(`site-overlay`);
