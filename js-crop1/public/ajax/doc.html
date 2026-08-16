@@ -1,134 +1,467 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="js-crop 3.1.2 documentation and API usage guide">
+  <title>js-crop Documentation</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --background: #ffffff;
+      --foreground: #1f2328;
+      --muted: #59636e;
+      --border: #d1d9e0;
+      --surface: #f6f8fa;
+      --accent: #0969da;
+      --quote: #656d76;
+    }
 
-<h1 align="center">Js Crop 3.0 Documentation 👋</h1>
-<div id="doc-info">
-<p>
-  <img src="https://img.shields.io/badge/version-3.0.1-blue.svg?cacheSeconds=2592000" />
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --background: #0d1117;
+        --foreground: #f0f6fc;
+        --muted: #9198a1;
+        --border: #3d444d;
+        --surface: #151b23;
+        --accent: #4493f8;
+        --quote: #9198a1;
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--background);
+      color: var(--foreground);
+      font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+
+    main {
+      width: min(100% - 32px, 980px);
+      margin: 0 auto;
+      padding: 48px 0 72px;
+    }
+
+    h1, h2, h3, h4 {
+      margin: 1.55em 0 .55em;
+      line-height: 1.25;
+    }
+
+    h1 {
+      margin-top: 0;
+      padding-bottom: .3em;
+      font-size: clamp(2.15rem, 7vw, 3.25rem);
+      border-bottom: 1px solid var(--border);
+    }
+
+    h2 {
+      padding-bottom: .3em;
+      font-size: 1.65rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    h3 { font-size: 1.3rem; }
+
+    p, ul, ol, table, pre, blockquote { margin: 0 0 1rem; }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    img { max-width: 100%; }
+
+    .center { text-align: center; }
+
+    blockquote {
+      padding: .35rem 1rem;
+      color: var(--quote);
+      border-left: .25rem solid var(--border);
+    }
+
+    blockquote > :last-child { margin-bottom: 0; }
+
+    code {
+      padding: .16em .38em;
+      border-radius: 6px;
+      background: var(--surface);
+      font: .875em/1.5 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    pre {
+      overflow: auto;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+
+    pre code { padding: 0; background: transparent; font-size: .9rem; }
+
+    table {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: .55rem .8rem;
+      text-align: left;
+      vertical-align: top;
+      border: 1px solid var(--border);
+    }
+
+    th { background: var(--surface); font-weight: 650; }
+
+    li + li { margin-top: .25rem; }
+
+    @media (max-width: 620px) {
+      main { width: min(100% - 24px, 980px); padding-top: 28px; }
+      th, td { min-width: 130px; padding: .45rem .6rem; }
+    }
+
+    @media print {
+      :root {
+        --background: #fff;
+        --foreground: #000;
+        --muted: #444;
+        --border: #bbb;
+        --surface: #f5f5f5;
+        --accent: #0645ad;
+      }
+
+      body { font-size: 11pt; }
+      main { width: 100%; padding: 0; }
+      pre, table, blockquote { break-inside: avoid; }
+      a { color: inherit; text-decoration: underline; }
+    }
+  </style>
+</head>
+<body>
+<main>
+<h1 class="center">js-crop</h1>
+
+<p class="center">
+  <a href="https://www.npmjs.com/package/js-crop">
+    <img alt="npm version" src="https://img.shields.io/npm/v/js-crop.svg">
+  </a>
   <a href="https://github.com/ujw0l/js-crop#readme">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" target="_blank" />
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg">
   </a>
   <a href="https://github.com/ujw0l/js-crop/graphs/commit-activity">
-    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" target="_blank" />
+    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg">
   </a>
   <a href="https://github.com/ujw0l/js-crop/blob/master/LICENSE">
-    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" target="_blank" />
+    <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-yellow.svg">
   </a>
 </p>
-<div>
-<h4>NPM Install</h4>
 
-<pre>
-    npm i js-crop
-</pre>
+<blockquote>
+<p>A lightweight, dependency-free image cropper with a responsive built-in UI for mouse, touch, and keyboard input.</p>
+</blockquote>
+<h2>Features</h2>
+<ul>
+<li>Works with existing <code>&lt;img&gt;</code> elements and <code>&lt;input type=&quot;file&quot;&gt;</code> controls</li>
+<li>Responsive editor for desktop, mobile, tablets, and touchscreens</li>
+<li>Resizable crop selection with undo, redo, and reset controls</li>
+<li>JPEG and PNG output with configurable quality</li>
+<li>Built-in download button and custom callback buttons</li>
+<li>Customizable overlay, toolbar, and button colors</li>
+<li>No framework or runtime dependency</li>
+</ul>
+<h2>Install</h2>
+<pre><code class="language-sh">npm install js-crop
+</code></pre>
+<h3>Browser script</h3>
+<p>Load the minified file from a CDN. The constructor is exposed as <code>window.jsCrop</code>.</p>
+<pre><code class="language-html">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/js-crop@3.1.2/js-crop.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>To follow the latest published version instead of pinning a release:</p>
+<pre><code class="language-html">&lt;script src=&quot;https://cdn.jsdelivr.net/npm/js-crop/js-crop.min.js&quot;&gt;&lt;/script&gt;
+</code></pre>
+<p>You can also serve <code>node_modules/js-crop/js-crop.min.js</code> from your own application.</p>
+<h3>CommonJS</h3>
+<pre><code class="language-js">const jsCrop = require(&#39;js-crop&#39;);
+</code></pre>
+<p><code>js-crop</code> runs in a browser and requires DOM, canvas, <code>Image</code>, and <code>FileReader</code> APIs. If you bundle it on the server, create an instance only in the browser.</p>
+<h2>Quick start</h2>
+<h3>Crop an uploaded image</h3>
+<pre><code class="language-html">&lt;input id=&quot;avatar&quot; type=&quot;file&quot; accept=&quot;image/png,image/jpeg&quot; /&gt;
 
-<h4>Sript Tag</h4>
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/js-crop@3.1.2/js-crop.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  new jsCrop(&#39;#avatar&#39;, {
+    imageType: &#39;jpeg&#39;,
+    imageQuality: 0.9,
+    extButton: {
+      buttonText: &#39;Use image&#39;,
+      buttonTitle: &#39;Use the cropped image&#39;,
+      callBack: function (dataUrl) {
+        document.querySelector(&#39;#preview&#39;).src = dataUrl;
+      }
+    }
+  });
+&lt;/script&gt;
+</code></pre>
+<p>Selecting a file opens the crop editor automatically.</p>
+<h3>Crop an existing image</h3>
+<pre><code class="language-html">&lt;img class=&quot;crop-image&quot; src=&quot;/images/photo.jpg&quot; alt=&quot;Select an area to crop&quot; /&gt;
 
-<h5>Download and include file</h5>
-<pre> &lt;script type="text/javascript" src="js-crop/js-crop.js"&gt;&lt;/script&gt; <a href="https://github.com/ujw0l/js-crop/archive/master.zip" title="Click here to download file" >Download here</a></pre>
-
-</div>
-
-<h4> Library initialization </h4>
-<pre class="doc-pre" >
-    new jsCrop(
-    'selector', (Image element or upload button selector/s refer to querySelector and querySelectorAll)
-    { 
-      extButton : (optional,extension which adds button after save image button)
-                { 
-                  buttonText : string, (Optional, text for button)
-                  buttonTitle : string, (Optional, title for button)
-                  buttonCSS   : string, (Optional, additional styling for extension button)
-                  callBack : function, (Required, callback function  which is passed blob of cropped image, on button click )
-                },
-       customColor : (Optional,Js object conataining options for UI color customization)
-                {  
-                    overlayBgColor : string, (Optional, background color for overlay)
-                    toolbarBgColor : string, (Optional, background color for toolbar)
-                    buttonBgColor :string,    (Optional, background color for buttons)
-                    buttonFontColor : string, (Optional, font color for button)
-                    
-              }, 
-      imageType:string,(optinal,cropped image type,either jpeg or png)
-      imageQuality: number,(opaitional, cropped image quality range 0 to 1);                
-      saveButton:boolean (optional, set false to hide save button)
-},
-[ (Array of one or multiple button objects  like  one below ☟)
-    { (Object with button properties)
-    buttonText : string, (Optional, text for button)
-    buttonTitle : string,(Optional, title for button)
-    relParam : any,(Optional, any data type to be relayed back to callback function as second parameter)
-    buttonEvent : event, (Optional, event to attach button for callback default click,  refer to "addEventListener" events)
-    buttonCSS : string, (Optional, additinal styling for button)
-    callBack : function,(required, callback function for button, which gets image blob as first parameter and relParam as second )
+&lt;script&gt;
+  new jsCrop(&#39;.crop-image&#39;);
+&lt;/script&gt;
+</code></pre>
+<p>Clicking any matching image opens it in the editor. A selector may match one or many elements.</p>
+<h2>API</h2>
+<pre><code class="language-js">new jsCrop(selector, options?, customButtons?);
+</code></pre>
+<p>Creating an instance attaches listeners to every element that matches <code>selector</code>. The constructor returns the cropper instance; normal use does not require storing it.</p>
+<h3><code>selector</code></h3>
+<p>Type: <code>string</code> (required)</p>
+<p>Any selector accepted by <code>document.querySelectorAll()</code>. Matching elements can be:</p>
+<ul>
+<li><code>&lt;input type=&quot;file&quot;&gt;</code>: opens the first selected file when the input changes.</li>
+<li><code>&lt;img&gt;</code>: opens the image when it is clicked.</li>
+<li>Another element with a <code>src</code> property: opens that source when the element is clicked.</li>
+</ul>
+<pre><code class="language-js">new jsCrop(&#39;#profile-photo&#39;);
+new jsCrop(&#39;.croppable&#39;);
+new jsCrop(&#39;input[type=&quot;file&quot;][data-crop]&#39;);
+</code></pre>
+<h3><code>options</code></h3>
+<p>Type: <code>object</code> (optional)</p>
+<table>
+<thead>
+<tr>
+<th>Option</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>imageType</code></td>
+<td><code>&#39;png&#39;</code> or <code>&#39;jpeg&#39;</code></td>
+<td><code>&#39;png&#39;</code></td>
+<td>Output format used by downloads and callbacks. Values other than <code>&#39;jpeg&#39;</code> fall back to PNG.</td>
+</tr>
+<tr>
+<td><code>imageQuality</code></td>
+<td><code>number</code></td>
+<td><code>1</code></td>
+<td>Canvas export quality from <code>0</code> to <code>1</code>. It mainly affects JPEG output.</td>
+</tr>
+<tr>
+<td><code>saveButton</code></td>
+<td><code>boolean</code></td>
+<td><code>true</code></td>
+<td>Set to <code>false</code> to hide the built-in Download image button.</td>
+</tr>
+<tr>
+<td><code>customColor</code></td>
+<td><code>object</code></td>
+<td>See below</td>
+<td>Overrides colors in the editor UI.</td>
+</tr>
+<tr>
+<td><code>extButton</code></td>
+<td><code>object</code></td>
+<td>None</td>
+<td>Adds one callback button after the built-in controls.</td>
+</tr>
+</tbody></table>
+<h4><code>customColor</code></h4>
+<p>All color fields accept any valid CSS color value and are optional.</p>
+<pre><code class="language-js">new jsCrop(&#39;.crop-image&#39;, {
+  customColor: {
+    overlayBgColor: &#39;rgba(10, 10, 12, 0.98)&#39;,
+    toolbarBgColor: &#39;rgba(18, 18, 20, 0.84)&#39;,
+    buttonBgColor: &#39;rgba(255, 255, 255, 0.10)&#39;,
+    buttonFontColor: &#39;#ffffff&#39;
+  }
+});
+</code></pre>
+<h4><code>extButton</code></h4>
+<p><code>extButton</code> is useful when you want the cropped result in application code instead of, or in addition to, the built-in download.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>callBack</code></td>
+<td><code>function</code></td>
+<td>Required</td>
+<td>Called with the cropped image data URL when the button is clicked. The button is only added when this is a function.</td>
+</tr>
+<tr>
+<td><code>buttonText</code></td>
+<td><code>string</code></td>
+<td><code>&#39;ext&#39;</code></td>
+<td>Button content. The value is inserted as HTML, so only use trusted content.</td>
+</tr>
+<tr>
+<td><code>buttonTitle</code></td>
+<td><code>string</code></td>
+<td><code>&#39;Extension&#39;</code></td>
+<td>Tooltip and accessible label.</td>
+</tr>
+<tr>
+<td><code>buttonCSS</code></td>
+<td><code>string</code></td>
+<td><code>&#39;&#39;</code></td>
+<td>Inline CSS declarations appended to the button style, for example <code>&#39;background:#2563eb;&#39;</code>. This is not a class name.</td>
+</tr>
+</tbody></table>
+<pre><code class="language-js">new jsCrop(&#39;#avatar&#39;, {
+  saveButton: false,
+  extButton: {
+    buttonText: &#39;Save avatar&#39;,
+    buttonTitle: &#39;Save the cropped avatar&#39;,
+    buttonCSS: &#39;background:#2563eb;color:#fff;&#39;,
+    callBack: function (dataUrl) {
+      // dataUrl looks like: data:image/png;base64,...
+      document.querySelector(&#39;#preview&#39;).src = dataUrl;
+    }
+  }
+});
+</code></pre>
+<p>Despite the historical callback examples calling this value <code>blob</code>, the library currently returns a base64-encoded data URL string from <code>canvas.toDataURL()</code>.</p>
+<h3><code>customButtons</code></h3>
+<p>Type: <code>Array&lt;object&gt;</code> (optional)</p>
+<p>The third constructor argument adds any number of application-specific toolbar buttons.</p>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>callBack</code></td>
+<td><code>function</code></td>
+<td>None</td>
+<td>Receives <code>(dataUrl, relParam)</code> when <code>buttonEvent</code> fires.</td>
+</tr>
+<tr>
+<td><code>buttonText</code></td>
+<td><code>string</code></td>
+<td><code>&#39;ext&#39;</code></td>
+<td>Button content, inserted as HTML.</td>
+</tr>
+<tr>
+<td><code>buttonTitle</code></td>
+<td><code>string</code></td>
+<td><code>Button N</code></td>
+<td>Tooltip and accessible label.</td>
+</tr>
+<tr>
+<td><code>buttonEvent</code></td>
+<td><code>string</code></td>
+<td><code>&#39;click&#39;</code></td>
+<td>DOM event name that triggers the callback.</td>
+</tr>
+<tr>
+<td><code>buttonCSS</code></td>
+<td><code>string</code></td>
+<td><code>&#39;&#39;</code></td>
+<td>Inline CSS declarations appended to the button style.</td>
+</tr>
+<tr>
+<td><code>relParam</code></td>
+<td>any</td>
+<td><code>undefined</code></td>
+<td>Application-defined value passed unchanged as the callback&#39;s second argument.</td>
+</tr>
+</tbody></table>
+<pre><code class="language-js">new jsCrop(
+  &#39;.crop-image&#39;,
+  {
+    imageType: &#39;png&#39;,
+    saveButton: false
+  },
+  [
+    {
+      buttonText: &#39;Preview&#39;,
+      buttonTitle: &#39;Preview this crop&#39;,
+      relParam: { destination: &#39;avatar-preview&#39; },
+      callBack: function (dataUrl, metadata) {
+        document.getElementById(metadata.destination).src = dataUrl;
+      }
     },
-]
+    {
+      buttonText: &#39;Upload&#39;,
+      buttonTitle: &#39;Upload this crop&#39;,
+      buttonCSS: &#39;background:#15803d;&#39;,
+      callBack: async function (dataUrl) {
+        await fetch(&#39;/api/avatar&#39;, {
+          method: &#39;POST&#39;,
+          headers: { &#39;Content-Type&#39;: &#39;application/json&#39; },
+          body: JSON.stringify({ image: dataUrl })
+        });
+      }
+    }
+  ]
 );
+</code></pre>
+<h3>Converting the callback result to a <code>Blob</code></h3>
+<p>If an upload API expects a <code>Blob</code> or <code>File</code>, convert the returned data URL first:</p>
+<pre><code class="language-js">async function dataUrlToBlob(dataUrl) {
+  return fetch(dataUrl).then(function (response) {
+    return response.blob();
+  });
+}
 
-*parameter 1 (required) : selector for images to be cropped, one or multiple
-*parameter 2 (optional): object to modify UI look and functionalities and develop library extension
-*parameter 3 (optional): Array which contains objects for one or multiple buttons 
-     
+new jsCrop(&#39;#avatar&#39;, {
+  extButton: {
+    buttonText: &#39;Upload&#39;,
+    callBack: async function (dataUrl) {
+      const blob = await dataUrlToBlob(dataUrl);
+      const formData = new FormData();
+      formData.append(&#39;image&#39;, blob, &#39;crop.png&#39;);
 
-  </pre>
-
-<div>
-    <h4>Demo  e.g : <a href="index.html" >Click Here</a></h4>
-    <pre>
-
-        new jsCrop(
-          '.gal-viewer-mas,#upload-demo',
-                                  { 
-                                  extButton :{ 
-                                              callBack:(imgBlob)=>alert(imgBlob),
-                                              buttonTitle : 'Display cropped image blob in alert box',
-                                              buttonCSS : 'color:rgba(255,255,255,1);',
-                                              buttonText : '&#9991;'
-                                  },
-                                  imageType:'png',
-                                  imageQuality: 0.9,
-                                  saveButton:true,
-                                  customColor :{
-                                      overlayBgColor :document.querySelector('#site-overlay').style.backgroundColor,
-                                      buttonBgColor :document.querySelector('#site-overlay').style.backgroundColor,
-                                      }
-                                  },
-                                  [
-                                      {
-                                          buttonText : '&#10063;', 
-                                          buttonTitle : 'Use image as button background',
-                                          relParam : '',
-                                          buttonEvent : 'click', 
-                                          buttonCSS : 'color:rgba(255,255,255,1);',
-                                          callBack : (imgBlob,relParam) => {
-                                                                              let btn =  document.querySelector('#ext-button-0');
-                                                                              btn.style.backgroundImage = `url('${imgBlob}')`;
-                                                                              btn.style.backgroundRepeat = `no-repeat`;
-                                                                              btn.innerHTML = ``;
-                                                                              btn.style.backgroundPosition = `center center`;
-                                                                              btn.style.backgroundSize = `cover`;
-                                                                          }
-  
-                                      },
-                                      {
-                                          buttonText : '', 
-                                          buttonTitle : 'Dummy extension button',
-                                          relParam : 'additional parameter 1',
-                                          buttonEvent : 'click', 
-                                          buttonCSS : 'color:rgba(255,255,255,1);', 
-                                          callBack : function(imgBlob,relParam){ console.log(imgBlob)},
-                                      },
-                                  ]
-                                  );
-
-
-    </pre>
-
-<h4> License</h4>
-
-<p>Copyright © 2019 <a href="https://github.com/ujw0l" target="_blank"> UjW0L</a></p>
-<p>This project is <a href="https://github.com/ujw0l/js-crop/blob/master/LICENSE" target="_blank"> MIT </a>licensed.</p>
-</div>
-
-</div>
-
-</div>
+      await fetch(&#39;/api/avatar&#39;, {
+        method: &#39;POST&#39;,
+        body: formData
+      });
+    }
+  }
+});
+</code></pre>
+<h2>Using the editor</h2>
+<ol>
+<li>Open an image by clicking it or choosing a file.</li>
+<li>Select the crop tool, then drag across the image to create a crop area.</li>
+<li>Move or resize the selection, then select the crop tool again to apply it.</li>
+<li>Use Reset, Undo, or Redo as needed.</li>
+<li>Download the result or use one of your callback buttons.</li>
+</ol>
+<p>Press <code>Escape</code> to close the editor. While a crop selection is visible, use the arrow keys to move it by one pixel or <code>Shift</code> + an arrow key to move it by ten pixels.</p>
+<h2>Cross-origin images</h2>
+<p>The browser must allow the image to be drawn to a canvas. Use same-origin images or images selected through a file input. A remote image that is not canvas-safe will let the editor open but the browser may block download and callback export with a canvas security error.</p>
+<h2>Contributing</h2>
+<p>Contributions, issues, and feature requests are welcome. See the <a href="https://github.com/ujw0l/js-crop/issues">issues page</a> and <a href="https://github.com/ujw0l/js-crop/blob/master/CONTRIBUTING.md">contributing guide</a>.</p>
+<h2>Author</h2>
+<p><strong>ujw0l</strong></p>
+<ul>
+<li>Twitter: <a href="https://twitter.com/bastakotiujwol">@bastakotiujwol</a></li>
+<li>GitHub: <a href="https://github.com/ujw0l">@ujw0l</a></li>
+</ul>
+<h2>Support</h2>
+<p>If this project helped you, please star the repository or <a href="https://www.buymeacoffee.com/ujw0l">buy me a coffee</a>.</p>
+<h2>License</h2>
+<p>Copyright © 2019 <a href="https://github.com/ujw0l">ujw0l</a>.</p>
+<p>Licensed under the <a href="https://github.com/ujw0l/js-crop/blob/master/LICENSE">MIT License</a>.</p>
+</main>
+</body>
+</html>
