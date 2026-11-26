@@ -1,6 +1,8 @@
 'use strict'
 class jsCropSite {
-
+/**
+ * This is just code to test termnal 
+ */
     constructor() {
         this.createOverlayAndSideBar();
     }
